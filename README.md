@@ -110,6 +110,37 @@ email, and photo persist to the demo account in `localStorage`:
 - removing the photo restores the default pixel mascot;
 - the account id never changes, so an email change cannot orphan the session.
 
+## Evaluation workflow
+
+`/app/evaluations/new` is a four-step configuration wizard; `/app/evaluations`
+lists saved configurations and `/app/evaluations/:id` reads one back. All three
+sit behind the existing auth guard.
+
+1. **Website** — one of your registered sites. A website's *Start evaluation*
+   link supplies it as `?website=<id>`, so that entry point lands pre-filled.
+2. **Pages** — manual entry or the example-path picker. 1–10 pages, each
+   validated against the website's own host, compared scheme-less for
+   duplicates.
+3. **Settings** — the six categories (names and summaries reused from
+   `content/criteria.ts`) and the three viewports: 1440, 768, 390.
+4. **Review** — the whole configuration, with a link back into the step that
+   owns each part.
+
+Saving is simulated in four visible steps and writes **one** record through
+`services/evaluation.service.ts` into `uiuxpulse.evaluations` — the same key the
+dashboard has read since Phase 4. The draft itself lives in the URL (`?website=`,
+`p_0=`, `categories=`, `viewports=`), so an abandoned wizard leaves nothing in the
+store and never reaches a dashboard total.
+
+A record stores the owner, the website id, **snapshots** of the website name and
+URL, the page list, categories, viewports, a creation timestamp, and the status
+`created`. There is no score field in practice, no findings, and no analysis:
+`created` means "configuration saved", and the UI says so on the review screen,
+the progress screen, the success screen, and the detail page.
+
+Deleting a website keeps its evaluations; they lose `websiteId`, keep the name
+snapshot, and are labelled *Removed website* in the list, filterable separately.
+
 ## Websites
 
 Registered sites live in their own store (`uiuxpulse.websites`, keyed by owner id),

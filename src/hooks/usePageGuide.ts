@@ -11,6 +11,8 @@ import { guideContent, type GuidePage } from '@/content/guide';
 const ROUTE_KEYS: Array<[pattern: RegExp, key: string]> = [
   [/^\/app\/websites\/(?:new|[^/]+\/edit|[^/]+)/, 'websiteDetail'],
   [/^\/app\/websites/, 'websites'],
+  [/^\/app\/evaluations\/new/, 'evaluationWizard'],
+  [/^\/app\/evaluations\/[^/]+/, 'evaluationDetail'],
   [/^\/app\/evaluations/, 'evaluations'],
   [/^\/app\/reports/, 'reports'],
   [/^\/app\/settings/, 'settings'],

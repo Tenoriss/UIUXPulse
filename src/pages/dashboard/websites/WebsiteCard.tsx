@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Globe, PenLine, Trash2 } from 'lucide-react';
+import { Globe, PenLine, Play, Trash2 } from 'lucide-react';
 import { Badge } from '@/components/ui';
+import { routes } from '@/config/site';
 import { useI18n } from '@/i18n';
 import { cn } from '@/lib/cn';
 import type { WebsiteRecord } from '@/services/workspace.types';
@@ -57,6 +58,14 @@ export function WebsiteCard({ website, evaluationCount, onDelete }: WebsiteCardP
 
         {/* Actions sit above the stretched link. */}
         <div className="relative z-10 flex shrink-0 items-center gap-1.5 self-start sm:self-auto">
+          {/* Same wizard as the detail page — this only supplies the website id. */}
+          <Link
+            to={`${routes.evaluationNew}?website=${website.id}`}
+            aria-label={t('websites.startEvaluationSr', { name: website.name })}
+            className="flex size-9 items-center justify-center rounded-pill border border-line bg-surface text-ink-soft transition-colors hover:border-sage/45 hover:bg-sage-wash hover:text-sage-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-deep/45"
+          >
+            <Play className="size-3.5" aria-hidden="true" />
+          </Link>
           <Link
             to={`/app/websites/${website.id}/edit`}
             aria-label={t('websites.editSr', { name: website.name })}

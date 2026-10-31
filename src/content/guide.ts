@@ -124,6 +124,18 @@ export const guideContent: Record<Locale, Record<string, GuidePage>> = {
       title: 'Your submissions',
       body: 'Every website you send us appears here with its selected pages. The new evaluation form captures a URL only — nothing is scanned yet.',
     },
+    evaluationWizard: {
+      name: 'Pip',
+      page: 'New evaluation',
+      title: 'Four steps, one configuration',
+      body: 'Choose a website, pick up to ten of its pages, then the categories and viewports this evaluation should cover. Saving stores the configuration — nothing is scanned.',
+    },
+    evaluationDetail: {
+      name: 'Pip',
+      page: 'Evaluation',
+      title: 'A saved configuration',
+      body: 'This record holds the pages, categories, and viewports you chose. There are no findings or scores, because no analysis has run.',
+    },
     reports: {
       name: 'Pip',
       page: 'Reports',
@@ -266,6 +278,18 @@ export const guideContent: Record<Locale, Record<string, GuidePage>> = {
       page: 'Evaluasi',
       title: 'Kiriman Anda',
       body: 'Setiap situs yang Anda kirim muncul di sini beserta halaman yang dipilih. Formulir evaluasi baru hanya menangkap URL — belum ada pemindaian.',
+    },
+    evaluationWizard: {
+      name: 'Pip',
+      page: 'Evaluasi baru',
+      title: 'Empat langkah, satu konfigurasi',
+      body: 'Pilih situs web, tentukan hingga sepuluh halamannya, lalu kategori dan viewport yang dicakup evaluasi ini. Menyimpan berarti menyimpan konfigurasi — tidak ada pemindaian.',
+    },
+    evaluationDetail: {
+      name: 'Pip',
+      page: 'Evaluasi',
+      title: 'Konfigurasi tersimpan',
+      body: 'Catatan ini menyimpan halaman, kategori, dan viewport yang Anda pilih. Tidak ada temuan atau skor, karena belum ada analisis yang berjalan.',
     },
     reports: {
       name: 'Pip',

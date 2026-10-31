@@ -6,7 +6,7 @@ import { PageHeader } from '@/components/layout/PageHeader';
 import { DeleteWebsiteDialog } from '@/components/websites/DeleteWebsiteDialog';
 import { useI18n } from '@/i18n';
 import { useAuth } from '@/services/auth.context';
-import { countEvaluationsByWebsite } from '@/services/workspace.service';
+import { countEvaluationsByWebsite } from '@/services/evaluation.service';
 import { queryWebsites } from '@/services/website.service';
 import type { WebsiteRecord, WebsiteStatus } from '@/services/workspace.types';
 import { cn } from '@/lib/cn';

@@ -52,7 +52,7 @@ export function OverviewPage() {
         title={t('dashboard.welcome', { name: firstName })}
         description={t('dashboard.welcomeBody')}
         actions={
-          <LinkButton to={routes.evaluations} tone="dark">
+          <LinkButton to={routes.evaluationNew} tone="dark">
             <Plus className="size-4" aria-hidden="true" />
             {t('dashboard.newEvaluation')}
           </LinkButton>
@@ -87,10 +87,17 @@ export function OverviewPage() {
               </>
             );
 
-            return stat.key === 'websites' ? (
+            const href =
+              stat.key === 'websites'
+                ? routes.websites
+                : stat.key === 'evaluations'
+                  ? routes.evaluations
+                  : null;
+
+            return href ? (
               <Link
                 key={stat.key}
-                to={routes.websites}
+                to={href}
                 className="block bg-surface px-5 py-6 transition-colors hover:bg-surface-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-deep/45"
               >
                 {inner}
@@ -136,7 +143,7 @@ export function OverviewPage() {
               icon={Plus}
               label={t('dashboard.newEvaluation')}
               description={t('dashboard.quick.newBody')}
-              to={routes.evaluations}
+              to={routes.evaluationNew}
             />
             <QuickAction
               icon={Globe}

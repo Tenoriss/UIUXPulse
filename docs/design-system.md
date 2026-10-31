@@ -295,6 +295,31 @@ deliberately, never overlap.
   is kept"), because the destructive button alone does not communicate it.
 - Cancel is the first focusable element; Escape cancels.
 
+### Wizard (`components/evaluations/`)
+
+- **Anatomy:** step rail → one step per panel → sticky configuration aside →
+  navigation row (`Back` / `Cancel` … primary action). The primary action is the
+  last element in the row on mobile, first visually on desktop.
+- **Step rail:** numbered, hairline-separated, `aria-current="step"`. Wraps to
+  two columns below `sm` rather than scrolling horizontally.
+- **Selection controls:** radios and checkboxes are visually replaced
+  (`sr-only` input + styled span) but remain real inputs, so keyboard, screen
+  reader, and form semantics are intact. The selected state is never colour-only —
+  a check glyph and a border change carry it too.
+- **Truthfulness rule:** any panel that could be mistaken for real analysis
+  carries a visible label (`Demo data`, `Demonstration`, `No analysis performed`).
+  Progress labels describe what the app does with the record, never what it does
+  to the website.
+- **Counters:** page counts always read `n / 10`, category counts `n / 6`. A limit
+  is stated before it is hit, and the control that would exceed it is disabled
+  rather than erroring after the fact.
+
+### Website picker row (`WebsiteStep`)
+
+- One row per site: icon, name, URL, date added, radio affordance.
+- The whole row is the label; there is no separate "select" button, so the tap
+  target is the full row on mobile.
+
 ### Modal
 
 - **Anatomy:** overlay → panel → eyebrow/title/description → body → footer actions.

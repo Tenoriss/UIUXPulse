@@ -19,7 +19,9 @@ import { LegacySignUpRedirect } from '@/pages/auth/LegacySignUpRedirect';
 import { ForgotPasswordPage } from '@/pages/auth/ForgotPasswordPage';
 import { ResetPasswordPage } from '@/pages/auth/ResetPasswordPage';
 import { OverviewPage } from '@/pages/dashboard/OverviewPage';
-import { EvaluationsPage } from '@/pages/dashboard/EvaluationsPage';
+import { EvaluationsPage } from '@/pages/dashboard/evaluations/EvaluationsPage';
+import { EvaluationWizardPage } from '@/pages/dashboard/evaluations/EvaluationWizardPage';
+import { EvaluationDetailPage } from '@/pages/dashboard/evaluations/EvaluationDetailPage';
 import { WebsitesPage } from '@/pages/dashboard/websites/WebsitesPage';
 import { WebsiteNewPage } from '@/pages/dashboard/websites/WebsiteNewPage';
 import { WebsiteDetailPage } from '@/pages/dashboard/websites/WebsiteDetailPage';
@@ -96,7 +98,8 @@ export const appRoutes: RouteObject[] = [
               { path: 'websites/:id', element: <WebsiteDetailPage /> },
               { path: 'websites/:id/edit', element: <WebsiteEditPage /> },
               { path: 'evaluations', element: <EvaluationsPage /> },
-              { path: 'evaluations/new', element: <EvaluationsPage /> },
+              { path: 'evaluations/new', element: <EvaluationWizardPage /> },
+              { path: 'evaluations/:id', element: <EvaluationDetailPage /> },
               { path: 'reports', element: <ReportsPage /> },
               { path: 'settings', element: <SettingsPage /> },
               { path: '*', element: <NotFoundPage inApp /> },

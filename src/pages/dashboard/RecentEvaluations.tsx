@@ -8,7 +8,7 @@ import { cn } from '@/lib/cn';
 import type { EvaluationRecord, EvaluationStatus } from '@/services/workspace.types';
 
 const statusTone: Record<EvaluationStatus, NonNullable<BadgeProps['tone']>> = {
-  queued: 'neutral',
+  created: 'neutral',
   inReview: 'ochre',
   completed: 'sage',
   failed: 'clay',
@@ -33,7 +33,7 @@ export function RecentEvaluations({ evaluations }: { evaluations: EvaluationReco
         description={t('dashboard.recentEmptyBody')}
         action={
           <Link
-            to={routes.evaluations}
+            to={routes.evaluationNew}
             className="group inline-flex items-center gap-2 rounded-pill border border-ink bg-ink px-5 py-2.5 text-[0.8125rem] font-medium text-canvas shadow-clay transition-colors hover:bg-ink-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-deep/45 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
           >
             <Plus className="size-3.5" aria-hidden="true" />
@@ -52,7 +52,7 @@ export function RecentEvaluations({ evaluations }: { evaluations: EvaluationReco
         return (
           <li key={record.id}>
             <Link
-              to={routes.evaluations}
+              to={`${routes.evaluations}/${record.id}`}
               className="group flex items-center gap-4 py-4 transition-colors hover:bg-surface/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-deep/45"
             >
               <span className="min-w-0 flex-1">

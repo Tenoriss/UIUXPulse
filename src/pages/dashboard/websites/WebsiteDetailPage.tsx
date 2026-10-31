@@ -3,10 +3,11 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, FileText, Globe, PenLine, Plus, Trash2 } from 'lucide-react';
 import { Badge, Button, Card, CardHeader, CardTitle, EmptyState, LinkButton } from '@/components/ui';
 import { DeleteWebsiteDialog } from '@/components/websites/DeleteWebsiteDialog';
+import { routes } from '@/config/site';
 import { useI18n } from '@/i18n';
 import { useAuth } from '@/services/auth.context';
 import { getWebsite } from '@/services/website.service';
-import { listEvaluationsForWebsite } from '@/services/workspace.service';
+import { listEvaluationsForWebsite } from '@/services/evaluation.service';
 import { RecentEvaluations } from '../RecentEvaluations';
 
 export function WebsiteDetailPage() {
@@ -68,7 +69,11 @@ export function WebsiteDetailPage() {
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <LinkButton to="/app/evaluations" tone="dark" size="sm">
+          <LinkButton
+            to={`${routes.evaluationNew}?website=${website.id}`}
+            tone="dark"
+            size="sm"
+          >
             <Plus className="size-3.5" aria-hidden="true" />
             {t('websites.detail.startEvaluation')}
           </LinkButton>
@@ -105,7 +110,11 @@ export function WebsiteDetailPage() {
               title={t('websites.detail.historyEmptyTitle')}
               description={t('websites.detail.historyEmptyBody')}
               action={
-                <LinkButton to="/app/evaluations" tone="neutral" size="sm">
+                <LinkButton
+                  to={`${routes.evaluationNew}?website=${website.id}`}
+                  tone="neutral"
+                  size="sm"
+                >
                   <Plus className="size-3.5" aria-hidden="true" />
                   {t('websites.detail.startEvaluation')}
                 </LinkButton>

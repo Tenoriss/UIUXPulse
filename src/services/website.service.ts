@@ -7,7 +7,7 @@ import type {
   WebsiteListResult,
   WebsiteStatus,
 } from './website.types';
-import { listEvaluations, detachEvaluations } from './workspace.service';
+import { listEvaluations, detachEvaluations } from './evaluation.service';
 
 /**
  * Website storage and CRUD.

@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useAuth } from '@/services/auth.context';
-import { listEvaluations, summarise } from '@/services/workspace.service';
+import { listEvaluations } from '@/services/evaluation.service';
+import { summarise } from '@/services/workspace.service';
 import { listWebsites } from '@/services/website.service';
 import type {
   EvaluationRecord,
