@@ -7,37 +7,47 @@
 /* ==========================================================================
    UIUXPulse — Design Tokens
    Tailwind CSS v4 CSS-first configuration.
-   Naming is semantic: canvas / surface / ink / sage / taupe / line.
+
+   Two layers:
+     1. --brand-*  raw palette values (imported from the Nuria-derived spec,
+        with AA corrections noted inline).
+     2. --color-*  semantic tokens defined in :root; components only use these
+        (via utilities such as bg-surface, text-ink-muted, border-line).
+
+   Restyling the product means editing layer 2 or swapping layer 1 — never
+   touching component files.
    ========================================================================== */
 
 @theme {
-  /* ---- Palette ---------------------------------------------------------- */
-  --color-canvas: #f7f6f2;
-  --color-surface: #fcfbf8;
-  --color-surface-muted: #eeece5;
-  --color-surface-sunken: #f1efe8;
-
-  --color-ink: #292a25;
-  --color-ink-soft: #55564e;
-  --color-ink-muted: #85857d;
-  --color-ink-faint: #a9a89f;
-
-  --color-sage: #a5b29a;
-  --color-sage-soft: #d7ddcd;
-  --color-sage-wash: #eaeee2;
-  --color-sage-deep: #65735c;
-  --color-sage-ink: #47523f;
-
-  --color-taupe: #c8c0b3;
-  --color-taupe-soft: #e2dcd1;
-  --color-line: #e4e1d9;
-  --color-line-strong: #d6d2c7;
-
-  /* Muted, warm feedback tones — no saturated UI-kit colours. */
-  --color-clay: #a9715f;
-  --color-clay-soft: #f0e2db;
-  --color-ochre: #a8863f;
-  --color-ochre-soft: #f2e9d5;
+  /* ---- Palette ----------------------------------------------------------
+     Raw brand values. Components must not reference these directly; use the
+     semantic layer in :root below so contrast fixes stay in one place.
+     -------------------------------------------------------------------- */
+  --brand-canvas: #f7f6f2;
+  --brand-surface: #fcfbf8;
+  --brand-surface-muted: #eeece5;
+  --brand-surface-sunken: #f1efe8;
+  --brand-ink: #292a25;
+  --brand-ink-soft: #55564e;
+  --brand-ink-tertiary: #6b6b63; /* AA on canvas, surface, muted, sage-wash */
+  --brand-ink-faint: #a9a89f; /* decoration / large text only, 2.2:1 */
+  --brand-sage: #a5b29a; /* decoration only */
+  --brand-sage-soft: #d7ddcd;
+  --brand-sage-wash: #eaeee2;
+  --brand-sage-deep: #5b6a53; /* AA for links + small text */
+  --brand-sage-ink: #47523f;
+  --brand-taupe: #c8c0b3;
+  --brand-taupe-soft: #e2dcd1;
+  --brand-line: #e4e1d9;
+  --brand-line-strong: #d6d2c7;
+  --brand-clay: #a9715f; /* fills, icons, large text */
+  --brand-clay-ink: #8a4a38; /* AA for error copy */
+  --brand-clay-soft: #f0e2db;
+  --brand-clay-deep: #7d4537; /* destructive hover */
+  --brand-on-clay: #fbf7f4; /* text on clay fills */
+  --brand-ochre: #a8863f;
+  --brand-ochre-soft: #f2e9d5;
+  --brand-ochre-ink: #7a6127; /* AA on ochre-soft */
 
   /* ---- Typography ------------------------------------------------------- */
   --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system,
@@ -120,6 +130,11 @@
 
   /* ---- Motion ----------------------------------------------------------- */
   --ease-editorial: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* Motion durations — semantic, no ad-hoc values in components. */
+  --duration-instant: 150ms;
+  --duration-quick: 250ms;
+  --duration-calm: 400ms;
   --animate-fade-in: fade-in 0.5s var(--ease-editorial) both;
   --animate-fade-up: fade-up 0.6s var(--ease-editorial) both;
   --animate-rise: rise 0.45s var(--ease-editorial) both;
@@ -220,6 +235,41 @@
    ========================================================================== */
 
 @layer base {
+  :root {
+    color-scheme: light;
+
+    /* Semantic colours (single source of truth for utilities) */
+    --color-canvas: var(--brand-canvas);
+    --color-surface: var(--brand-surface);
+    --color-surface-muted: var(--brand-surface-muted);
+    --color-surface-sunken: var(--brand-surface-sunken);
+
+    --color-ink: var(--brand-ink);
+    --color-ink-soft: var(--brand-ink-soft);
+    --color-ink-muted: var(--brand-ink-tertiary);
+    --color-ink-faint: var(--brand-ink-faint);
+
+    --color-sage: var(--brand-sage);
+    --color-sage-soft: var(--brand-sage-soft);
+    --color-sage-wash: var(--brand-sage-wash);
+    --color-sage-deep: var(--brand-sage-deep);
+    --color-sage-ink: var(--brand-sage-ink);
+
+    --color-taupe: var(--brand-taupe);
+    --color-taupe-soft: var(--brand-taupe-soft);
+    --color-line: var(--brand-line);
+    --color-line-strong: var(--brand-line-strong);
+
+    --color-clay: var(--brand-clay);
+    --color-clay-ink: var(--brand-clay-ink);
+    --color-clay-deep: var(--brand-clay-deep);
+    --color-clay-soft: var(--brand-clay-soft);
+    --color-on-clay: var(--brand-on-clay);
+    --color-ochre: var(--brand-ochre);
+    --color-ochre-soft: var(--brand-ochre-soft);
+    --color-ochre-ink: var(--brand-ochre-ink);
+  }
+
   *,
   *::before,
   *::after {
@@ -291,6 +341,11 @@
     color: var(--color-ink);
   }
 
+  /*
+   * Focus-visible: 2px sage-deep outline (`#5b6a53`, 5.35:1 on canvas) with a
+   * 3px offset, so the indicator is always visible against every surface and
+   * never deleted by `outline: none` in a component.
+   */
   :focus-visible {
     outline: 2px solid var(--color-sage-deep);
     outline-offset: 3px;

@@ -41,7 +41,7 @@ export function AppTopbar({
       />
 
       <div className="flex min-w-0 items-center gap-2.5">
-        <span className="hidden text-micro uppercase tracking-[0.12em] text-ink-faint sm:inline">
+        <span className="hidden text-micro uppercase tracking-[0.12em] text-ink-muted sm:inline">
           {t('dashboard.workspace')}
         </span>
         <span className="hidden size-1 rounded-full bg-line-strong sm:block" aria-hidden="true" />

@@ -52,7 +52,7 @@ export function PublicFooter({ className }: { className?: string }) {
                         >
                           {t(item.labelKey)}
                           {item.badgeKey && (
-                            <span className="rounded-pill border border-line px-1.5 py-0.5 text-[0.5625rem] uppercase tracking-[0.08em] text-ink-faint">
+                            <span className="rounded-pill border border-line px-1.5 py-0.5 text-[0.5625rem] uppercase tracking-[0.08em] text-ink-muted">
                               {t(item.badgeKey)}
                             </span>
                           )}
@@ -67,11 +67,11 @@ export function PublicFooter({ className }: { className?: string }) {
         </div>
 
         <div className="mt-14 border-t border-line pt-6">
-          <p className="max-w-2xl text-micro leading-relaxed text-ink-faint">
+          <p className="max-w-2xl text-micro leading-relaxed text-ink-muted">
             {t('footer.disclaimer')}
           </p>
 
-          <div className="mt-6 flex flex-col gap-3 text-micro text-ink-faint sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-6 flex flex-col gap-3 text-micro text-ink-muted sm:flex-row sm:items-center sm:justify-between">
             <p>
               © {year} {site.name}. {t('footer.rights')}
             </p>

@@ -51,6 +51,12 @@ src/
 └── types/             ui.ts, navigation.ts
 ```
 
+## Design system documentation
+
+Behavioural and accessibility rules (component states, keyboard contracts, contrast
+requirements, anti-patterns, QA checklist) live in [`docs/design-system.md`](docs/design-system.md).
+That document is the contract; this README only covers setup.
+
 ## Design tokens
 
 All tokens live in `src/styles/index.css` under `@theme`, so every value is both a CSS

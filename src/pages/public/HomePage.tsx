@@ -21,7 +21,7 @@ export function HomePage() {
           <Badge tone="sage" dot>
             {t('home.available')}
           </Badge>
-          <p className="text-micro uppercase tracking-[0.14em] text-ink-faint">
+          <p className="text-micro uppercase tracking-[0.14em] text-ink-muted">
             {t('home.heroMeta')}
           </p>
         </div>
@@ -74,7 +74,7 @@ export function HomePage() {
                 className="aspect-[4/3] w-full object-cover"
               />
             </div>
-            <figcaption className="mt-3 flex items-start justify-between gap-6 text-micro text-ink-faint">
+            <figcaption className="mt-3 flex items-start justify-between gap-6 text-micro text-ink-muted">
               <span className="max-w-xs leading-relaxed">{t('home.heroNote')}</span>
               <span className="shrink-0 tabular-nums">01 / 04</span>
             </figcaption>
@@ -101,7 +101,7 @@ export function HomePage() {
             <span
               key={copy}
               aria-hidden={copy === 1}
-              className="flex items-center gap-10 font-serif text-xl text-ink-faint"
+              className="flex items-center gap-10 font-serif text-xl text-ink-muted"
             >
               {t('home.marquee')}
             </span>
@@ -178,7 +178,7 @@ export function HomePage() {
                 key={key}
                 className="grid grid-cols-[40px_1fr] gap-5 border-t border-line py-6 last:border-b sm:grid-cols-[56px_1fr]"
               >
-                <span className="text-micro tabular-nums tracking-[0.08em] text-ink-faint">
+                <span className="text-micro tabular-nums tracking-[0.08em] text-ink-muted">
                   0{index + 1}
                 </span>
                 <div>

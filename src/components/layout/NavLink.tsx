@@ -87,14 +87,14 @@ export function SidebarNavLink({ item, onNavigate }: SidebarNavLinkProps) {
     >
       {Icon && (
         <Icon
-          className="size-4 shrink-0 text-ink-faint transition-colors group-hover:text-sage-deep"
+          className="size-4 shrink-0 text-ink-muted transition-colors group-hover:text-sage-deep"
           strokeWidth={1.5}
           aria-hidden="true"
         />
       )}
       <span className="truncate">{t(item.labelKey)}</span>
       {item.badgeKey && (
-        <span className="ml-auto rounded-pill border border-line bg-surface-muted px-1.5 py-0.5 text-[0.5625rem] uppercase tracking-[0.08em] text-ink-faint">
+        <span className="ml-auto rounded-pill border border-line bg-surface-muted px-1.5 py-0.5 text-[0.5625rem] uppercase tracking-[0.08em] text-ink-muted">
           {t(item.badgeKey)}
         </span>
       )}

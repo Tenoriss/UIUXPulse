@@ -50,13 +50,13 @@ export function Field({
             {required && <span className="ml-1 text-sage-deep">*</span>}
           </label>
           {optionalLabel && !required && (
-            <span className="text-micro text-ink-faint">{optionalLabel}</span>
+            <span className="text-micro text-ink-muted">{optionalLabel}</span>
           )}
         </div>
       )}
       {children}
       {error ? (
-        <p className="text-micro text-clay" role="alert">
+        <p className="text-micro text-clay-ink" role="alert">
           {error}
         </p>
       ) : hint ? (
@@ -109,7 +109,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     >
       <div className="relative">
         {leadingIcon && (
-          <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-faint">
+          <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-muted">
             {leadingIcon}
           </span>
         )}
@@ -210,7 +210,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
           <path
             d="M1.5 6.2 4.4 9 10.5 2.6"
             fill="none"
-            stroke="#f7f6f2"
+            stroke="var(--color-canvas)"
             strokeWidth="1.8"
             strokeLinecap="round"
             strokeLinejoin="round"

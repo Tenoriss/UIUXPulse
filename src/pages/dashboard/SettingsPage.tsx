@@ -53,7 +53,7 @@ export function SettingsPage({ admin = false }: SettingsPageProps) {
                   <span className="block text-[0.8125rem] font-medium text-ink">
                     {LOCALE_META[item].label}
                   </span>
-                  <span className="block text-micro text-ink-faint">
+                  <span className="block text-micro text-ink-muted">
                     {LOCALE_META[item].intl}
                   </span>
                 </span>
@@ -88,7 +88,7 @@ export function SettingsPage({ admin = false }: SettingsPageProps) {
             ))}
           </div>
 
-          <p className="mt-8 text-micro text-ink-faint">{t('common.previewNotice')}</p>
+          <p className="mt-8 text-micro text-ink-muted">{t('common.previewNotice')}</p>
         </Card>
       </div>
     </div>

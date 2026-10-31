@@ -45,7 +45,7 @@ export function OverviewPage() {
       <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 xl:grid-cols-4">
         {statKeys.map((key) => (
           <div key={key} className="bg-surface px-5 py-6">
-            <p className="text-micro uppercase tracking-[0.12em] text-ink-faint">
+            <p className="text-micro uppercase tracking-[0.12em] text-ink-muted">
               {t(`dashboard.stats.${key}`)}
             </p>
             <p className="mt-3 font-serif text-h1 leading-none text-ink-faint">0</p>
@@ -109,7 +109,7 @@ export function OverviewPage() {
           <ul className="mt-6 divide-y divide-line">
             {scopeKeys.map((key, index) => (
               <li key={key} className="flex items-baseline gap-4 py-3 first:pt-0 last:pb-0">
-                <span className="text-micro tabular-nums text-ink-faint">
+                <span className="text-micro tabular-nums text-ink-muted">
                   0{index + 1}
                 </span>
                 <span className="text-[0.8125rem] font-medium text-ink">

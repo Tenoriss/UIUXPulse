@@ -80,7 +80,7 @@ export function SignInPage() {
               type="button"
               onClick={() => setReveal((value) => !value)}
               aria-label={reveal ? t('auth.hidePassword') : t('auth.showPassword')}
-              className="flex size-8 items-center justify-center rounded-full text-ink-faint transition-colors hover:bg-surface-muted hover:text-ink"
+              className="flex size-9 items-center justify-center rounded-full text-ink-muted transition-colors duration-[var(--duration-instant)] hover:bg-surface-muted hover:text-ink"
             >
               {reveal ? (
                 <EyeOff className="size-4" aria-hidden="true" />
@@ -116,7 +116,7 @@ export function SignInPage() {
             {t('auth.createOne')}
           </Link>
         </p>
-        <p className="text-micro text-ink-faint">{t('auth.terms')}</p>
+        <p className="text-micro text-ink-muted">{t('auth.terms')}</p>
       </AuthFooterLinks>
     </>
   );

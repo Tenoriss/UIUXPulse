@@ -94,7 +94,7 @@ export function PublicHeader() {
                 onClick={() => setMobileOpen(false)}
                 className="flex items-baseline gap-4 py-4 text-2xl font-serif text-ink"
               >
-                <span className="text-micro tabular-nums text-ink-faint">
+                <span className="text-micro tabular-nums text-ink-muted">
                   0{index + 1}
                 </span>
                 {t(item.labelKey)}

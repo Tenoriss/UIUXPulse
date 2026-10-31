@@ -38,7 +38,7 @@ export function AdminLayout() {
       <div key={location.pathname} className="mx-auto w-full max-w-6xl animate-fade-in">
         <div className="mb-8 flex items-center gap-3">
           <Badge tone="taupe">{t('admin.restricted')}</Badge>
-          <span className="text-micro text-ink-faint">{t('admin.restrictedBody')}</span>
+          <span className="text-micro text-ink-muted">{t('admin.restrictedBody')}</span>
         </div>
         <Outlet />
       </div>

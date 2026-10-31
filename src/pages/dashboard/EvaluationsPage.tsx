@@ -112,7 +112,7 @@ export function EvaluationsPage() {
           />
           <div className="flex flex-wrap items-center gap-2">
             <Badge tone="sage">{t('common.readOnly')}</Badge>
-            <span className="text-micro text-ink-faint">{t('home.heroNote')}</span>
+            <span className="text-micro text-ink-muted">{t('home.heroNote')}</span>
           </div>
         </div>
       </Modal>

@@ -94,7 +94,7 @@ export function AppSidebar({
           {t('nav.home')}
         </Link>
 
-        <p className="px-3 pb-1 text-[0.625rem] leading-relaxed text-ink-faint">
+        <p className="px-3 pb-1 text-[0.625rem] leading-relaxed text-ink-muted">
           {t('dashboard.disclaimer')}
         </p>
       </div>

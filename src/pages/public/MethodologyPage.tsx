@@ -22,7 +22,7 @@ export function MethodologyPage() {
           {scope.map((key, index) => (
             <Card key={key} interactive>
               <CardHeader>
-                <span className="text-micro tabular-nums text-ink-faint">
+                <span className="text-micro tabular-nums text-ink-muted">
                   0{index + 1}
                 </span>
                 <CardTitle>{t(`home.scope.${key}.title`)}</CardTitle>

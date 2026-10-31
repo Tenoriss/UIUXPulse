@@ -109,7 +109,7 @@ export function Tabs<T extends string = string>({
                 <span
                   className={cn(
                     'rounded-pill px-1.5 py-0.5 text-[0.625rem] tabular-nums',
-                    isActive ? 'bg-sage-wash text-sage-ink' : 'bg-surface-muted text-ink-faint',
+                    isActive ? 'bg-sage-wash text-sage-ink' : 'bg-surface-muted text-ink-muted',
                   )}
                 >
                   {item.count}

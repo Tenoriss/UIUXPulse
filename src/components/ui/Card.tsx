@@ -110,7 +110,7 @@ export function CardFooter({ className, children, ...props }: HTMLAttributes<HTM
 
 /** Eyebrow number label used in editorial card lists, e.g. "01". */
 export function CardIndex({ children, className }: { children: ReactNode; className?: string }) {
-  return <span className={cn('eyebrow text-ink-faint', className)}>{children}</span>;
+  return <span className={cn('eyebrow text-ink-muted', className)}>{children}</span>;
 }
 
 export function useCardVariant() {

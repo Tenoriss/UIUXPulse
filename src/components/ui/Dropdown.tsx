@@ -167,12 +167,12 @@ export function Dropdown<T extends string = string>({
                   <span className="min-w-0 flex-1">
                     <span className="block truncate font-medium">{item.label}</span>
                     {item.description && (
-                      <span className="mt-0.5 block truncate text-micro text-ink-faint">
+                      <span className="mt-0.5 block truncate text-micro text-ink-muted">
                         {item.description}
                       </span>
                     )}
                   </span>
-                  {item.hint && <span className="text-micro text-ink-faint">{item.hint}</span>}
+                  {item.hint && <span className="text-micro text-ink-muted">{item.hint}</span>}
                   {isActive && <Check className="size-3.5 shrink-0 text-sage-deep" aria-hidden="true" />}
                 </button>
               </div>

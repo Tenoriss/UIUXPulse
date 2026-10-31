@@ -6,8 +6,8 @@ const toneStyles: Record<StatusTone, string> = {
   neutral: 'border-line bg-surface text-ink-soft',
   sage: 'border-sage/45 bg-sage-wash text-sage-ink',
   taupe: 'border-taupe/60 bg-taupe-soft/60 text-ink-soft',
-  clay: 'border-clay/30 bg-clay-soft text-[#7d4537]',
-  ochre: 'border-ochre/30 bg-ochre-soft text-[#7a6127]',
+  clay: 'border-clay/30 bg-clay-soft text-clay-ink',
+  ochre: 'border-ochre/30 bg-ochre-soft text-ochre-ink',
 };
 
 const dotStyles: Record<StatusTone, string> = {
@@ -26,6 +26,10 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   icon?: ReactNode;
 }
 
+/**
+ * Badge is non-interactive display text (never a button), so it may sit below
+ * the 24px target-size floor. Interactive chips must use Button instead.
+ */
 export function Badge({
   tone = 'neutral',
   dot = false,

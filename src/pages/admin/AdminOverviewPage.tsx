@@ -18,7 +18,7 @@ export function AdminOverviewPage() {
       <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 xl:grid-cols-4">
         {metricKeys.map((key) => (
           <div key={key} className="bg-surface px-5 py-6">
-            <p className="text-micro uppercase tracking-[0.12em] text-ink-faint">
+            <p className="text-micro uppercase tracking-[0.12em] text-ink-muted">
               {t(`admin.metrics.${key}`)}
             </p>
             <p className="mt-3 font-serif text-h1 leading-none text-ink-faint">—</p>

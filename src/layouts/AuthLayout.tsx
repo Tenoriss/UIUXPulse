@@ -38,7 +38,7 @@ export function AuthLayout() {
         </main>
 
         <footer className="px-6 pb-8 text-center sm:px-10">
-          <p className="mx-auto max-w-sm text-micro leading-relaxed text-ink-faint">
+          <p className="mx-auto max-w-sm text-micro leading-relaxed text-ink-muted">
             {t('auth.previewNotice')}
           </p>
         </footer>
@@ -62,7 +62,7 @@ export function AuthLayout() {
             <p className="mt-5 text-body text-ink-soft">{t('auth.asideBody')}</p>
           </div>
 
-          <div className="flex items-center justify-between border-t border-line pt-5 text-micro text-ink-faint">
+          <div className="flex items-center justify-between border-t border-line pt-5 text-micro text-ink-muted">
             <span>{t('common.tagline')}</span>
             <span className="tabular-nums">© {new Date().getFullYear()}</span>
           </div>

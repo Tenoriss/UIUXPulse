@@ -11,7 +11,7 @@ const variantMeta: Record<
 > = {
   success: { icon: Check, accent: 'text-sage-deep', ring: 'bg-sage-wash' },
   info: { icon: Info, accent: 'text-ink-soft', ring: 'bg-surface-muted' },
-  error: { icon: TriangleAlert, accent: 'text-clay', ring: 'bg-clay-soft' },
+  error: { icon: TriangleAlert, accent: 'text-clay-ink', ring: 'bg-clay-soft' },
 };
 
 function ToastItem({ record }: { record: ToastRecord }) {
@@ -64,7 +64,7 @@ function ToastItem({ record }: { record: ToastRecord }) {
         type="button"
         onClick={() => dismiss(record.id)}
         aria-label={t('toast.dismiss')}
-        className="-mr-1 -mt-1 flex size-7 shrink-0 items-center justify-center rounded-full text-ink-faint transition-colors hover:bg-surface-muted hover:text-ink"
+        className="-mr-1 -mt-1 flex size-8 shrink-0 items-center justify-center rounded-full text-ink-muted transition-colors duration-[var(--duration-instant)] hover:bg-surface-muted hover:text-ink"
       >
         <X className="size-3.5" aria-hidden="true" />
       </button>

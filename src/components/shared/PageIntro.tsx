@@ -24,7 +24,7 @@ export function PageIntro({ eyebrow, title, description, meta, className }: Page
       <div className="flex items-center justify-between border-b border-line pb-4">
         <p className="eyebrow">{eyebrow}</p>
         {meta && (
-          <span className="text-micro tabular-nums tracking-[0.04em] text-ink-faint">
+          <span className="text-micro tabular-nums tracking-[0.04em] text-ink-muted">
             ({meta})
           </span>
         )}

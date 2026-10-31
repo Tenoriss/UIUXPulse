@@ -24,7 +24,7 @@ export function SectionLabel({
     >
       <p className="eyebrow">{label}</p>
       {index && (
-        <span className="text-micro tabular-nums tracking-[0.04em] text-ink-faint">
+        <span className="text-micro tabular-nums tracking-[0.04em] text-ink-muted">
           ({index})
         </span>
       )}
@@ -60,7 +60,7 @@ export function StatBand({
           key={item.label}
           className="flex flex-col-reverse gap-2 bg-canvas px-6 py-6 first:pl-0 sm:py-8"
         >
-          <dt className="text-micro uppercase tracking-[0.12em] text-ink-faint">
+          <dt className="text-micro uppercase tracking-[0.12em] text-ink-muted">
             {item.label}
           </dt>
           <dd className="font-serif text-mega leading-none text-ink">{item.value}</dd>
@@ -94,7 +94,7 @@ export function NumberedRow({
         className,
       )}
     >
-      <span className="text-micro tabular-nums tracking-[0.08em] text-ink-faint">
+      <span className="text-micro tabular-nums tracking-[0.08em] text-ink-muted">
         {index}
       </span>
       <div className="max-w-xl">
@@ -105,7 +105,7 @@ export function NumberedRow({
           <p className="mt-3 text-body text-ink-soft">{children}</p>
         )}
       </div>
-      {meta && <div className="text-micro text-ink-faint sm:pt-2 sm:text-right">{meta}</div>}
+      {meta && <div className="text-micro text-ink-muted sm:pt-2 sm:text-right">{meta}</div>}
     </div>
   );
 }

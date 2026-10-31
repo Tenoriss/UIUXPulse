@@ -136,7 +136,7 @@ export function SignUpPage() {
             {t('auth.signInInstead')}
           </Link>
         </p>
-        <p className="text-micro text-ink-faint">{t('auth.terms')}</p>
+        <p className="text-micro text-ink-muted">{t('auth.terms')}</p>
       </AuthFooterLinks>
     </>
   );
