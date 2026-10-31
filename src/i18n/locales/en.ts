@@ -47,7 +47,6 @@ export const en = {
     home: 'Home',
     howItWorks: 'How it works',
     principles: 'Principles',
-    pricing: 'Pricing',
     signIn: 'Sign in',
     signUp: 'Create account',
     dashboard: 'Dashboard',
@@ -172,12 +171,6 @@ export const en = {
       'The first evaluation is often the smallest. Submit a single landing page and see how the report reads.',
     ctaButton: 'Start an evaluation',
     ctaSecondary: 'Read the methodology',
-  },
-
-  pricing: {
-    monthly: 'Monthly',
-    annual: 'Annual',
-    notice: 'Plans and pricing are being finalised. Nothing is purchasable in this preview.',
   },
 
   auth: {

@@ -46,7 +46,6 @@ export const id: Dictionary = {
     home: 'Beranda',
     howItWorks: 'Cara kerja',
     principles: 'Prinsip',
-    pricing: 'Harga',
     signIn: 'Masuk',
     signUp: 'Buat akun',
     dashboard: 'Dasbor',
@@ -171,12 +170,6 @@ export const id: Dictionary = {
       'Evaluasi pertama biasanya yang paling kecil. Kirim satu halaman beranda dan lihat bagaimana laporannya terbaca.',
     ctaButton: 'Mulai evaluasi',
     ctaSecondary: 'Baca metodologi',
-  },
-
-  pricing: {
-    monthly: 'Bulanan',
-    annual: 'Tahunan',
-    notice: 'Paket dan harga masih disusun. Tidak ada yang dapat dibeli pada pratinjau ini.',
   },
 
   auth: {

@@ -226,7 +226,7 @@ deliberately, never overlap.
 
 | Layout | Structure | Responsive |
 | --- | --- | --- |
-| `PublicLayout` | sticky header (blur after 12px scroll) → main → footer | desktop nav ≥1024px; drawer below, scroll-locked, Escape closes, closes on navigation |
+| `PublicLayout` | sticky header (blur after 12px scroll) → main → footer | desktop nav ≥1024px; below that a `MobileNavDrawer` **portalled to `document.body`** — inside the header it would inherit the sticky header's stacking context and any ancestor `overflow-hidden`/`backdrop-filter`, which silently breaks `position: fixed` scrolling |
 | `AuthLayout` | form column + editorial aside | aside hidden <1024px; single column, max 24rem form |
 | `DashboardLayout` | fixed sidebar 256px + sticky topbar + content | sidebar becomes slide-over drawer <1024px |
 | `AdminLayout` | same shell, taupe accent, "restricted" marker | same as dashboard |

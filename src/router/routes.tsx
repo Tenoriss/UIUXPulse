@@ -7,7 +7,6 @@ import { GuideLayout } from '@/layouts/GuideLayout';
 import { HomePage } from '@/pages/public/HomePage';
 import { HowItWorksPage } from '@/pages/public/HowItWorksPage';
 import { PrinciplesPage } from '@/pages/public/PrinciplesPage';
-import { PricingPage } from '@/pages/public/PricingPage';
 import { MethodologyPage } from '@/pages/public/MethodologyPage';
 import { SignInPage } from '@/pages/auth/SignInPage';
 import { SignUpPage } from '@/pages/auth/SignUpPage';
@@ -43,7 +42,6 @@ export const appRoutes: RouteObject[] = [
           { index: true, element: <HomePage /> },
           { path: 'how-it-works', element: <HowItWorksPage /> },
           { path: 'principles', element: <PrinciplesPage /> },
-          { path: 'pricing', element: <PricingPage /> },
           { path: 'methodology', element: <MethodologyPage /> },
           { path: '*', element: <NotFoundPage /> },
         ],

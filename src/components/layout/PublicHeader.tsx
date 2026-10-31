@@ -6,11 +6,11 @@ import { routes } from '@/config/site';
 import { publicNav } from '@/config/navigation';
 import { useI18n } from '@/i18n';
 import { useScrolled } from '@/hooks/useScrolled';
-import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
-import { LinkButton, IconButton } from '@/components/ui';
+import { IconButton, LinkButton } from '@/components/ui';
 import { Logo } from '@/components/brand/Logo';
-import { LanguageSwitcher, LanguageList } from '@/components/brand/LanguageSwitcher';
+import { LanguageSwitcher } from '@/components/brand/LanguageSwitcher';
 import { Container } from './Container';
+import { MobileNavDrawer } from './MobileNavDrawer';
 import { HeaderNavLink } from './NavLink';
 
 export function PublicHeader() {
@@ -19,20 +19,9 @@ export function PublicHeader() {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  useLockBodyScroll(mobileOpen);
-
   useEffect(() => {
     setMobileOpen(false);
   }, [location.pathname]);
-
-  useEffect(() => {
-    if (!mobileOpen) return;
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setMobileOpen(false);
-    };
-    document.addEventListener('keydown', onKeyDown);
-    return () => document.removeEventListener('keydown', onKeyDown);
-  }, [mobileOpen]);
 
   return (
     <header
@@ -80,53 +69,11 @@ export function PublicHeader() {
         </div>
       </Container>
 
-      {/* Mobile drawer */}
-      <div
-        id="mobile-nav"
-        hidden={!mobileOpen}
-        className="fixed inset-x-0 top-16 bottom-0 z-30 overflow-y-auto border-t border-line bg-canvas px-5 pb-10 pt-6 sm:top-18 lg:hidden"
-      >
-        <nav aria-label="Mobile" className="flex flex-col">
-          {publicNav.map((item, index) => (
-            <div key={`${item.to}-${item.labelKey}`} className="border-b border-line">
-              <Link
-                to={item.to}
-                onClick={() => setMobileOpen(false)}
-                className="flex items-baseline gap-4 py-4 text-2xl font-serif text-ink"
-              >
-                <span className="text-micro tabular-nums text-ink-muted">
-                  0{index + 1}
-                </span>
-                {t(item.labelKey)}
-              </Link>
-            </div>
-          ))}
-        </nav>
-
-        <div className="mt-8 flex flex-col gap-3">
-          <LinkButton
-            to={routes.signUp}
-            size="lg"
-            fullWidth
-            onClick={() => setMobileOpen(false)}
-          >
-            {t('nav.signUp')}
-            <ArrowRight className="size-4" aria-hidden="true" />
-          </LinkButton>
-          <Link
-            to={routes.signIn}
-            onClick={() => setMobileOpen(false)}
-            className="py-3 text-center text-[0.8125rem] text-ink-soft underline decoration-line-strong underline-offset-4"
-          >
-            {t('nav.signIn')}
-          </Link>
-        </div>
-
-        <div className="mt-10 border-t border-line pt-6">
-          <p className="eyebrow mb-3">{t('common.language')}</p>
-          <LanguageList />
-        </div>
-      </div>
+      <MobileNavDrawer
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        items={publicNav}
+      />
     </header>
   );
 }

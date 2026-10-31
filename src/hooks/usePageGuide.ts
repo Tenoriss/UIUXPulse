@@ -23,7 +23,6 @@ const ROUTE_KEYS: Array<[pattern: RegExp, key: string]> = [
   [/^\/forgot-password/, 'forgotPassword'],
   [/^\/how-it-works/, 'howItWorks'],
   [/^\/principles/, 'principles'],
-  [/^\/pricing/, 'pricing'],
   [/^\/methodology/, 'methodology'],
   [/^\/$/, 'home'],
 ];

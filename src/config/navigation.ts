@@ -15,7 +15,6 @@ import { routes } from './site';
 export const publicNav: NavItem[] = [
   { to: routes.howItWorks, labelKey: 'nav.howItWorks' },
   { to: routes.principles, labelKey: 'nav.principles' },
-  { to: routes.pricing, labelKey: 'nav.pricing' },
 ];
 
 /** Public footer link groups. */
@@ -25,7 +24,7 @@ export const footerNav: NavTree = [
     items: [
       { to: routes.howItWorks, labelKey: 'nav.howItWorks' },
       { to: routes.principles, labelKey: 'nav.principles' },
-      { to: routes.pricing, labelKey: 'nav.pricing' },
+      { to: routes.methodology, labelKey: 'footer.methodology' },
     ],
   },
   {

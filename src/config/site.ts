@@ -12,7 +12,6 @@ export const routes = {
   home: '/',
   howItWorks: '/how-it-works',
   principles: '/principles',
-  pricing: '/pricing',
   methodology: '/methodology',
   signIn: '/sign-in',
   signUp: '/sign-up',

@@ -48,12 +48,6 @@ export const guideContent: Record<Locale, Record<string, GuidePage>> = {
       title: 'We read, we never rewrite',
       body: 'Every finding is an observation with evidence attached. A recommendation is a suggestion for your team to act on, never an automatic change.',
     },
-    pricing: {
-      name: 'Pip',
-      page: 'Pricing',
-      title: 'Plans are being finalised',
-      body: 'Nothing is purchasable in this preview. The structure is ready, so plans can drop in without redesigning the page.',
-    },
     methodology: {
       name: 'Pip',
       page: 'Methodology',
@@ -158,12 +152,6 @@ export const guideContent: Record<Locale, Record<string, GuidePage>> = {
       page: 'Prinsip',
       title: 'Kami membaca, bukan menulis ulang',
       body: 'Setiap temuan adalah observasi dengan bukti terlampir. Rekomendasi adalah saran untuk tim Anda kerjakan, bukan perubahan otomatis.',
-    },
-    pricing: {
-      name: 'Pip',
-      page: 'Harga',
-      title: 'Paket masih disusun',
-      body: 'Belum ada yang bisa dibeli pada pratinjau ini. Strukturnya sudah siap, jadi paket bisa masuk tanpa desain ulang.',
     },
     methodology: {
       name: 'Pip',
