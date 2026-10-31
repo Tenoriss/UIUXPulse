@@ -1,4 +1,4 @@
-import { createContext, useContext, type HTMLAttributes, type ReactNode } from 'react';
+import { createContext, type HTMLAttributes, type ReactNode } from 'react';
 import { cn } from '@/lib/cn';
 
 /**
@@ -113,6 +113,3 @@ export function CardIndex({ children, className }: { children: ReactNode; classN
   return <span className={cn('eyebrow text-ink-muted', className)}>{children}</span>;
 }
 
-export function useCardVariant() {
-  return useContext(CardContext).variant;
-}
