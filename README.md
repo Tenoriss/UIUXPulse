@@ -110,6 +110,25 @@ email, and photo persist to the demo account in `localStorage`:
 - removing the photo restores the default pixel mascot;
 - the account id never changes, so an email change cannot orphan the session.
 
+## Websites
+
+Registered sites live in their own store (`uiuxpulse.websites`, keyed by owner id),
+managed through `services/website.service.ts` — the only place that reads or writes it.
+Routes: `/app/websites`, `/app/websites/new`, `/app/websites/:id`,
+`/app/websites/:id/edit`, all behind the existing auth guard.
+
+- **Normalisation** (`lib/url.ts`): a bare domain gains `https://`; the host is lowercased
+  and stripped of `www.`; a trailing slash and the fragment are dropped; **path and query
+  are preserved**, so `/shop` and `/` are different records. `http` and `https` stay distinct.
+- **Ownership**: every service call takes the owner id from `useAuth()`. A record belonging
+  to another account resolves to "not found" rather than a permission error.
+- **Duplicates**: one account cannot register the same normalised URL twice.
+- **Deletion** removes the row and **keeps every evaluation**. Related evaluations are
+  detached (`websiteId` cleared, the site name copied into `record.website`) and the count
+  is shown in the confirmation and the success toast. Nothing unrelated is touched.
+- **No scanning.** The detail page shows evaluation history only when real records exist,
+  and counts are read from the store; nothing is invented.
+
 ## Design tokens
 
 All tokens live in `src/styles/index.css` under `@theme`, so every value is both a CSS

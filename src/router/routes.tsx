@@ -20,6 +20,10 @@ import { ForgotPasswordPage } from '@/pages/auth/ForgotPasswordPage';
 import { ResetPasswordPage } from '@/pages/auth/ResetPasswordPage';
 import { OverviewPage } from '@/pages/dashboard/OverviewPage';
 import { EvaluationsPage } from '@/pages/dashboard/EvaluationsPage';
+import { WebsitesPage } from '@/pages/dashboard/websites/WebsitesPage';
+import { WebsiteNewPage } from '@/pages/dashboard/websites/WebsiteNewPage';
+import { WebsiteDetailPage } from '@/pages/dashboard/websites/WebsiteDetailPage';
+import { WebsiteEditPage } from '@/pages/dashboard/websites/WebsiteEditPage';
 import { ReportsPage } from '@/pages/dashboard/ReportsPage';
 import { SettingsPage } from '@/pages/dashboard/SettingsPage';
 import { AdminOverviewPage } from '@/pages/admin/AdminOverviewPage';
@@ -87,6 +91,10 @@ export const appRoutes: RouteObject[] = [
             errorElement: <RouteErrorBoundary />,
             children: [
               { index: true, element: <OverviewPage /> },
+              { path: 'websites', element: <WebsitesPage /> },
+              { path: 'websites/new', element: <WebsiteNewPage /> },
+              { path: 'websites/:id', element: <WebsiteDetailPage /> },
+              { path: 'websites/:id/edit', element: <WebsiteEditPage /> },
               { path: 'evaluations', element: <EvaluationsPage /> },
               { path: 'evaluations/new', element: <EvaluationsPage /> },
               { path: 'reports', element: <ReportsPage /> },

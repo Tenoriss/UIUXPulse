@@ -96,6 +96,20 @@ export const guideContent: Record<Locale, Record<string, GuidePage>> = {
       title: 'Choose a new password',
       body: 'Set a new password for a demo account. Nothing is emailed and nothing is verified, but the new password really does replace the old one here.',
     },
+    websites: {
+      name: 'Pip',
+      page: 'My websites',
+      title: 'One record per site',
+      body: 'Register a site once, then every evaluation and report for it stays together. Counts come from real records — nothing is simulated here.',
+      action: 'Add a website',
+      actionTo: '/app/websites/new',
+    },
+    websiteDetail: {
+      name: 'Pip',
+      page: 'Website',
+      title: 'Everything about one site',
+      body: 'Edit the name, address, or description, or start an evaluation from here. Deleting the site keeps its evaluation history.',
+    },
     dashboard: {
       name: 'Pip',
       page: 'Dashboard',
@@ -224,6 +238,20 @@ export const guideContent: Record<Locale, Record<string, GuidePage>> = {
       page: 'Setel ulang kata sandi',
       title: 'Pilih kata sandi baru',
       body: 'Tetapkan kata sandi baru untuk akun demo. Tidak ada email dan tidak ada verifikasi, tapi kata sandi barunya benar-benar menggantikan yang lama di sini.',
+    },
+    websites: {
+      name: 'Pip',
+      page: 'Situs web saya',
+      title: 'Satu catatan per situs',
+      body: 'Daftarkan situs sekali, lalu setiap evaluasi dan laporannya tetap terkumpul. Angkanya berasal dari data nyata — tidak ada yang disimulasikan.',
+      action: 'Tambah situs web',
+      actionTo: '/app/websites/new',
+    },
+    websiteDetail: {
+      name: 'Pip',
+      page: 'Situs web',
+      title: 'Semua tentang satu situs',
+      body: 'Edit nama, alamat, atau deskripsi, atau mulai evaluasi dari sini. Menghapus situs tetap menyimpan riwayat evaluasinya.',
     },
     dashboard: {
       name: 'Pip',

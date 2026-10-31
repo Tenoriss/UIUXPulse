@@ -1,6 +1,7 @@
 import {
   FileText,
   Gauge,
+  Globe,
   LayoutDashboard,
   Layers,
   ListChecks,
@@ -50,6 +51,7 @@ export const footerNav: NavTree = [
 /** Dashboard sidebar navigation. */
 export const dashboardNav: NavItem[] = [
   { to: routes.dashboardOverview, labelKey: 'dashboard.nav.overview', icon: LayoutDashboard },
+  { to: routes.websites, labelKey: 'dashboard.nav.websites', icon: Globe },
   { to: routes.evaluations, labelKey: 'dashboard.nav.evaluations', icon: Gauge },
   { to: routes.reports, labelKey: 'dashboard.nav.reports', icon: FileText },
   { to: routes.settings, labelKey: 'dashboard.nav.settings', icon: Settings },

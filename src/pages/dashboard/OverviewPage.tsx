@@ -68,8 +68,8 @@ export function OverviewPage() {
         <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 xl:grid-cols-4">
           {stats.map((stat) => {
             const Icon = stat.icon;
-            return (
-              <div key={stat.key} className="bg-surface px-5 py-6">
+            const inner = (
+              <>
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-micro uppercase tracking-[0.12em] text-ink-muted">
                     {stat.label}
@@ -84,6 +84,20 @@ export function OverviewPage() {
                 >
                   {stat.value}
                 </p>
+              </>
+            );
+
+            return stat.key === 'websites' ? (
+              <Link
+                key={stat.key}
+                to={routes.websites}
+                className="block bg-surface px-5 py-6 transition-colors hover:bg-surface-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-deep/45"
+              >
+                {inner}
+              </Link>
+            ) : (
+              <div key={stat.key} className="bg-surface px-5 py-6">
+                {inner}
               </div>
             );
           })}
@@ -123,6 +137,12 @@ export function OverviewPage() {
               label={t('dashboard.newEvaluation')}
               description={t('dashboard.quick.newBody')}
               to={routes.evaluations}
+            />
+            <QuickAction
+              icon={Globe}
+              label={t('dashboard.nav.websites')}
+              description={t('dashboard.quick.websitesBody')}
+              to={routes.websites}
             />
             <QuickAction
               icon={Gauge}

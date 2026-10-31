@@ -285,6 +285,16 @@ deliberately, never overlap.
 - Display-only, non-interactive (may sit below 24px). Tones: `neutral`, `sage`, `taupe`, `clay`, `ochre`.
 - A badge **must not** be the only way to convey state in a form.
 
+### ConfirmDialog (`components/ui/ConfirmDialog.tsx`)
+
+- Wraps `Modal`; **anatomy:** title naming the exact object → consequence paragraph →
+  optional warning → `Cancel` + destructive confirm.
+- `tone="destructive"` is only for irreversible actions; the confirm label **must** be a verb
+  phrase ("Delete website"), never "OK".
+- The consequence text **must** state what survives the action (e.g. "its evaluation history
+  is kept"), because the destructive button alone does not communicate it.
+- Cancel is the first focusable element; Escape cancels.
+
 ### Modal
 
 - **Anatomy:** overlay → panel → eyebrow/title/description → body → footer actions.

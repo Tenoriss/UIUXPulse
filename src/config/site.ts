@@ -26,6 +26,8 @@ export const routes = {
   profile: '/app/settings',
   dashboard: '/app',
   dashboardOverview: '/app',
+  websites: '/app/websites',
+  websiteNew: '/app/websites/new',
   evaluations: '/app/evaluations',
   evaluationNew: '/app/evaluations/new',
   reports: '/app/reports',

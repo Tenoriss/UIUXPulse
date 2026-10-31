@@ -9,6 +9,8 @@ import { guideContent, type GuidePage } from '@/content/guide';
  * `/app`, and unknown paths fall back to the 404 entry.
  */
 const ROUTE_KEYS: Array<[pattern: RegExp, key: string]> = [
+  [/^\/app\/websites\/(?:new|[^/]+\/edit|[^/]+)/, 'websiteDetail'],
+  [/^\/app\/websites/, 'websites'],
   [/^\/app\/evaluations/, 'evaluations'],
   [/^\/app\/reports/, 'reports'],
   [/^\/app\/settings/, 'settings'],

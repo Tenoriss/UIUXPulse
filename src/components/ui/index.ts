@@ -18,6 +18,8 @@ export type { CardProps, CardVariant } from './Card';
 export { Badge, IndexBadge } from './Badge';
 export type { BadgeProps } from './Badge';
 export { Modal } from './Modal';
+export { ConfirmDialog } from './ConfirmDialog';
+export type { ConfirmDialogProps } from './ConfirmDialog';
 export type { ModalProps, ModalSize } from './Modal';
 export { Dropdown } from './Dropdown';
 export type { DropdownProps } from './Dropdown';
