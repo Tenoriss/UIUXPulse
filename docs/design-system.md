@@ -132,6 +132,9 @@ Rules:
 - Pip is a helper, never a gate: it must not cover the primary action on mobile, must be
   dismissible, closes on navigation and on Escape, and exposes its text through
   `role="status"`.
+- **Dismissal must be reversible.** Hiding Pip leaves a compact "Show Pip" pill in the same
+  corner (`guide.show`); clicking it clears the stored flag. Never return `null` from a
+  hidden state — that strands the visitor with no way back except DevTools.
 - The container is `position: fixed` with `pointer-events-none` on the wrapper, so it never
   intercepts clicks on the page beneath.
 - The guide mounts through the pathless `GuideLayout`, never outside `RouterProvider` —

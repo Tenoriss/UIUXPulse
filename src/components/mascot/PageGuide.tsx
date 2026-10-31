@@ -29,6 +29,19 @@ export function PageGuide() {
   });
   const [open, setOpen] = useState(false);
 
+  /** Dismiss Pip and remember the choice across pages and reloads. */
+  const hideGuide = () => {
+    setHidden(true);
+    setOpen(false);
+    window.localStorage.setItem(STORAGE_KEY, '1');
+  };
+
+  /** Bring Pip back and clear the stored preference. */
+  const restoreGuide = () => {
+    setHidden(false);
+    window.localStorage.removeItem(STORAGE_KEY);
+  };
+
   // Close the bubble on navigation so it never describes the wrong page.
   useEffect(() => {
     setOpen(false);
@@ -39,7 +52,37 @@ export function PageGuide() {
     onDismiss: () => setOpen(false),
   });
 
-  if (hidden) return null;
+  // Hiding is reversible: a small pill in the same corner brings Pip back.
+  // Without it, the only way out would be editing localStorage by hand.
+  if (hidden) {
+    return (
+      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-end p-4 sm:p-6">
+        <button
+          type="button"
+          onClick={restoreGuide}
+          className={cn(
+            'pointer-events-auto group flex items-center gap-2 rounded-pill border border-line bg-surface/95 py-1 pl-1 pr-3.5 shadow-clay backdrop-blur-sm',
+            'transition-[transform,border-color,color] duration-[var(--duration-quick)] ease-[var(--ease-editorial)]',
+            'hover:-translate-y-0.5 hover:border-line-strong focus-visible:outline-none',
+            'focus-visible:ring-2 focus-visible:ring-sage-deep/45 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas',
+          )}
+        >
+          <img
+            src="/images/mascot-pip-sm.png"
+            alt=""
+            width={160}
+            height={160}
+            aria-hidden="true"
+            className="size-7 object-contain opacity-80 transition-opacity duration-300 group-hover:opacity-100"
+            style={{ imageRendering: 'pixelated' }}
+          />
+          <span className="text-[0.75rem] font-medium text-ink-soft transition-colors group-hover:text-ink">
+            {t('guide.show')}
+          </span>
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-end p-4 sm:p-6">
@@ -97,10 +140,7 @@ export function PageGuide() {
 
               <button
                 type="button"
-                onClick={() => {
-                  setHidden(true);
-                  window.localStorage.setItem(STORAGE_KEY, '1');
-                }}
+                onClick={hideGuide}
                 className="text-[0.625rem] text-ink-muted underline decoration-line-strong underline-offset-2 transition-colors hover:text-ink"
               >
                 {t('guide.hide')}
