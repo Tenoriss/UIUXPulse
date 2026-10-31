@@ -50,9 +50,12 @@ export function ReportDocumentView({ report }: { report: ReportDocument }) {
         </div>
 
         <div>
-          <h1 className="font-serif text-[1.75rem] leading-[1.15] text-[#1a1a18] sm:text-[2.25rem]">
+          {/* The page already has an h1 (the preview heading) above this
+              document, so the cover title is an h2 — the document reads as one
+              section of the page, not as a second page inside it. */}
+          <h2 className="font-serif text-[1.75rem] leading-[1.15] text-[#1a1a18] sm:text-[2.25rem]">
             {meta.title}
-          </h1>
+          </h2>
           <div className="mt-5 h-px w-16 bg-[#6f7f66]" />
         </div>
 

@@ -7,7 +7,7 @@ import { routes } from '@/config/site';
 import { useI18n } from '@/i18n';
 import { useAuth } from '@/services/auth.context';
 import { getReport } from '@/services/report.service';
-import { downloadReportPdf } from '@/services/report-generator';
+
 
 /**
  * Report preview.
@@ -62,9 +62,17 @@ export function EvaluationReportPage() {
     );
   }
 
-  const onDownload = () => {
+  /**
+   * jsPDF plus its html2canvas/dompurify dependencies are roughly a megabyte —
+   * far more than the rest of the app combined. They are loaded on the click
+   * that needs them rather than on first paint, so opening a report preview
+   * stays as cheap as opening any other page. The button already shows a
+   * pending state, so the one-off load is not a visible stall.
+   */
+  const onDownload = async () => {
     setState('working');
     try {
+      const { downloadReportPdf } = await import('@/services/report-generator');
       downloadReportPdf(report);
       setState('done');
       window.setTimeout(() => setState('idle'), 2400);

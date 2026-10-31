@@ -31,15 +31,18 @@ export function EvaluationDetailPage() {
 
   if (!record) {
     return (
-      <EmptyState
-        title={t('evaluation.detail.notFoundTitle')}
-        description={t('evaluation.detail.notFoundBody')}
-        action={
-          <LinkButton to={routes.evaluations} tone="dark" size="sm">
-            {t('evaluation.detail.notFoundAction')}
-          </LinkButton>
-        }
-      />
+      <div className="flex flex-col gap-8">
+        <h1 className="font-serif text-h2 text-ink">{t('evaluation.detail.notFoundTitle')}</h1>
+        <EmptyState
+          title={t('evaluation.detail.notFoundTitle')}
+          description={t('evaluation.detail.notFoundBody')}
+          action={
+            <LinkButton to={routes.evaluations} tone="dark" size="sm">
+              {t('evaluation.detail.notFoundAction')}
+            </LinkButton>
+          }
+        />
+      </div>
     );
   }
 
@@ -66,7 +69,7 @@ export function EvaluationDetailPage() {
             </Badge>
           </div>
           <h1 className="truncate font-serif text-h2 text-ink">{record.website}</h1>
-          <p className="mt-1 truncate text-[0.8125rem] text-ink-muted">{record.url}</p>
+          <p className="mt-1 break-all text-[0.8125rem] leading-relaxed text-ink-muted">{record.url}</p>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">

@@ -21,7 +21,12 @@ export function PageHeader({ eyebrow, title, description, actions, className }: 
       <div className="max-w-xl">
         {eyebrow && <p className="eyebrow mb-3">{eyebrow}</p>}
         <h1 className="font-serif text-h2 text-ink">{title}</h1>
-        {description && <p className="mt-2 text-body text-ink-soft">{description}</p>}
+        {/* Descriptions are often a URL or an e-mail address. `break-words`
+            keeps a long unbroken token inside the column instead of pushing the
+            page sideways on a 390px screen. */}
+        {description && (
+          <p className="mt-2 break-words text-body text-ink-soft">{description}</p>
+        )}
       </div>
       {actions && <div className="flex flex-wrap items-center gap-2.5">{actions}</div>}
     </div>

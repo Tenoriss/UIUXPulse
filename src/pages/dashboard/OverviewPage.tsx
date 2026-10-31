@@ -166,7 +166,7 @@ export function OverviewPage() {
             <button
               type="button"
               onClick={() => setProfileOpen(true)}
-              className="group flex w-full items-center gap-3 px-2 py-3.5 text-left transition-colors hover:bg-surface-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-deep/45"
+              className="group flex min-h-12 w-full items-center gap-3 px-2 py-3 text-left transition-colors hover:bg-surface-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-deep/45"
             >
               <span className="flex size-8 shrink-0 items-center justify-center rounded-full border border-line bg-surface text-ink-soft transition-colors group-hover:text-ink">
                 <PenLine className="size-3.5" strokeWidth={1.6} aria-hidden="true" />
@@ -244,7 +244,7 @@ function QuickAction({
   return (
     <Link
       to={to}
-      className="group flex items-center gap-3 px-2 py-3.5 transition-colors hover:bg-surface-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-deep/45"
+      className="group flex min-h-12 items-center gap-3 px-2 py-3 transition-colors hover:bg-surface-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-deep/45"
     >
       <span className="flex size-8 shrink-0 items-center justify-center rounded-full border border-line bg-surface text-ink-soft transition-colors group-hover:text-ink">
         <Icon className="size-3.5" strokeWidth={1.6} aria-hidden="true" />

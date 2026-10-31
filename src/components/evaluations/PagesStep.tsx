@@ -189,7 +189,7 @@ export function PagesStep({ website, pages, onChange, error }: PagesStepProps) {
                         : 'border-line bg-surface text-ink-soft hover:border-line-strong hover:text-ink',
                     )}
                   >
-                    <span className="tabular-nums opacity-60">{pagePathLabel(page)}</span>
+                    <span className="break-all tabular-nums opacity-60">{pagePathLabel(page)}</span>
                     {added ? (
                       <X className="size-3" aria-hidden="true" />
                     ) : (

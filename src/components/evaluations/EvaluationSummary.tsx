@@ -90,7 +90,7 @@ export function EvaluationSummary({ record }: { record: EvaluationRecord }) {
                     title={page}
                   >
                     <Link2 className="size-3 shrink-0 text-ink-faint" aria-hidden="true" />
-                    <span className="font-mono text-[0.75rem]">{pagePathLabel(page)}</span>
+                    <span className="break-all font-mono text-[0.75rem]">{pagePathLabel(page)}</span>
                   </li>
                 ))}
               </ul>

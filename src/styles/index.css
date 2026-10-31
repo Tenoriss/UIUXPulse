@@ -32,7 +32,7 @@
   --brand-ink: #f3f1ea; /* 16.7:1 on canvas */
   --brand-ink-soft: #c6c4ba; /* 10.8:1 */
   --brand-ink-tertiary: #9c9a90; /* 6.7:1 — AA */
-  --brand-ink-faint: #6e6c64; /* 3.6:1 — placeholder / numerals only */
+  --brand-ink-faint: #8a8880; /* 5.0:1 on surface, 5.3:1 on canvas — AA for small text */
 
   --brand-sage: #a5b29a; /* decoration, borders */
   --brand-sage-soft: #3a4434;

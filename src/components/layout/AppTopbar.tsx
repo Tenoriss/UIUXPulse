@@ -137,7 +137,7 @@ export function AppTopbar({
           <button
             type="button"
             aria-label={t('profile.menuLabel')}
-            className="flex items-center gap-2 rounded-pill border border-line bg-surface py-1 pl-1 pr-2.5 transition-colors hover:border-line-strong"
+            className="flex h-10 items-center gap-2 rounded-pill border border-line bg-surface py-1 pl-1 pr-2.5 transition-colors hover:border-line-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-deep/45"
           >
             <UserAvatar size="sm" />
             <span className="hidden max-w-32 truncate text-[0.75rem] font-medium text-ink-soft sm:block">

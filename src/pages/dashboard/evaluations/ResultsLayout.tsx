@@ -47,16 +47,21 @@ export function ResultsLayout({ section, title, description, children }: Results
   const demoOpen = params.get('preview') === 'demo';
 
   if (!record) {
+    // The results shell owns the page heading, so the empty state gets one too:
+    // a page without an h1 has no anchor for a screen reader's heading list.
     return (
-      <EmptyState
-        title={t('evaluation.detail.notFoundTitle')}
-        description={t('evaluation.detail.notFoundBody')}
-        action={
-          <LinkButton to={routes.evaluations} tone="dark" size="sm">
-            {t('evaluation.detail.notFoundAction')}
-          </LinkButton>
-        }
-      />
+      <div className="flex flex-col gap-8">
+        <h1 className="font-serif text-h2 text-ink">{t('evaluation.detail.notFoundTitle')}</h1>
+        <EmptyState
+          title={t('evaluation.detail.notFoundTitle')}
+          description={t('evaluation.detail.notFoundBody')}
+          action={
+            <LinkButton to={routes.evaluations} tone="dark" size="sm">
+              {t('evaluation.detail.notFoundAction')}
+            </LinkButton>
+          }
+        />
+      </div>
     );
   }
 
@@ -66,6 +71,7 @@ export function ResultsLayout({ section, title, description, children }: Results
     return (
       <div className="flex flex-col gap-8">
         <BackLink />
+        <h1 className="font-serif text-h2 text-ink">{title}</h1>
         <SectionTabs evaluationId={id} active={section} demoOpen={false} disabled />
         <EmptyState
           icon={FlaskConical}

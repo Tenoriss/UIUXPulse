@@ -39,6 +39,7 @@ export function AdminUserDetailPage() {
     return (
       <div className="flex flex-col gap-8">
         <BackLink label={t('admin.users.detailBack')} />
+        <h1 className="font-serif text-h2 text-ink">{t('admin.users.detailNotFoundTitle')}</h1>
         <EmptyState
           icon={Users}
           title={t('admin.users.detailNotFoundTitle')}

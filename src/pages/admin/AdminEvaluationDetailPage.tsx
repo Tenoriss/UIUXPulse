@@ -38,6 +38,7 @@ export function AdminEvaluationDetailPage() {
     return (
       <div className="flex flex-col gap-8">
         <BackLink label={t('admin.evaluations.detailBack')} />
+        <h1 className="font-serif text-h2 text-ink">{t('admin.evaluations.detailNotFoundTitle')}</h1>
         <EmptyState
           icon={Gauge}
           title={t('admin.evaluations.detailNotFoundTitle')}
@@ -84,7 +85,7 @@ export function AdminEvaluationDetailPage() {
         </div>
         <div className="bg-surface px-5 py-4">
           <dt className="text-micro text-ink-muted">{t('admin.evaluations.columnId')}</dt>
-          <dd className="mt-1 truncate font-mono text-[0.75rem] text-ink">{record.id}</dd>
+          <dd className="mt-1 break-all font-mono text-[0.75rem] text-ink">{record.id}</dd>
         </div>
       </dl>
 

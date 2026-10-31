@@ -44,7 +44,7 @@ export function LanguageSwitcher({
             onClick={() => setLocale(item)}
             aria-pressed={locale === item}
             className={cn(
-              'rounded-pill px-2.5 py-1 text-[0.6875rem] font-medium tracking-[0.04em] transition-colors duration-300',
+              'inline-flex h-8 items-center rounded-pill px-2.5 text-[0.6875rem] font-medium tracking-[0.04em] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-deep/45',
               locale === item
                 ? 'bg-sage-wash text-sage-ink'
                 : 'text-ink-soft hover:text-ink',

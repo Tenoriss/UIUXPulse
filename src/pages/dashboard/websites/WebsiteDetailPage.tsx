@@ -20,16 +20,21 @@ export function WebsiteDetailPage() {
   const evaluations = website ? listEvaluationsForWebsite(user?.id, website.id) : [];
 
   if (!website) {
+    // A page needs an h1 even when there is nothing to show, or the heading
+    // list a screen reader announces starts one level too deep.
     return (
-      <EmptyState
-        title={t('websites.detail.notFoundTitle')}
-        description={t('websites.detail.notFoundBody')}
-        action={
-          <LinkButton to="/app/websites" tone="dark" size="sm">
-            {t('websites.detail.notFoundAction')}
-          </LinkButton>
-        }
-      />
+      <div className="flex flex-col gap-8">
+        <h1 className="font-serif text-h2 text-ink">{t('websites.detail.notFoundTitle')}</h1>
+        <EmptyState
+          title={t('websites.detail.notFoundTitle')}
+          description={t('websites.detail.notFoundBody')}
+          action={
+            <LinkButton to={routes.websites} tone="dark" size="sm">
+              {t('websites.detail.notFoundAction')}
+            </LinkButton>
+          }
+        />
+      </div>
     );
   }
 
