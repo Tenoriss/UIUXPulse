@@ -339,6 +339,25 @@ deliberately, never overlap.
 - **Progress indicators:** plain bars, not a second gauge — one score arc per
   screen, at the top.
 
+### Admin surfaces (`pages/admin/`)
+
+- **Same shell, different accent.** Admin reuses `AppShell`, the sidebar and the
+  topbar, and changes exactly one thing: the accent is taupe rather than sage,
+  plus a persistent "restricted area" marker. A second navigation language for
+  internal tools would be a second product to learn.
+- **Tables that cannot overflow.** Wide viewports get a real `<table>` with
+  `table-fixed` and percentage column widths; below `lg` the same rows render as
+  stacked cards that repeat every column label. No horizontal scrolling, ever —
+  a table that must be scrolled sideways has stopped being readable.
+- **Read-only looks read-only.** There is no score column, no "rescan" button,
+  and no editable role. Where an action is deliberately absent, the page says
+  why in one sentence instead of leaving a gap.
+- **Honest absence.** Unavailable metrics print a sentence and a neutral chip
+  ("Not available"), never a zero that could be mistaken for a measurement.
+- **Notes are labelled.** An administrative note on a criterion carries an
+  ochre `Has an admin note` chip and sits under its own heading, so it can never
+  be read as the published definition.
+
 ### Report document surface (`components/reports/`)
 
 - **One visual language, two materials.** The preview page is a *paper* surface

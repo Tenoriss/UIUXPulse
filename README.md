@@ -170,6 +170,65 @@ Safeguards that keep previews from being mistaken for results:
 - the demo data lives in no store at all, so it cannot overwrite or collide with
   a saved evaluation.
 
+## Administration (frontend mock)
+
+`/admin` is a monitoring and management surface over the same data the workspace
+uses. It reads; it does not own a second copy of anything.
+
+- `/admin` — overview: registered users, websites, saved evaluations, configured
+  pages, plus the five most recent registrations and configurations.
+- `/admin/users`, `/admin/users/:id` — every account with its role, registration
+  date, and the number of websites and configurations it owns.
+- `/admin/evaluations`, `/admin/evaluations/:id` — every saved configuration,
+  with owner, status, page and category counts, and a read-only detail view.
+- `/admin/criteria` — the six categories in both languages, with an optional
+  administrative note.
+- `/admin/queue` is kept as an alias and forwards to `/admin/evaluations`.
+
+### Roles and gates
+
+Accounts carry `role: 'user' | 'admin'`. New registrations are always `user`;
+a stored record with no role reads as `user`, so an account created before
+Phase 9 can never escalate by existing. The demo administrator is planted once
+per browser by `ensureDemoAccounts()` — a normal account row with a normal
+digest, published on the sign-in screen because an unreachable role would just
+be a dead page.
+
+Gating is centralised in one predicate, `useAuth().isAdmin`, consumed by
+`<RequireAdmin />`, the workspace sidebar entry, and the topbar shortcut. The
+route tree nests `<RequireAdmin />` inside `<RequireAuth />`, so:
+
+- unauthenticated → `/sign-in` with `?next=` preserved;
+- signed-in `user` → their own `/app` dashboard;
+- signed in `admin` → the admin shell.
+
+**This is frontend mock authorisation, not security.** Everything runs in the
+browser, `localStorage` is writable by whoever opens devtools, and the role is
+therefore an interface rule, not a boundary. Real enforcement has to live on a
+server that never trusts a client-provided role.
+
+### Data architecture
+
+- `services/admin.types.ts` — the admin view models.
+- `services/admin.service.ts` — the only aggregation layer. It composes
+  `auth.storage` (accounts), `website.service` and `evaluation.service`; it
+  writes nothing, so opening an admin page cannot alter a record.
+- `services/admin.criteria.ts` — the *only* writable admin store, holding an
+  optional note per category under `uiuxpulse.admin.criteriaNotes`. It is
+  deliberately separate from `content/criteria.ts`, which stays the single
+  published source of truth: a note is shown beside a definition, never in
+  place of it, and nothing here weights or scores a category.
+- Accounts are exposed as `AccountSummary`, a type with **no** `passwordHash`
+  field, so no admin view can leak a digest even by accident — the compiler
+  enforces it.
+
+Deliberate omissions: no role switcher, no delete-account, no impersonate. Each
+would be a promise the mock cannot keep, and the last one would fabricate a
+session real authentication would never issue. Two numbers are also absent on
+purpose — a registration trend (no event log exists) and a demo-preview count
+(opening a preview is never recorded) — and the overview says so in words
+instead of printing a plausible-looking figure.
+
 ## Reports and PDF export
 
 `/app/evaluations/:id/report` previews a report; `/app/reports` lists every saved

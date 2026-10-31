@@ -44,6 +44,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     typeof window === 'undefined' ? 'loading' : 'ready',
   );
 
+  // Derived, never stored: the role comes from the account record on every
+  // render, so a sign-out cannot leave a stale `isAdmin` behind.
+  const isAdmin = user?.role === 'admin';
+
   const login = useCallback(async (payload: LoginPayload): Promise<AuthOutcome> => {
     const result = await loginRequest(payload);
     if (result.ok) setUser(result.data);
@@ -92,17 +96,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       user,
       status,
       isAuthenticated: status === 'ready' && user !== null,
+      isAdmin,
       login,
       register,
       logout,
       resetPassword,
       updateProfile,
     }),
-    [user, status, login, register, logout, resetPassword, updateProfile],
+    [user, status, isAdmin, login, register, logout, resetPassword, updateProfile],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
+
+export { DEMO_ADMIN } from './auth.service';
 
 export function useAuth(): AuthContextValue {
   const context = useContext(AuthContext);

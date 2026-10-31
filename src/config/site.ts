@@ -33,7 +33,9 @@ export const routes = {
   reports: '/app/reports',
   settings: '/app/settings',
   admin: '/admin',
+  /** Kept as an alias: earlier phases linked here, it now forwards. */
   adminQueue: '/admin/queue',
+  adminEvaluations: '/admin/evaluations',
   adminUsers: '/admin/users',
   adminCriteria: '/admin/criteria',
   adminSettings: '/admin/settings',

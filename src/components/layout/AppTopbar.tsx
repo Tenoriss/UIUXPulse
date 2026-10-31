@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Bell, LogOut, Menu, PenLine, Plus, Settings } from 'lucide-react';
+import { Bell, LogOut, Menu, PenLine, Plus, Settings, ShieldCheck } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { useI18n } from '@/i18n';
 import { routes } from '@/config/site';
@@ -26,7 +26,7 @@ export function AppTopbar({
 }: AppTopbarProps) {
   const { t } = useI18n();
   const { toast } = useToast();
-  const { user, logout } = useAuth();
+  const { user, logout, isAdmin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [profileOpen, setProfileOpen] = useState(false);
@@ -83,6 +83,16 @@ export function AppTopbar({
             toast({ title: t('common.comingSoon'), variant: 'info' })
           }
         />
+
+        {isAdmin && (
+          <IconButton
+            label={t('admin.nav.openAdmin')}
+            icon={<ShieldCheck className="size-4" />}
+            tone="ghost"
+            size="sm"
+            onClick={() => navigate(routes.admin)}
+          />
+        )}
 
         <Dropdown
           align="end"

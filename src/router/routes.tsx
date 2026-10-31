@@ -1,4 +1,4 @@
-import type { RouteObject } from 'react-router-dom';
+import { Navigate, type RouteObject } from 'react-router-dom';
 import { PublicLayout } from '@/layouts/PublicLayout';
 import { AuthLayout } from '@/layouts/AuthLayout';
 import { DashboardLayout } from '@/layouts/DashboardLayout';
@@ -11,6 +11,7 @@ import { HowItWorksPage } from '@/pages/public/HowItWorksPage';
 import { StartEvaluationPage } from '@/pages/public/StartEvaluationPage';
 import { PrinciplesPage } from '@/pages/public/PrinciplesPage';
 import { MethodologyPage } from '@/pages/public/MethodologyPage';
+import { RequireAdmin } from '@/components/auth/RequireAdmin';
 import { RequireAuth } from '@/components/auth/RequireAuth';
 import { RedirectIfAuthenticated } from '@/components/auth/RedirectIfAuthenticated';
 import { SignInPage } from '@/pages/auth/SignInPage';
@@ -33,8 +34,10 @@ import { WebsiteEditPage } from '@/pages/dashboard/websites/WebsiteEditPage';
 import { ReportsPage } from '@/pages/dashboard/ReportsPage';
 import { SettingsPage } from '@/pages/dashboard/SettingsPage';
 import { AdminOverviewPage } from '@/pages/admin/AdminOverviewPage';
-import { AdminQueuePage } from '@/pages/admin/AdminQueuePage';
 import { AdminUsersPage } from '@/pages/admin/AdminUsersPage';
+import { AdminUserDetailPage } from '@/pages/admin/AdminUserDetailPage';
+import { AdminEvaluationsPage } from '@/pages/admin/AdminEvaluationsPage';
+import { AdminEvaluationDetailPage } from '@/pages/admin/AdminEvaluationDetailPage';
 import { AdminCriteriaPage } from '@/pages/admin/AdminCriteriaPage';
 import { NotFoundPage } from '@/pages/errors/NotFoundPage';
 import { RouteErrorBoundary } from '@/pages/errors/RouteErrorBoundary';
@@ -116,20 +119,33 @@ export const appRoutes: RouteObject[] = [
         ],
       },
       {
+        // Both guards, in this order: identity first, then role. An
+        // unauthenticated visitor is sent to sign-in; a signed-in `user` is
+        // sent to their own workspace. Neither can reach the admin shell.
         element: <RequireAuth />,
         errorElement: <RouteErrorBoundary />,
         children: [
           {
             path: routes.admin,
-            element: <AdminLayout />,
+            element: <RequireAdmin />,
             errorElement: <RouteErrorBoundary />,
             children: [
-              { index: true, element: <AdminOverviewPage /> },
-              { path: 'queue', element: <AdminQueuePage /> },
-              { path: 'users', element: <AdminUsersPage /> },
-              { path: 'criteria', element: <AdminCriteriaPage /> },
-              { path: 'settings', element: <SettingsPage admin /> },
-              { path: '*', element: <NotFoundPage inApp /> },
+              {
+                element: <AdminLayout />,
+                errorElement: <RouteErrorBoundary />,
+                children: [
+                  { index: true, element: <AdminOverviewPage /> },
+                  { path: 'users', element: <AdminUsersPage /> },
+                  { path: 'users/:id', element: <AdminUserDetailPage /> },
+                  { path: 'evaluations', element: <AdminEvaluationsPage /> },
+                  { path: 'evaluations/:id', element: <AdminEvaluationDetailPage /> },
+                  { path: 'criteria', element: <AdminCriteriaPage /> },
+                  { path: 'settings', element: <SettingsPage admin /> },
+                  // Legacy alias from Phase 1, forwards to the evaluations list.
+                  { path: 'queue', element: <Navigate to={routes.adminEvaluations} replace /> },
+                  { path: '*', element: <NotFoundPage inApp /> },
+                ],
+              },
             ],
           },
         ],

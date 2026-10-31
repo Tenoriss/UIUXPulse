@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, PenLine, X } from 'lucide-react';
 import { cn } from '@/lib/cn';
@@ -23,6 +23,11 @@ export interface AppSidebarProps {
   accent?: 'sage' | 'taupe';
   onClose?: () => void;
   className?: string;
+  /**
+   * Extra links above "back to site". Used by the admin shell for
+   * "Back to workspace" and "Sign out"; the workspace passes nothing.
+   */
+  footer?: ReactNode;
 }
 
 export function AppSidebar({
@@ -32,6 +37,7 @@ export function AppSidebar({
   accent = 'sage',
   onClose,
   className,
+  footer,
 }: AppSidebarProps) {
   const { t } = useI18n();
   const { user } = useAuth();
@@ -102,6 +108,8 @@ export function AppSidebar({
         <div className="flex items-center justify-center px-1">
           <LanguageSwitcher display="inline" />
         </div>
+
+        {footer}
 
         <Link
           to={routes.home}

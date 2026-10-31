@@ -6,7 +6,7 @@ import { AuthAlert, AuthFooterLinks, AuthHeading, PasswordToggle } from '@/compo
 import { routes } from '@/config/site';
 import { useI18n } from '@/i18n';
 import { useToast } from '@/providers/ToastProvider';
-import { useAuth } from '@/services/auth.context';
+import { DEMO_ADMIN, useAuth } from '@/services/auth.context';
 import { readReturnTo } from '@/lib/redirect';
 import {
   hasErrors,
@@ -129,6 +129,18 @@ export function SignInPage() {
           </Link>
         </p>
         <p className="text-micro text-ink-muted">{t('auth.demoNotice')}</p>
+
+        {/* The demo administrator's credentials are published on purpose: the
+            admin surface is a mock, and a role nobody can obtain would just be
+            an unreachable screen. This is not a bypass — signing in this way
+            goes through the same credential check as any other account. */}
+        <div className="rounded-md border border-line bg-surface-muted/50 px-3 py-2.5 text-micro leading-relaxed text-ink-muted">
+          <p className="font-medium text-ink-soft">{t('auth.demoAdminTitle')}</p>
+          <p className="mt-1 break-all font-mono text-[0.6875rem] text-ink-soft">
+            {DEMO_ADMIN.email} · {DEMO_ADMIN.password}
+          </p>
+          <p className="mt-1">{t('auth.demoAdminBody')}</p>
+        </div>
       </AuthFooterLinks>
     </>
   );

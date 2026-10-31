@@ -12,6 +12,13 @@ import type { StoredAccount, StoredSession } from './auth.types';
  */
 export const ACCOUNTS_KEY = 'uiuxpulse.auth.accounts';
 export const SESSION_KEY = 'uiuxpulse.auth.session';
+/**
+ * One-off marker: the demo administrator has been planted in this browser.
+ *
+ * A marker rather than a "create if missing" rule, so deleting the demo admin
+ * from the user list actually sticks instead of being undone by the next login.
+ */
+export const SEEDED_KEY = 'uiuxpulse.auth.seeded';
 
 function getStore(): Storage | null {
   try {
@@ -86,4 +93,28 @@ export function writeSession(session: StoredSession): void {
 
 export function clearSession(): void {
   remove(SESSION_KEY);
+}
+
+export function isSeeded(): boolean {
+  const store = getStore();
+  if (!store) return true;
+  try {
+    return store.getItem(SEEDED_KEY) === '1';
+  } catch {
+    return true;
+  }
+}
+
+export function markSeeded(): void {
+  const store = getStore();
+  if (!store) return;
+  try {
+    store.setItem(SEEDED_KEY, '1');
+  } catch {
+    // Blocked storage: seeding simply runs again next time.
+  }
+}
+
+export function clearSeeded(): void {
+  remove(SEEDED_KEY);
 }

@@ -58,10 +58,17 @@ export const dashboardNav: NavItem[] = [
 ];
 
 /** Admin sidebar navigation. */
+/**
+ * Admin sidebar navigation.
+ *
+ * Rendered only inside `<AdminLayout />`, which itself only mounts for an
+ * `admin` account, so this list is never serialised into a page an ordinary
+ * user can see.
+ */
 export const adminNav: NavItem[] = [
   { to: routes.admin, labelKey: 'admin.nav.overview', icon: Layers },
-  { to: routes.adminQueue, labelKey: 'admin.nav.queue', icon: ListChecks },
   { to: routes.adminUsers, labelKey: 'admin.nav.users', icon: Users },
+  { to: routes.adminEvaluations, labelKey: 'admin.nav.evaluations', icon: ListChecks },
   { to: routes.adminCriteria, labelKey: 'admin.nav.criteria', icon: SlidersHorizontal },
   { to: routes.adminSettings, labelKey: 'admin.nav.settings', icon: Settings },
 ];

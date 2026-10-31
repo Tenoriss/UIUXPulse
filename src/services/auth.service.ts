@@ -1,12 +1,16 @@
 import {
   clearAccounts,
+  clearSeeded,
   clearSession,
+  isSeeded,
+  markSeeded,
   readAccounts,
   readSession,
   writeAccounts,
   writeSession,
 } from './auth.storage';
 import type {
+  AccountRole,
   AuthErrorCode,
   AuthOutcome,
   AuthUser,
@@ -72,9 +76,65 @@ function toUser(account: StoredAccount): AuthUser {
     id: account.id,
     name: account.name,
     email: account.email,
+    // A record written before Phase 9 has no role. It is read as `user`, never
+    // as `admin`, so an old account cannot gain administrative access by
+    // existing.
+    role: account.role === 'admin' ? 'admin' : 'user',
     createdAt: account.createdAt,
     avatarUrl: account.avatarUrl ?? null,
   };
+}
+
+/**
+ * The demo administrator, published on purpose.
+ *
+ * This is not a bypass: the credentials are on the sign-in screen for anyone
+ * to read, the account is an ordinary row in the same account list, and
+ * every gate that reads the role is the same code path a real backend would
+ * replace. There is no back door that works without these credentials.
+ */
+export const DEMO_ADMIN = {
+  email: 'admin@uiuxpulse.com',
+  password: 'uiuxpulse-admin',
+  name: 'Ratna Wisesa',
+} as const;
+
+/**
+ * Plant the demo administrator once per browser.
+ *
+ * Runs before a sign-in or registration attempt so the account always exists
+ * by the time it can be used. The digest goes through the same `digest()` call
+ * as a real registration — the seed holds no plaintext and no special hash.
+ */
+async function ensureDemoAccounts(): Promise<void> {
+  if (isSeeded()) return;
+
+  const accounts = readAccounts();
+  const exists = accounts.some(
+    (account) => normaliseEmail(account.email) === DEMO_ADMIN.email,
+  );
+
+  if (!exists) {
+    const account: StoredAccount = {
+      id: 'user_demo_admin',
+      name: DEMO_ADMIN.name,
+      email: DEMO_ADMIN.email,
+      passwordHash: await digest(DEMO_ADMIN.password, DEMO_ADMIN.email),
+      createdAt: '2026-01-12T08:30:00.000Z',
+      avatarUrl: null,
+      role: 'admin',
+    };
+    writeAccounts([...accounts, account]);
+  }
+
+  markSeeded();
+}
+
+/** The role of a stored account, with the safe default. */
+export function roleOf(accountId: string | undefined): AccountRole {
+  if (!accountId) return 'user';
+  const account = readAccounts().find((entry) => entry.id === accountId);
+  return account?.role === 'admin' ? 'admin' : 'user';
 }
 
 const fail = (code: AuthErrorCode): AuthOutcome => ({ ok: false, code });
@@ -82,6 +142,7 @@ const fail = (code: AuthErrorCode): AuthOutcome => ({ ok: false, code });
 /** Register a demo account. Rejects duplicates and persists a new session. */
 export async function register(payload: RegisterPayload): Promise<AuthOutcome> {
   await delay(LATENCY_MS);
+  await ensureDemoAccounts();
 
   const email = normaliseEmail(payload.email);
   if (!email) return fail('unknown');
@@ -98,6 +159,9 @@ export async function register(payload: RegisterPayload): Promise<AuthOutcome> {
     passwordHash: await digest(payload.password, email),
     createdAt: new Date().toISOString(),
     avatarUrl: null,
+    // Registration never grants administration. Roles are assigned by the
+    // administered surface, exactly as a real service would.
+    role: 'user',
   };
 
   writeAccounts([...accounts, account]);
@@ -109,6 +173,7 @@ export async function register(payload: RegisterPayload): Promise<AuthOutcome> {
 /** Check credentials against the stored demo accounts. */
 export async function login(payload: LoginPayload): Promise<AuthOutcome> {
   await delay(LATENCY_MS);
+  await ensureDemoAccounts();
 
   const email = normaliseEmail(payload.email);
   const account = readAccounts().find(
@@ -175,6 +240,7 @@ export async function requestPasswordReset(email: string): Promise<AuthOutcome> 
       id: account?.id ?? 'demo',
       name: account?.name ?? '',
       email: normalised,
+      role: account?.role === 'admin' ? 'admin' : 'user',
       createdAt: '',
       avatarUrl: account?.avatarUrl ?? null,
     },
@@ -260,4 +326,5 @@ export async function updateProfile(
 export function clearDemoData(): void {
   clearAccounts();
   clearSession();
+  clearSeeded();
 }

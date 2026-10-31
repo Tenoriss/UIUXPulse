@@ -5,11 +5,25 @@
  * result objects) so swapping `auth.service.ts` for a backend later does not
  * ripple through the UI.
  */
+/**
+ * Frontend mock role.
+ *
+ * This is a client-side label, not a security boundary: anyone can edit
+ * `localStorage`. It exists so the admin surface can be *structured* correctly
+ * — real enforcement belongs in a backend that never trusts the client.
+ */
+export type AccountRole = 'user' | 'admin';
+
 export interface AuthUser {
   /** Stable id, assigned once at registration and never derived from email. */
   id: string;
   name: string;
   email: string;
+  /**
+   * `admin` unlocks the `/admin` shell. New registrations are always `user`;
+   * only the seeded demo administrator carries `admin`.
+   */
+  role: AccountRole;
   /** ISO timestamp — when the demo account was registered. */
   createdAt: string;
   /**
@@ -66,6 +80,27 @@ export interface StoredAccount {
   createdAt: string;
   /** Optional so accounts created before Phase 4 keep loading. */
   avatarUrl?: string | null;
+  /**
+   * Optional so accounts stored before Phase 9 keep loading. A missing value
+   * is read as `user` — never as admin — so an old record cannot escalate.
+   */
+  role?: AccountRole;
+}
+
+/**
+ * An account as the admin screens may see it.
+ *
+ * Deliberately a different type from `StoredAccount`: it has no
+ * `passwordHash` field at all, so no admin view can leak a digest even by
+ * accident, and the compiler enforces it.
+ */
+export interface AccountSummary {
+  id: string;
+  name: string;
+  email: string;
+  role: AccountRole;
+  createdAt: string;
+  hasAvatar: boolean;
 }
 
 /** The persisted session — a user id and when it started. No secrets. */
