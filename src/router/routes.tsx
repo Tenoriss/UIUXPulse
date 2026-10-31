@@ -22,6 +22,9 @@ import { OverviewPage } from '@/pages/dashboard/OverviewPage';
 import { EvaluationsPage } from '@/pages/dashboard/evaluations/EvaluationsPage';
 import { EvaluationWizardPage } from '@/pages/dashboard/evaluations/EvaluationWizardPage';
 import { EvaluationDetailPage } from '@/pages/dashboard/evaluations/EvaluationDetailPage';
+import { EvaluationResultsPage } from '@/pages/dashboard/evaluations/EvaluationResultsPage';
+import { EvaluationAuditPage } from '@/pages/dashboard/evaluations/EvaluationAuditPage';
+import { EvaluationRecommendationsPage } from '@/pages/dashboard/evaluations/EvaluationRecommendationsPage';
 import { WebsitesPage } from '@/pages/dashboard/websites/WebsitesPage';
 import { WebsiteNewPage } from '@/pages/dashboard/websites/WebsiteNewPage';
 import { WebsiteDetailPage } from '@/pages/dashboard/websites/WebsiteDetailPage';
@@ -100,6 +103,9 @@ export const appRoutes: RouteObject[] = [
               { path: 'evaluations', element: <EvaluationsPage /> },
               { path: 'evaluations/new', element: <EvaluationWizardPage /> },
               { path: 'evaluations/:id', element: <EvaluationDetailPage /> },
+              { path: 'evaluations/:id/results', element: <EvaluationResultsPage /> },
+              { path: 'evaluations/:id/audit', element: <EvaluationAuditPage /> },
+              { path: 'evaluations/:id/recommendations', element: <EvaluationRecommendationsPage /> },
               { path: 'reports', element: <ReportsPage /> },
               { path: 'settings', element: <SettingsPage /> },
               { path: '*', element: <NotFoundPage inApp /> },

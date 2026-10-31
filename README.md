@@ -141,6 +141,33 @@ the progress screen, the success screen, and the detail page.
 Deleting a website keeps its evaluations; they lose `websiteId`, keep the name
 snapshot, and are labelled *Removed website* in the list, filterable separately.
 
+## Results and recommendations (demo only)
+
+`/app/evaluations/:id/results`, `.../audit` and `.../recommendations` present the
+results interface. **No analysis engine exists**, so every one of those screens
+renders fixture data behind an explicit `?preview=demo` opt-in, under a banner
+that says so. Without the flag the section shows "Results are not available yet"
+and names the reason.
+
+- `services/evaluation-results.fixtures.ts` — a fixed, deterministic set: ten
+  findings, ten recommendations, six category scores. No dates, no randomness.
+- `services/evaluation-results.service.ts` — read-only. It resolves fixture
+  paths onto the evaluation's **own** saved pages, derives the overall score as
+  the mean of the six categories, and derives the priority counts from the
+  finding list. It never writes, so opening a preview cannot change a record.
+- `content/demoResults.ts` — the bilingual copy for every finding and
+  recommendation, keyed by the same ids, so a missing translation is a type error.
+
+Safeguards that keep previews from being mistaken for results:
+
+- every demo id is prefixed `demo-`;
+- `hasRealResults()` is the single switch, and it is `false` for every record;
+- records keep `status: 'created'` and never gain an `overallScore`;
+- findings carry `evidence: { kind: 'none' }` — there is no screenshot anywhere,
+  and the evidence viewer shows a placeholder rather than stock imagery;
+- the demo data lives in no store at all, so it cannot overwrite or collide with
+  a saved evaluation.
+
 ## Websites
 
 Registered sites live in their own store (`uiuxpulse.websites`, keyed by owner id),

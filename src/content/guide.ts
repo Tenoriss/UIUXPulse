@@ -136,6 +136,12 @@ export const guideContent: Record<Locale, Record<string, GuidePage>> = {
       title: 'A saved configuration',
       body: 'This record holds the pages, categories, and viewports you chose. There are no findings or scores, because no analysis has run.',
     },
+    evaluationResults: {
+      name: 'Pip',
+      page: 'Results',
+      title: 'A demo of the results view',
+      body: 'Everything on this page comes from a fixture set and is labelled as such. No website was analysed, and your saved evaluation record is untouched.',
+    },
     reports: {
       name: 'Pip',
       page: 'Reports',
@@ -290,6 +296,12 @@ export const guideContent: Record<Locale, Record<string, GuidePage>> = {
       page: 'Evaluasi',
       title: 'Konfigurasi tersimpan',
       body: 'Catatan ini menyimpan halaman, kategori, dan viewport yang Anda pilih. Tidak ada temuan atau skor, karena belum ada analisis yang berjalan.',
+    },
+    evaluationResults: {
+      name: 'Pip',
+      page: 'Hasil',
+      title: 'Demo tampilan hasil',
+      body: 'Semua isi halaman ini berasal dari data contoh dan diberi label demikian. Tidak ada situs yang dianalisis, dan catatan evaluasi Anda tidak berubah.',
     },
     reports: {
       name: 'Pip',

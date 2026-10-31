@@ -320,6 +320,25 @@ deliberately, never overlap.
 - The whole row is the label; there is no separate "select" button, so the tap
   target is the full row on mobile.
 
+### Results surfaces (`components/results/`)
+
+- **Score gauge:** one SVG ring with a text readout — the arc is decoration, the
+  number is the content. Bands are three (`strong | fair | weak`), not five, and
+  each band is a plain statement about the design, never about the team.
+- **Demo marking:** anything fixture-derived carries the same ochre `Demo data`
+  chip plus one banner per section. Demo marking is *not* optional on results
+  surfaces, and it is never reduced to a footnote.
+- **Priority tone:** clay → ochre → taupe → neutral, hottest first. Colour is
+  never the only signal; the badge always carries the word.
+- **Findings:** a `<details>` disclosure per finding. The summary row must carry
+  title, category, priority, assessment, and page, so the list is triageable
+  without opening anything.
+- **Evidence viewer:** fixed aspect-ratio placeholder, never an unrelated image.
+  A screenshot region that is not a capture of the evaluated page would be
+  fabricated evidence, which is worse than an empty state.
+- **Progress indicators:** plain bars, not a second gauge — one score arc per
+  screen, at the top.
+
 ### Modal
 
 - **Anatomy:** overlay → panel → eyebrow/title/description → body → footer actions.
