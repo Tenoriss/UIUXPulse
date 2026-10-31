@@ -45,11 +45,45 @@ export const en = {
 
   nav: {
     home: 'Home',
+    about: 'About',
     howItWorks: 'How it works',
+    criteria: 'Evaluation criteria',
     principles: 'Principles',
     signIn: 'Sign in',
     signUp: 'Create account',
     dashboard: 'Dashboard',
+  },
+
+  about: {
+    problemsIndex: '04',
+  },
+
+  criteria: {
+    eyebrow: 'Evaluation criteria',
+    title: 'Six ways of looking at one page.',
+    lede:
+      'A short, published set of criteria applied the same way to every evaluation — so a report can be read, argued with, and compared.',
+    indexLabel: 'The six categories',
+    detailLabel: 'What each category covers',
+    whatLabel: 'What is evaluated',
+    whyLabel: 'Why it matters',
+    problemsLabel: 'Potential problems',
+    recommendationsLabel: 'Possible recommendations',
+    exampleBadge: 'Example',
+    disclaimer:
+      'Examples only. No scoring formula is fixed yet, and no automated analysis is connected in this build — these categories describe what a UIUXPulse review is meant to look at.',
+  },
+
+  start: {
+    eyebrow: 'Start an evaluation',
+    title: 'This step needs an account.',
+    lead:
+      'An evaluation belongs to a workspace so it can be revisited later. Sign in to continue, or create an account first — you will be brought straight back here.',
+    redirecting: 'Taking you to sign in…',
+  },
+
+  session: {
+    signedIn: 'Signed in',
   },
 
   developer: {

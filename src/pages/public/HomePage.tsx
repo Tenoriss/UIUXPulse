@@ -13,6 +13,7 @@ import {
   Type,
 } from 'lucide-react';
 import { Container } from '@/components/layout/Container';
+import { StartEvaluationLink } from '@/components/layout/StartEvaluationLink';
 import { NumberedRow, SectionLabel, StatBand } from '@/components/shared/Editorial';
 import { AvailabilityPill } from '@/components/brand/AvailabilityPill';
 import { FloatingIcon } from '@/components/brand/FloatingIcon';
@@ -71,8 +72,7 @@ export function HomePage() {
             <p className="mt-8 max-w-lg text-body text-ink-soft">{t('home.heroLead')}</p>
 
             <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-              <Link
-                to={routes.signUp}
+              <StartEvaluationLink
                 className="group inline-flex items-center gap-2 rounded-pill border border-ink bg-ink px-6 py-3 text-[0.875rem] font-semibold text-canvas shadow-clay transition-colors duration-300 hover:bg-ink-soft"
               >
                 {t('home.heroPrimary')}
@@ -80,7 +80,7 @@ export function HomePage() {
                   className="size-4 transition-transform duration-300 group-hover:translate-x-0.5"
                   aria-hidden="true"
                 />
-              </Link>
+              </StartEvaluationLink>
               <Link
                 to={routes.howItWorks}
                 className="clay-surface group inline-flex items-center gap-2 rounded-pill border border-white/[0.07] bg-surface/70 px-6 py-3 text-[0.875rem] font-medium text-ink-soft backdrop-blur-sm transition-colors duration-300 hover:text-ink"
@@ -229,13 +229,10 @@ export function HomePage() {
             <h2 className="mt-5 font-serif text-h1 text-ink">{t('home.ctaTitle')}</h2>
             <p className="mt-5 max-w-lg text-lead text-ink-soft">{t('home.ctaLead')}</p>
             <div className="mt-9 flex flex-wrap items-center gap-5">
-              <Link
-                to={routes.signUp}
-                className="group inline-flex items-center gap-2 rounded-pill border border-ink bg-ink px-6 py-3 text-[0.875rem] font-medium text-canvas transition-colors hover:bg-ink-soft"
-              >
+              <StartEvaluationLink className="group inline-flex items-center gap-2 rounded-pill border border-ink bg-ink px-6 py-3 text-[0.875rem] font-medium text-canvas transition-colors hover:bg-ink-soft">
                 {t('home.ctaButton')}
                 <ArrowRight className="size-4" aria-hidden="true" />
-              </Link>
+              </StartEvaluationLink>
               <Link
                 to={routes.methodology}
                 className="text-[0.8125rem] text-ink-soft underline decoration-line-strong underline-offset-4 transition-colors hover:text-ink hover:decoration-ink"

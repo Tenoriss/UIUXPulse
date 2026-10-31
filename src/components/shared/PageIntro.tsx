@@ -3,6 +3,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import type { ReactNode } from 'react';
 import { Container } from '@/components/layout/Container';
+import { StartEvaluationLink } from '@/components/layout/StartEvaluationLink';
 import { routes } from '@/config/site';
 import { useI18n } from '@/i18n';
 
@@ -68,16 +69,13 @@ export function ClosingCta({
           </div>
 
           <div className="flex flex-wrap items-center gap-5 lg:justify-self-end lg:pb-2">
-            <Link
-              to={routes.signUp}
-              className="group inline-flex items-center gap-2 rounded-pill border border-ink bg-ink px-6 py-3 text-[0.875rem] font-medium text-canvas transition-colors hover:bg-ink-soft"
-            >
+            <StartEvaluationLink className="group inline-flex items-center gap-2 rounded-pill border border-ink bg-ink px-6 py-3 text-[0.875rem] font-medium text-canvas transition-colors hover:bg-ink-soft">
               {t('home.ctaButton')}
               <ArrowUpRight
                 className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                 aria-hidden="true"
               />
-            </Link>
+            </StartEvaluationLink>
             <Link
               to={routes.methodology}
               className="text-[0.8125rem] text-ink-soft underline decoration-line-strong underline-offset-4 transition-colors hover:text-ink hover:decoration-ink"

@@ -128,7 +128,7 @@ Rules:
 
 - Copy lives in `src/content/guide.ts`, not in the i18n dictionaries, because it needs
   named props; **every** route must have an entry in **both** `en` and `id` (a smoke check
-  enforces parity, currently 17 entries).
+  enforces parity, currently 20 entries).
 - Pip is a helper, never a gate: it must not cover the primary action on mobile, must be
   dismissible, closes on navigation and on Escape, and exposes its text through
   `role="status"`.
@@ -146,6 +146,35 @@ statement of intent, not marketing collateral. Brand marks are inline SVG in
 do **not** add a dependency for two glyphs. External profile links **must** carry
 `target="_blank"` with `rel="noreferrer noopener"`, and every link **must** have a visible
 handle plus an accessible "open profile" label.
+
+**Public content modules.** Long-form bilingual copy for the public pages lives in
+`src/content/` (`about.ts`, `howItWorks.ts`, `criteria.ts`), typed per locale and rendered by
+the page — not in `locales/en.ts`. Reason: those pages carry nested lists (problems,
+recommendations, workflow steps) that would turn the flat dictionaries into unreadable
+mounds, and the copy has to stay in sync across two languages as structured data. Short
+labels and buttons stay in the dictionaries; only the recognisably long-form prose moves.
+
+**Evaluation criteria.** `src/content/criteria.ts` is the single source of truth for the six
+categories (`criterionOrder` fixes the order). `/criteria` renders them; any future scoring
+surface should import from there rather than restating the taxonomy. The copy is
+deliberately illustrative — examples are labelled "Example" and the page states that no
+formula is fixed and no analysis runs yet. **Never** describe a scoring formula or imply
+automated analysis in this build.
+
+**Start an evaluation gate.** Every "Start an evaluation" CTA renders
+`components/layout/StartEvaluationLink`, which points at `/start` with
+`?next=/app/evaluations`. `/start` redirects unauthenticated visitors to `/sign-in`
+carrying the same `next`, while authenticated visitors go straight to the workspace. Do not
+link a new CTA directly to `/sign-up` or `/app` — route it through the gate so the auth
+requirement can never be bypassed by a copy-pasted link.
+
+**Mock session.** `lib/mockAuth.ts` + `providers/SessionProvider.tsx` store one
+`localStorage` flag (`uiuxpulse.session.user`). The provider reads storage only after mount
+(via `hooks/useHydrateSession.ts`) so SSR and the first client paint agree. This is a
+frontend demonstration, not authentication: no request leaves the browser, and the toast on
+sign-in/sign-up still says so. `lib/redirect.ts` is the only place that validates a `?next=`
+destination — same-origin relative paths only, rejecting absolute, protocol-relative, and
+backslash forms.
 
 **Pixel mascot.** The product mascot is a pixel sprite cropped from its source artwork to
 a transparent PNG (`avatar-hero.png` 512², `avatar-tile.png` 192²). It **must** be rendered

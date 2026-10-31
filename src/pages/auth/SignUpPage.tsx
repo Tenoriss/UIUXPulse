@@ -1,11 +1,13 @@
 import { useState, type FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Building2, Mail, User } from 'lucide-react';
 import { Button, Input } from '@/components/ui';
 import { AuthFooterLinks, AuthHeading } from '@/components/auth';
 import { routes } from '@/config/site';
 import { useI18n } from '@/i18n';
 import { useToast } from '@/providers/ToastProvider';
+import { useSession } from '@/providers/SessionProvider';
+import { readReturnTo } from '@/lib/redirect';
 import {
   hasErrors,
   validateEmail,
@@ -22,6 +24,9 @@ const emptyErrors: Errors = { name: null, email: null, password: null, confirm: 
 export function SignUpPage() {
   const { t } = useI18n();
   const { toast } = useToast();
+  const { signIn } = useSession();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [values, setValues] = useState({
     name: '',
     email: '',
@@ -50,11 +55,15 @@ export function SignUpPage() {
     setSubmitting(true);
     window.setTimeout(() => {
       setSubmitting(false);
+      // Mock only: the account is created in memory and a local session flag
+      // is written. Nothing is sent anywhere.
+      signIn(values.email);
       toast({
-        title: t('common.readOnly'),
+        title: t('session.signedIn'),
         description: t('auth.previewNotice'),
         variant: 'info',
       });
+      navigate(readReturnTo(location.search), { replace: true });
     }, 600);
   };
 
@@ -130,7 +139,7 @@ export function SignUpPage() {
         <p>
           {t('auth.hasAccount')}{' '}
           <Link
-            to={routes.signIn}
+            to={{ pathname: routes.signIn, search: location.search }}
             className="font-medium text-ink underline decoration-ink/20 underline-offset-4 hover:decoration-ink"
           >
             {t('auth.signInInstead')}

@@ -1,11 +1,13 @@
 import { useState, type FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail } from 'lucide-react';
 import { Button, Checkbox, Input } from '@/components/ui';
 import { AuthFooterLinks, AuthHeading } from '@/components/auth';
 import { routes } from '@/config/site';
 import { useI18n } from '@/i18n';
 import { useToast } from '@/providers/ToastProvider';
+import { useSession } from '@/providers/SessionProvider';
+import { readReturnTo } from '@/lib/redirect';
 import {
   hasErrors,
   validateEmail,
@@ -18,6 +20,9 @@ type Errors = Record<'email' | 'password', FieldError>;
 export function SignInPage() {
   const { t } = useI18n();
   const { toast } = useToast();
+  const { signIn } = useSession();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [reveal, setReveal] = useState(false);
@@ -37,11 +42,16 @@ export function SignInPage() {
     setSubmitting(true);
     window.setTimeout(() => {
       setSubmitting(false);
+      // Mock only: the credentials are validated above, then a local session
+      // flag is written so the authenticated path can be demonstrated. No
+      // request leaves the browser.
+      signIn(email);
       toast({
-        title: t('common.readOnly'),
+        title: t('session.signedIn'),
         description: t('auth.previewNotice'),
         variant: 'info',
       });
+      navigate(readReturnTo(location.search), { replace: true });
     }, 600);
   };
 
@@ -110,7 +120,7 @@ export function SignInPage() {
         <p>
           {t('auth.noAccount')}{' '}
           <Link
-            to={routes.signUp}
+            to={{ pathname: routes.signUp, search: location.search }}
             className="font-medium text-ink underline decoration-ink/20 underline-offset-4 hover:decoration-ink"
           >
             {t('auth.createOne')}

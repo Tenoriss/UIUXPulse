@@ -4,6 +4,7 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from './router';
 import { I18nProvider } from '@/i18n';
 import { ToastProvider } from '@/providers/ToastProvider';
+import { SessionProvider } from '@/providers/SessionProvider';
 import './styles/index.css';
 
 const rootElement = document.getElementById('root');
@@ -16,7 +17,9 @@ createRoot(rootElement).render(
   <StrictMode>
     <I18nProvider>
       <ToastProvider>
-        <RouterProvider router={router} />
+        <SessionProvider>
+          <RouterProvider router={router} />
+        </SessionProvider>
       </ToastProvider>
     </I18nProvider>
   </StrictMode>,

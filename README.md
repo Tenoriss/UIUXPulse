@@ -42,15 +42,16 @@ src/
 │                      Toast, Loading, EmptyState, ErrorState
 ├── components/mascot/ Pip — the per-page guide (floating, bilingual)
 ├── config/            site routes + navigation trees
-├── content/           guide copy per route (en + id)
+├── content/           long-form bilingual copy: guide per route, about, how-it-works,
+│                      criteria (en + id)
 ├── hooks/             useMediaQuery, useDismissable, useLockBodyScroll, useScrolled, useMounted
 ├── i18n/              provider, typed dictionaries (en/id), translate helpers
 ├── layouts/           PublicLayout, AuthLayout, DashboardLayout, AdminLayout
-├── lib/               cn (class composition), validation
+├── lib/               cn (class composition), validation, redirect guards, mock auth
 ├── pages/             public/ auth/ dashboard/ admin/ errors/
-├── providers/         ToastProvider
+├── providers/         ToastProvider, SessionProvider (mock session)
 ├── styles/            index.css — design tokens, base layer, keyframes, utilities
-└── types/             ui.ts, navigation.ts
+└── types/             ui.ts, navigation.ts, session.ts
 ```
 
 ## Design system documentation
@@ -58,6 +59,22 @@ src/
 Behavioural and accessibility rules (component states, keyboard contracts, contrast
 requirements, anti-patterns, QA checklist) live in [`docs/design-system.md`](docs/design-system.md).
 That document is the contract; this README only covers setup.
+
+## Public routes
+
+| Route           | Page                                                              |
+| --------------- | ----------------------------------------------------------------- |
+| `/`             | Home                                                              |
+| `/how-it-works` | Intended workflow, eight steps, current vs. intended capabilities |
+| `/criteria`     | Six evaluation categories, with example problems and recommendations |
+| `/about`        | What the product is, its purpose, problems, and four principles   |
+| `/principles`   | Editorial principles                                              |
+| `/methodology`  | What a report contains                                            |
+| `/start`        | Start-an-evaluation gate (redirects to sign-in when signed out)   |
+
+Authentication is a **frontend mock**: signing in or up writes a single `localStorage` flag
+and returns the visitor to the `?next=` destination, defaulting to the workspace. There is
+no backend, no real session, and no password handling beyond form validation.
 
 ## Design tokens
 

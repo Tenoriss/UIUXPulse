@@ -5,7 +5,10 @@ import { DashboardLayout } from '@/layouts/DashboardLayout';
 import { AdminLayout } from '@/layouts/AdminLayout';
 import { GuideLayout } from '@/layouts/GuideLayout';
 import { HomePage } from '@/pages/public/HomePage';
+import { AboutPage } from '@/pages/public/AboutPage';
+import { CriteriaPage } from '@/pages/public/CriteriaPage';
 import { HowItWorksPage } from '@/pages/public/HowItWorksPage';
+import { StartEvaluationPage } from '@/pages/public/StartEvaluationPage';
 import { PrinciplesPage } from '@/pages/public/PrinciplesPage';
 import { MethodologyPage } from '@/pages/public/MethodologyPage';
 import { SignInPage } from '@/pages/auth/SignInPage';
@@ -40,7 +43,10 @@ export const appRoutes: RouteObject[] = [
         errorElement: <RouteErrorBoundary />,
         children: [
           { index: true, element: <HomePage /> },
+          { path: 'about', element: <AboutPage /> },
           { path: 'how-it-works', element: <HowItWorksPage /> },
+          { path: 'criteria', element: <CriteriaPage /> },
+          { path: 'start', element: <StartEvaluationPage /> },
           { path: 'principles', element: <PrinciplesPage /> },
           { path: 'methodology', element: <MethodologyPage /> },
           { path: '*', element: <NotFoundPage /> },

@@ -44,11 +44,45 @@ export const id: Dictionary = {
 
   nav: {
     home: 'Beranda',
+    about: 'Tentang',
     howItWorks: 'Cara kerja',
+    criteria: 'Kriteria evaluasi',
     principles: 'Prinsip',
     signIn: 'Masuk',
     signUp: 'Buat akun',
     dashboard: 'Dasbor',
+  },
+
+  about: {
+    problemsIndex: '04',
+  },
+
+  criteria: {
+    eyebrow: 'Kriteria evaluasi',
+    title: 'Enam cara memandang satu halaman.',
+    lede:
+      'Kriteria yang ringkas dan terbuka, diterapkan dengan cara sama pada setiap evaluasi — sehingga sebuah laporan bisa dibaca, ditantang, dan dibandingkan.',
+    indexLabel: 'Enam kategori',
+    detailLabel: 'Cakupan tiap kategori',
+    whatLabel: 'Yang dievaluasi',
+    whyLabel: 'Kenapa penting',
+    problemsLabel: 'Contoh potensi masalah',
+    recommendationsLabel: 'Contoh rekomendasi',
+    exampleBadge: 'Contoh',
+    disclaimer:
+      'Hanya contoh. Belum ada rumus skor yang ditetapkan, dan belum ada analisis otomatis yang tersambung di build ini — kategori ini menggambarkan apa yang hendak diperiksa oleh tinjauan UIUXPulse.',
+  },
+
+  start: {
+    eyebrow: 'Mulai evaluasi',
+    title: 'Langkah ini membutuhkan akun.',
+    lead:
+      'Evaluasi tersimpan dalam ruang kerja agar bisa dibuka lagi nanti. Masuk untuk melanjutkan, atau buat akun lebih dulu — Anda akan langsung dibawa kembali ke sini.',
+    redirecting: 'Mengarahkan ke halaman masuk…',
+  },
+
+  session: {
+    signedIn: 'Sudah masuk',
   },
 
   developer: {

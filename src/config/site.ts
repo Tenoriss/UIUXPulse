@@ -10,7 +10,10 @@ export const site = {
 
 export const routes = {
   home: '/',
+  about: '/about',
+  startEvaluation: '/start',
   howItWorks: '/how-it-works',
+  criteria: '/criteria',
   principles: '/principles',
   methodology: '/methodology',
   signIn: '/sign-in',

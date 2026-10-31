@@ -14,6 +14,8 @@ import { routes } from './site';
 /** Primary public header navigation. */
 export const publicNav: NavItem[] = [
   { to: routes.howItWorks, labelKey: 'nav.howItWorks' },
+  { to: routes.criteria, labelKey: 'nav.criteria' },
+  { to: routes.about, labelKey: 'nav.about' },
   { to: routes.principles, labelKey: 'nav.principles' },
 ];
 
@@ -23,6 +25,7 @@ export const footerNav: NavTree = [
     titleKey: 'footer.product',
     items: [
       { to: routes.howItWorks, labelKey: 'nav.howItWorks' },
+      { to: routes.criteria, labelKey: 'nav.criteria' },
       { to: routes.principles, labelKey: 'nav.principles' },
       { to: routes.methodology, labelKey: 'footer.methodology' },
     ],
@@ -37,7 +40,7 @@ export const footerNav: NavTree = [
   {
     titleKey: 'footer.company',
     items: [
-      { to: routes.principles, labelKey: 'footer.about' },
+      { to: routes.about, labelKey: 'footer.about' },
       { to: `mailto:${'hello@uiuxpulse.com'}`, labelKey: 'footer.contact', external: true },
       { to: routes.methodology, labelKey: 'footer.privacy', badgeKey: 'common.soon' },
     ],

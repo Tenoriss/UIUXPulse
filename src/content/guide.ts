@@ -34,7 +34,25 @@ export const guideContent: Record<Locale, Record<string, GuidePage>> = {
       title: 'Here is what we do',
       body: 'Submit a website URL, pick the pages that matter, and get a calm read on usability, hierarchy, and craft. We only analyse — your site is never modified.',
       action: 'Start an evaluation',
-      actionTo: '/sign-up',
+      actionTo: '/start',
+    },
+    about: {
+      name: 'Pip',
+      page: 'About',
+      title: 'Why this exists',
+      body: 'UIUXPulse is an evaluation practice, not a redesign service. Read what it is for, what it refuses to do, and the four principles that decide the rest.',
+    },
+    criteria: {
+      name: 'Pip',
+      page: 'Evaluation criteria',
+      title: 'Six things we look at',
+      body: 'Each category explains what is checked, why it matters, and what a problem or a recommendation might look like. Examples only — no secret formula.',
+    },
+    start: {
+      name: 'Pip',
+      page: 'Start an evaluation',
+      title: 'One step before the workspace',
+      body: 'An evaluation needs a workspace so it can be revisited later. Sign in and you will be brought straight back to where you were headed.',
     },
     howItWorks: {
       name: 'Pip',
@@ -139,7 +157,25 @@ export const guideContent: Record<Locale, Record<string, GuidePage>> = {
       title: 'Ini yang kami lakukan',
       body: 'Kirim URL situs, pilih halaman yang penting, lalu terima pembacaan tenang atas kegunaan, hierarki, dan kualitas detail. Kami hanya menganalisis — situs Anda tidak diubah.',
       action: 'Mulai evaluasi',
-      actionTo: '/sign-up',
+      actionTo: '/start',
+    },
+    about: {
+      name: 'Pip',
+      page: 'Tentang',
+      title: 'Kenapa ini ada',
+      body: 'UIUXPulse adalah praktik evaluasi, bukan layanan desain ulang. Baca tujuannya, batas yang dijaganya, dan empat prinsip yang menentukan sisanya.',
+    },
+    criteria: {
+      name: 'Pip',
+      page: 'Kriteria evaluasi',
+      title: 'Enam hal yang kami periksa',
+      body: 'Tiap kategori menjelaskan apa yang dinilai, kenapa penting, dan seperti apa potensi masalah maupun rekomendasinya. Hanya contoh — tanpa rumus rahasia.',
+    },
+    start: {
+      name: 'Pip',
+      page: 'Mulai evaluasi',
+      title: 'Satu langkah sebelum ruang kerja',
+      body: 'Evaluasi butuh ruang kerja agar bisa dibuka lagi nanti. Masuk dulu, lalu Anda dibawa kembali ke tujuan semula.',
     },
     howItWorks: {
       name: 'Pip',
