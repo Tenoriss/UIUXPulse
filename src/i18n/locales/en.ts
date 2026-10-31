@@ -81,12 +81,15 @@ export const en = {
     heroPrimary: 'Start an evaluation',
     heroSecondary: 'See how it works',
     heroImageAlt: 'Cream still-life composition with soft clay objects',
+    heroMeta: 'Evaluation practice · Jakarta / remote',
+    heroScroll: 'Selected sections',
+    indexLabel: 'Report index',
     heroNote: 'No crawling of private spaces. No changes to your site. Ever.',
     statsLabel: 'At a glance',
     stats: {
-      pages: { value: 'Multi', label: 'Page selection per review' },
-      evidence: { value: 'Visual', label: 'Annotated evidence, not opinions' },
-      languages: { value: '2', label: 'Reports in English and Indonesian' },
+      pages: { value: '06', label: 'Pages selectable per evaluation' },
+      evidence: { value: '04', label: 'Fixed sections in every report' },
+      languages: { value: '02', label: 'Report languages, EN and ID' },
     },
     marquee: 'Usability · Hierarchy · Typography · Accessibility · Motion · Trust',
 

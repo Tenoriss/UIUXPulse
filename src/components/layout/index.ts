@@ -9,6 +9,5 @@ export type { AppTopbarProps } from './AppTopbar';
 export { AppShell } from './AppShell';
 export type { AppShellProps } from './AppShell';
 export { PageHeader } from './PageHeader';
-export { SectionHeader } from './SectionHeader';
 export { HeaderNavLink, SidebarNavLink } from './NavLink';
 export { ScrollToTop } from './ScrollRestoration';

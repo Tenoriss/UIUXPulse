@@ -80,12 +80,15 @@ export const id: Dictionary = {
     heroPrimary: 'Mulai evaluasi',
     heroSecondary: 'Lihat cara kerjanya',
     heroImageAlt: 'Komposisi benda tanah liat lembut di atas latar krem',
+    heroMeta: 'Praktik evaluasi · Jakarta / jarak jauh',
+    heroScroll: 'Bagian pilihan',
+    indexLabel: 'Indeks laporan',
     heroNote: 'Tanpa memindai ruang privat. Tanpa mengubah situs Anda. Selamanya.',
     statsLabel: 'Sekilas',
     stats: {
-      pages: { value: 'Multi', label: 'Pemilihan halaman per tinjauan' },
-      evidence: { value: 'Visual', label: 'Bukti beranotasi, bukan opini' },
-      languages: { value: '2', label: 'Laporan dalam Inggris dan Indonesia' },
+      pages: { value: '06', label: 'Halaman dapat dipilih per evaluasi' },
+      evidence: { value: '04', label: 'Bagian tetap di setiap laporan' },
+      languages: { value: '02', label: 'Bahasa laporan, EN dan ID' },
     },
     marquee: 'Kegunaan · Hierarki · Tipografi · Aksesibilitas · Gerak · Kepercayaan',
 

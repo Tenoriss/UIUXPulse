@@ -1,5 +1,5 @@
 import { Container } from '@/components/layout/Container';
-import { PageIntro, CtaBand } from '@/components/shared/PageIntro';
+import { PageIntro, ClosingCta } from '@/components/shared/PageIntro';
 import { EmptyState, Tabs } from '@/components/ui';
 import { useI18n } from '@/i18n';
 
@@ -39,7 +39,7 @@ export function PricingPage() {
         />
       </Container>
 
-      <CtaBand title={t('home.ctaTitle')} description={t('home.ctaLead')} />
+      <ClosingCta title={t('home.ctaTitle')} description={t('home.ctaLead')} />
     </>
   );
 }

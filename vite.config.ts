@@ -21,7 +21,7 @@ export default defineConfig({
     // protocol (ws/wss) and port from `location`, so it works both on
     // localhost and behind the https preview proxy.
     watch: {
-      ignored: ['**/*.tsbuildinfo', '**/dist/**'],
+      ignored: ['**/*.tsbuildinfo', '**/dist/**', '**/.tmp/**', '**/.verify*/**'],
     },
   },
   preview: {

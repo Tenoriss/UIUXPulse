@@ -45,6 +45,14 @@
   --font-serif: 'Instrument Serif', 'Iowan Old Style', 'Times New Roman', Georgia,
     serif;
 
+  --text-hero: clamp(3rem, 8vw, 7rem);
+  --text-hero--line-height: 0.86;
+  --text-hero--letter-spacing: -0.035em;
+
+  --text-mega: clamp(2.75rem, 6vw, 4.75rem);
+  --text-mega--line-height: 0.85;
+  --text-mega--letter-spacing: -0.03em;
+
   --text-display: clamp(3.25rem, 8vw, 6.75rem);
   --text-display--line-height: 0.92;
   --text-display--letter-spacing: -0.025em;
@@ -100,6 +108,10 @@
   --shadow-clay-pressed:
     inset 0 2px 5px rgb(41 42 37 / 0.09), inset 0 -1px 0 rgb(255 255 255 / 0.6);
   --shadow-focus: 0 0 0 2px var(--color-canvas), 0 0 0 4px rgb(101 115 92 / 0.45);
+
+  /* ---- Editorial rhythm -------------------------------------------------- */
+  --spacing-section: 7rem;
+  --spacing-section-lg: 10rem;
 
   /* ---- Container -------------------------------------------------------- */
   --container-page: 78rem;
