@@ -137,7 +137,7 @@ export const id: Dictionary = {
     editSr: 'Edit {name}',
     deleteSr: 'Hapus {name}',
     statuses: {
-      ready: 'Aktif',
+      ready: 'Terdaftar',
       archived: 'Diarsipkan',
     },
     form: {

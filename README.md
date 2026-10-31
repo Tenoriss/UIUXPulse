@@ -119,7 +119,9 @@ Routes: `/app/websites`, `/app/websites/new`, `/app/websites/:id`,
 
 - **Normalisation** (`lib/url.ts`): a bare domain gains `https://`; the host is lowercased
   and stripped of `www.`; a trailing slash and the fragment are dropped; **path and query
-  are preserved**, so `/shop` and `/` are different records. `http` and `https` stay distinct.
+  are preserved**, so `/shop` and `/` are different records. The stored URL keeps its
+  scheme, but duplicate detection compares scheme-less keys (`urlKey`), so `http://studio.com`
+  cannot be registered next to `https://studio.com`.
 - **Ownership**: every service call takes the owner id from `useAuth()`. A record belonging
   to another account resolves to "not found" rather than a permission error.
 - **Duplicates**: one account cannot register the same normalised URL twice.

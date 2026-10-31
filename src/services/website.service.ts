@@ -1,4 +1,4 @@
-import { normaliseUrl, domainOf } from '@/lib/url';
+import { normaliseUrl, domainOf, urlKey } from '@/lib/url';
 import type {
   WebsiteInput,
   WebsiteQuery,
@@ -119,10 +119,10 @@ export function isUrlTaken(
   url: string,
   exceptId?: string,
 ): boolean {
-  const normalised = normaliseUrl(url);
-  if (!normalised) return false;
+  const key = urlKey(url);
+  if (!key) return false;
   return listWebsites(ownerId).some(
-    (record) => record.id !== exceptId && record.url === normalised,
+    (record) => record.id !== exceptId && urlKey(record.url) === key,
   );
 }
 

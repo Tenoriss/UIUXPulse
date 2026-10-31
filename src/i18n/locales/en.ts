@@ -138,7 +138,7 @@ export const en = {
     editSr: 'Edit {name}',
     deleteSr: 'Delete {name}',
     statuses: {
-      ready: 'Active',
+      ready: 'Registered',
       archived: 'Archived',
     },
     form: {

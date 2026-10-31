@@ -71,7 +71,21 @@ export function suggestNameFromUrl(url: string): string {
   return cleaned.replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
+/**
+ * Identity used for duplicate detection.
+ *
+ * A site reachable over `http` and `https` is the same site, so the scheme is
+ * dropped here and only here. Stored `url` values keep the scheme the person
+ * typed (normalised to https for bare domains), because that is what they
+ * expect to see — and what an evaluation would later open.
+ */
+export function urlKey(url: string): string | null {
+  const normalised = normaliseUrl(url);
+  if (!normalised) return null;
+  return normalised.replace(/^https?:\/\//, '');
+}
+
 /** Two URLs belong to the same website record. */
 export function sameUrl(a: string, b: string): boolean {
-  return normaliseUrl(a) === normaliseUrl(b);
+  return urlKey(a) === urlKey(b);
 }
