@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ArrowLeft, FlaskConical, ShieldAlert } from 'lucide-react';
+import { ArrowLeft, FileText, FlaskConical, ShieldAlert } from 'lucide-react';
 import { Badge, Card, EmptyState, LinkButton } from '@/components/ui';
 import { EvaluationSummary } from '@/components/evaluations/EvaluationSummary';
 import { statusTone } from '@/components/evaluations/EvaluationSummary';
@@ -70,6 +70,10 @@ export function EvaluationDetailPage() {
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
+          <LinkButton to={`${routes.evaluations}/${record.id}/report`} tone="neutral" size="sm">
+            <FileText className="size-3.5" aria-hidden="true" />
+            {t('report.list.view')}
+          </LinkButton>
           {website && (
             <LinkButton to={`/app/websites/${website.id}`} tone="neutral" size="sm">
               {t('evaluation.detail.openWebsite')}

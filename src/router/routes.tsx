@@ -25,6 +25,7 @@ import { EvaluationDetailPage } from '@/pages/dashboard/evaluations/EvaluationDe
 import { EvaluationResultsPage } from '@/pages/dashboard/evaluations/EvaluationResultsPage';
 import { EvaluationAuditPage } from '@/pages/dashboard/evaluations/EvaluationAuditPage';
 import { EvaluationRecommendationsPage } from '@/pages/dashboard/evaluations/EvaluationRecommendationsPage';
+import { EvaluationReportPage } from '@/pages/dashboard/evaluations/EvaluationReportPage';
 import { WebsitesPage } from '@/pages/dashboard/websites/WebsitesPage';
 import { WebsiteNewPage } from '@/pages/dashboard/websites/WebsiteNewPage';
 import { WebsiteDetailPage } from '@/pages/dashboard/websites/WebsiteDetailPage';
@@ -106,6 +107,7 @@ export const appRoutes: RouteObject[] = [
               { path: 'evaluations/:id/results', element: <EvaluationResultsPage /> },
               { path: 'evaluations/:id/audit', element: <EvaluationAuditPage /> },
               { path: 'evaluations/:id/recommendations', element: <EvaluationRecommendationsPage /> },
+              { path: 'evaluations/:id/report', element: <EvaluationReportPage /> },
               { path: 'reports', element: <ReportsPage /> },
               { path: 'settings', element: <SettingsPage /> },
               { path: '*', element: <NotFoundPage inApp /> },

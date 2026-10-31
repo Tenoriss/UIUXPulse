@@ -142,6 +142,12 @@ export const guideContent: Record<Locale, Record<string, GuidePage>> = {
       title: 'A demo of the results view',
       body: 'Everything on this page comes from a fixture set and is labelled as such. No website was analysed, and your saved evaluation record is untouched.',
     },
+    evaluationReport: {
+      name: 'Pip',
+      page: 'Report',
+      title: 'The document, ready to export',
+      body: 'This preview mirrors the PDF exactly. A configuration report needs no analysis — the demo report adds scores and findings, and says so on every page.',
+    },
     reports: {
       name: 'Pip',
       page: 'Reports',
@@ -302,6 +308,12 @@ export const guideContent: Record<Locale, Record<string, GuidePage>> = {
       page: 'Hasil',
       title: 'Demo tampilan hasil',
       body: 'Semua isi halaman ini berasal dari data contoh dan diberi label demikian. Tidak ada situs yang dianalisis, dan catatan evaluasi Anda tidak berubah.',
+    },
+    evaluationReport: {
+      name: 'Pip',
+      page: 'Laporan',
+      title: 'Dokumen siap diekspor',
+      body: 'Pratinjau ini sama persis dengan PDF-nya. Laporan konfigurasi tidak butuh analisis — laporan demo menambahkan skor dan temuan, dan menyatakannya di setiap halaman.',
     },
     reports: {
       name: 'Pip',

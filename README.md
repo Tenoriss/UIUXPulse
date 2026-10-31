@@ -17,6 +17,7 @@ design system, reusable components, layouts, routing, and bilingual (EN/ID) arch
 | Routing    | React Router 7 (`createBrowserRouter`)        |
 | Icons      | Lucide React                                  |
 | Fonts      | Fraunces (SOFT) + Bricolage Grotesque + Plus Jakarta Sans (Fontsource) |
+| PDF        | jsPDF 4.2.1 (client-side report export)       |
 
 ## Commands
 
@@ -37,6 +38,7 @@ src/
 │   ├── brand/         Logo, LanguageSwitcher
 │   ├── layout/        Container, PublicHeader/Footer, AppShell, AppSidebar,
 │   │                  AppTopbar, PageHeader, SectionHeader, NavLink, ScrollToTop
+│   ├── reports/       ReportDocumentView (paper preview), ReportUnavailable
 │   ├── shared/        PageIntro, CtaBand
 │   └── ui/            Button, Input, Card, Badge, Modal, Dropdown, Tabs,
 │                      Toast, Loading, EmptyState, ErrorState
@@ -167,6 +169,54 @@ Safeguards that keep previews from being mistaken for results:
   and the evidence viewer shows a placeholder rather than stock imagery;
 - the demo data lives in no store at all, so it cannot overwrite or collide with
   a saved evaluation.
+
+## Reports and PDF export
+
+`/app/evaluations/:id/report` previews a report; `/app/reports` lists every saved
+evaluation with its available report. Both sit behind the existing auth and
+ownership checks, and neither adds a second results store.
+
+Two report modes, and they are not interchangeable:
+
+- **Configuration report** — for any saved (`status: 'created'`) evaluation.
+  Documents the website, evaluation id, creation date, selected pages,
+  categories and viewports, and states plainly that no analysis has been
+  performed. It has no score, no findings, and no recommendations, because
+  there is nothing behind such a number.
+- **Demo results report** — only opened through an explicit
+  `?preview=demo`, and only when the caller passes `demoAuthorised`. It reads
+  the existing demo set from `evaluation-results.service.ts`, carries a DEMO
+  cover band on the preview and on every PDF page, and is never mixed with a
+  real record.
+
+- `services/report.types.ts` — the report model. A discriminant union
+  (`facts | groups | score | table | findings | recommendations | callout`)
+  means a configuration report cannot contain a score section without a type
+  error.
+- `services/report.service.ts` — assembles a `ReportDocument` from the
+  evaluation record and, for demo mode, from the Phase 7 fixtures. It only
+  reads; generating a report never writes a record, a status, or a timestamp.
+  `getReport()` returns `null` for a missing or foreign id **and** for demo mode
+  without authorisation, so the failure mode is "no report", never a demo report
+  wearing a real record's identity.
+- `services/report-generator.ts` — client-side PDF via **jsPDF 4.2.1**
+  (`npm audit` reports zero vulnerabilities for this release; 3.x is unusable).
+  Real A4 pages, real embedded text metrics, page numbers on every page after
+  the cover, and a downloaded filename of the form
+  `uiuxpulse-<website>-<id>.pdf` (prefixed `demo-` for demo reports).
+
+Layout: cover → contents → §1 Evaluation overview → §2 Evaluation configuration
+→ (demo only) §3 Overall results → §4 Category scores → §5 Detailed findings →
+§6 Recommendations → disclaimer. Every section flows through one cursor that
+starts a new page before writing past the bottom margin, so long URLs and long
+finding copy wrap instead of clipping.
+
+Limits of client-side PDF worth knowing: jsPDF's built-in fonts are WinAnsi, not
+Unicode. `sanitise()` transliterates typographic punctuation and degrades
+anything outside Latin-1 to `?` rather than emitting a NUL that would corrupt
+the surrounding text run. The preview and the PDF therefore show the same
+characters for Latin-script content, and a script outside Latin-1 is documented
+as unsupported rather than silently garbled.
 
 ## Websites
 

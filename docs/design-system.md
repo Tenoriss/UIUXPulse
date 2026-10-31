@@ -339,6 +339,26 @@ deliberately, never overlap.
 - **Progress indicators:** plain bars, not a second gauge — one score arc per
   screen, at the top.
 
+### Report document surface (`components/reports/`)
+
+- **One visual language, two materials.** The preview page is a *paper* surface
+  on the app canvas: serif headings, hairline rules, generous leading, a single
+  sage accent. It is not a dashboard, and it never borrows card shadows or
+  gradients — an audit document should read like a document.
+- **The preview must equal the export.** Sections, order, labels and numbers
+  come from the same `ReportDocument` the PDF generator consumes, so the two can
+  drift only by a rendering bug, not by design.
+- **Score visualisation:** a ring plus the number in tabular figures, one per
+  report. Priority counts are a plain legend, not a second chart.
+- **Demo marking:** a clay cover band, a ribbon across the document, and the
+  words `DEMO DATA` on every PDF page. It is never a footnote, never a
+  low-contrast hint, and never absent from an exported file.
+- **Disclaimers:** the configuration report says analysis has not been
+  performed; the demo report says the data is illustrative. Both statements are
+  in the document body *and* in the PDF, in the reader's own language.
+- **Empty states:** an empty page list, category list or viewport list prints a
+  sentence, never a blank gap. Nothing is invented to fill a section.
+
 ### Modal
 
 - **Anatomy:** overlay → panel → eyebrow/title/description → body → footer actions.

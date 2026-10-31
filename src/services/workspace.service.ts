@@ -14,7 +14,12 @@ export function summarise(records: EvaluationRecord[], websiteCount = 0): Worksp
     websites: websiteCount,
     evaluations: records.length,
     completed,
-    reports: completed,
+    /**
+     * A configuration report can be produced for every saved evaluation, so
+     * "available reports" counts records — not completed analyses, which do not
+     * exist yet. Demo previews are never counted: they describe no record.
+     */
+    reports: records.length,
     pending: records.length - completed,
   };
 }
