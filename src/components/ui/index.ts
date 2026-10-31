@@ -1,5 +1,7 @@
-export { Button, IconButton, buttonStyles } from './Button';
-export type { ButtonProps, IconButtonProps, ButtonStyleOptions } from './Button';
+export { Button, IconButton } from './Button';
+export type { ButtonProps, IconButtonProps } from './Button';
+export { buttonStyles } from './buttonStyles';
+export type { ButtonStyleOptions } from './buttonStyles';
 export { LinkButton, ExternalLinkButton } from './LinkButton';
 export { Input, Textarea, Checkbox, Field } from './Input';
 export type { InputProps, TextareaProps, CheckboxProps, FieldProps } from './Input';

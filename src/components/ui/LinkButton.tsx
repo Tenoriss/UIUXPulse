@@ -1,7 +1,7 @@
 import { forwardRef, type ReactNode } from 'react';
 import { Link, type LinkProps } from 'react-router-dom';
 import { cn } from '@/lib/cn';
-import { buttonStyles, type ButtonStyleOptions } from './Button';
+import { buttonStyles, type ButtonStyleOptions } from './buttonStyles';
 
 export interface LinkButtonProps extends LinkProps, ButtonStyleOptions {
   children: ReactNode;
