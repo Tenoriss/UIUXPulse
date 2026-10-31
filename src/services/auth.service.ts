@@ -9,10 +9,11 @@ import {
 import type {
   AuthErrorCode,
   AuthOutcome,
+  AuthUser,
   LoginPayload,
+  ProfileUpdatePayload,
   RegisterPayload,
   StoredAccount,
-  AuthUser,
 } from './auth.types';
 
 /**
@@ -34,8 +35,16 @@ const delay = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve,
 
 const normaliseEmail = (email: string) => email.trim().toLowerCase();
 
-/** Deterministic id, so the same email cannot produce two accounts. */
-const idForEmail = (email: string) => `user_${encodeURIComponent(normaliseEmail(email))}`;
+/**
+ * Stable id for a new account.
+ *
+ * Deliberately *not* derived from the email: the profile form lets the address
+ * change, and the id is what the session and every stored record point at.
+ */
+function createId(): string {
+  const random = Math.random().toString(36).slice(2, 10);
+  return `user_${Date.now().toString(36)}${random}`;
+}
 
 async function digest(password: string, email: string): Promise<string> {
   const input = `${normaliseEmail(email)}::${password}`;
@@ -64,6 +73,7 @@ function toUser(account: StoredAccount): AuthUser {
     name: account.name,
     email: account.email,
     createdAt: account.createdAt,
+    avatarUrl: account.avatarUrl ?? null,
   };
 }
 
@@ -82,11 +92,12 @@ export async function register(payload: RegisterPayload): Promise<AuthOutcome> {
   }
 
   const account: StoredAccount = {
-    id: idForEmail(email),
+    id: createId(),
     name: payload.name.trim(),
     email,
     passwordHash: await digest(payload.password, email),
     createdAt: new Date().toISOString(),
+    avatarUrl: null,
   };
 
   writeAccounts([...accounts, account]);
@@ -165,6 +176,7 @@ export async function requestPasswordReset(email: string): Promise<AuthOutcome> 
       name: account?.name ?? '',
       email: normalised,
       createdAt: '',
+      avatarUrl: account?.avatarUrl ?? null,
     },
   };
 }
@@ -192,6 +204,54 @@ export async function resetPassword(
   const next = [...accounts];
   next[index] = updated;
   writeAccounts(next);
+
+  return { ok: true, data: toUser(updated) };
+}
+
+/**
+ * Update the signed-in demo account's profile.
+ *
+ * Only name, email, and avatar are touched — the password digest and the
+ * session are left exactly as they are, so a profile edit can never sign the
+ * visitor out. An email change is rejected when another account already uses
+ * that address (case-insensitively), and the session keeps pointing at the
+ * same user id.
+ */
+export async function updateProfile(
+  userId: string,
+  changes: ProfileUpdatePayload,
+): Promise<AuthOutcome> {
+  await delay(LATENCY_MS);
+
+  const accounts = readAccounts();
+  const index = accounts.findIndex((entry) => entry.id === userId);
+  if (index === -1) return fail('accountNotFound');
+
+  const email = normaliseEmail(changes.email);
+  const current = accounts[index];
+
+  const clash = accounts.find(
+    (entry) => entry.id !== userId && normaliseEmail(entry.email) === email,
+  );
+  if (clash) return fail('emailTaken');
+
+  const updated: StoredAccount = {
+    ...current,
+    name: changes.name.trim(),
+    email,
+    avatarUrl: changes.avatarUrl,
+  };
+
+  const next = [...accounts];
+  next[index] = updated;
+  writeAccounts(next);
+
+  // The session already identifies this account by id, so nothing needs to be
+  // rewritten — but touch it anyway so a stale session cannot survive a rename.
+  const session = readSession();
+  if (session && session.userId === userId) {
+    writeSession({ userId, startedAt: session.startedAt });
+  }
 
   return { ok: true, data: toUser(updated) };
 }

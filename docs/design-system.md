@@ -199,6 +199,32 @@ Rules:
 - The auth API is async and returns a discriminated `AuthResult`, so loading states already
   exist and a real `fetch` can drop in without touching components.
 
+**Workspace data.** `services/workspace.service.ts` owns evaluation records under
+`uiuxpulse.evaluations`, keyed by account id, and derives every dashboard total in
+`summarise()`. Nothing writes to that store yet — there is no scanning engine — so the
+overview honestly reports zero. **Never seed sample evaluations or scores** to make the
+dashboard look populated; the counters and the recent list fill in on their own once
+submission exists. `useWorkspace()` is the single reader, so the overview, the evaluations
+list, and future report screens cannot disagree about what a total means.
+
+**Profile management.** `services/auth.service.ts → updateProfile()` changes only `name`,
+`email`, and `avatarUrl` on the stored account. The password digest and the session are left
+alone, so saving a profile never signs anyone out; the session points at a stable account id
+that is **not** derived from the email, precisely because the email can change. A second
+account already using the address is rejected case-insensitively.
+
+- `components/profile/EditProfileForm.tsx` is the one form, mounted in the dashboard dialog
+  and the settings card. Do not create a second editor.
+- `lib/avatar.ts` validates type (`png`/`jpeg`/`webp`) and size (≤2 MB), centre-crops to a
+  square, and re-encodes to a 256px JPEG data URL before anything is persisted. It never
+  uploads: `localStorage` is the only destination. Reject the file *before* reading it so a
+  huge image never enters memory.
+- `components/profile/UserAvatar.tsx` is the single avatar renderer: the pixel mascot stays
+  the default, initials sit underneath for accessibility, and a custom photo replaces it
+  everywhere (topbar, sidebar, settings, dashboard) because it reads from `useAuth()`.
+- Every entry point — sidebar identity row, topbar menu, dashboard quick action, settings –
+  opens the same dialog or form.
+
 **Route guards.** `components/auth/RequireAuth.tsx` and `RedirectIfAuthenticated.tsx`.
 
 - `RequireAuth` wraps the workspace and admin branches. It must sit **above** the layout

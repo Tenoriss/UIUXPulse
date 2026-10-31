@@ -94,6 +94,22 @@ Everything lives in `src/services/`: `auth.storage.ts` is the only module that t
 
 Clearing site data resets everything. There is no backend, no OAuth, and no email delivery.
 
+## Dashboard and profile
+
+`/app` shows a greeting for the signed-in account, four totals derived from the evaluation
+store (`services/workspace.service.ts`), recent submissions, and quick actions. No evaluation
+has been submitted yet, so the totals read zero and the recent list shows an empty state —
+nothing is fabricated.
+
+Profile editing lives in `components/profile/`. The same form is used by the dashboard
+dialog (sidebar identity row, topbar menu, quick action) and by the settings page. Name,
+email, and photo persist to the demo account in `localStorage`:
+
+- images must be PNG, JPEG, or WebP and at most 2 MB;
+- each upload is centre-cropped and re-encoded to a 256px JPEG data URL in the browser;
+- removing the photo restores the default pixel mascot;
+- the account id never changes, so an email change cannot orphan the session.
+
 ## Design tokens
 
 All tokens live in `src/styles/index.css` under `@theme`, so every value is both a CSS

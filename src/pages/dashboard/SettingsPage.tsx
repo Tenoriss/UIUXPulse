@@ -1,6 +1,8 @@
 import { SUPPORTED_LOCALES, LOCALE_META, useI18n } from '@/i18n';
 import { PageHeader } from '@/components/layout/PageHeader';
-import { Card, CardDescription, CardHeader, CardTitle, Badge } from '@/components/ui';
+import { Badge, Card, CardDescription, CardHeader, CardTitle } from '@/components/ui';
+import { EditProfileForm, UserAvatar } from '@/components/profile';
+import { useAuth } from '@/services/auth.context';
 import { cn } from '@/lib/cn';
 
 export interface SettingsPageProps {
@@ -8,11 +10,15 @@ export interface SettingsPageProps {
 }
 
 /**
- * Settings foundation: the language preference is real (it drives i18n), while
- * workspace/profile fields are clearly marked as not yet connected.
+ * Settings.
+ *
+ * Profile editing is the same form used by the dashboard dialog, so there is
+ * one implementation and no drift. Language preference stays exactly as it was
+ * — it drives i18n directly and persists on its own.
  */
 export function SettingsPage({ admin = false }: SettingsPageProps) {
-  const { t, locale, setLocale } = useI18n();
+  const { t, locale, setLocale, formatDate } = useI18n();
+  const { user } = useAuth();
 
   return (
     <div className="flex flex-col gap-10">
@@ -20,10 +26,62 @@ export function SettingsPage({ admin = false }: SettingsPageProps) {
         eyebrow={admin ? t('admin.title') : t('dashboard.workspace')}
         title={t('dashboard.settings.title')}
         description={t('dashboard.settings.body')}
-        actions={<Badge tone="taupe">{t('common.readOnly')}</Badge>}
+        actions={<Badge tone={admin ? 'taupe' : 'sage'}>{t('profile.demoBadge')}</Badge>}
       />
 
+      {!admin && (
+        <section aria-labelledby="settings-profile" className="flex flex-col gap-4">
+          <h2 id="settings-profile" className="font-serif text-h4 text-ink">
+            {t('profile.sectionTitle')}
+          </h2>
+
+          <Card padding="lg">
+            <EditProfileForm />
+          </Card>
+        </section>
+      )}
+
       <div className="grid gap-4 lg:grid-cols-2">
+        {/* ------------------------------------------------ Account info */}
+        {!admin && (
+          <Card padding="lg">
+            <CardHeader>
+              <CardTitle>{t('profile.accountTitle')}</CardTitle>
+              <CardDescription>{t('profile.accountBody')}</CardDescription>
+            </CardHeader>
+
+            <div className="mt-6 flex items-center gap-4">
+              <UserAvatar size="lg" />
+              <div className="min-w-0">
+                <p className="truncate text-[0.9375rem] font-medium text-ink">
+                  {user?.name || t('profile.fallbackName')}
+                </p>
+                <p className="truncate text-micro text-ink-muted">{user?.email}</p>
+              </div>
+            </div>
+
+            <dl className="mt-6 flex flex-col gap-3 border-t border-line pt-5 text-[0.8125rem]">
+              <div className="flex items-baseline justify-between gap-4">
+                <dt className="text-ink-muted">{t('profile.memberSince')}</dt>
+                <dd className="tabular-nums text-ink-soft">
+                  {user?.createdAt ? formatDate(user.createdAt) : '—'}
+                </dd>
+              </div>
+              <div className="flex items-baseline justify-between gap-4">
+                <dt className="text-ink-muted">{t('profile.accountId')}</dt>
+                <dd className="min-w-0 truncate font-mono text-micro text-ink-soft">
+                  {user?.id ?? '—'}
+                </dd>
+              </div>
+              <div className="flex items-baseline justify-between gap-4">
+                <dt className="text-ink-muted">{t('profile.passwordLabel')}</dt>
+                <dd className="text-ink-soft">{t('profile.passwordNote')}</dd>
+              </div>
+            </dl>
+          </Card>
+        )}
+
+        {/* ---------------------------------------------------- Language */}
         <Card padding="lg">
           <CardHeader>
             <CardTitle>{t('common.language')}</CardTitle>
@@ -53,9 +111,7 @@ export function SettingsPage({ admin = false }: SettingsPageProps) {
                   <span className="block text-[0.8125rem] font-medium text-ink">
                     {LOCALE_META[item].label}
                   </span>
-                  <span className="block text-micro text-ink-muted">
-                    {LOCALE_META[item].intl}
-                  </span>
+                  <span className="block text-micro text-ink-muted">{LOCALE_META[item].intl}</span>
                 </span>
                 <span
                   className={cn(
@@ -69,26 +125,8 @@ export function SettingsPage({ admin = false }: SettingsPageProps) {
               </button>
             ))}
           </div>
-        </Card>
 
-        <Card variant="muted" padding="lg">
-          <CardHeader>
-            <CardTitle>{admin ? t('admin.criteriaTitle') : t('dashboard.settings.title')}</CardTitle>
-            <CardDescription>
-              {admin ? t('admin.criteriaBody') : t('dashboard.settings.body')}
-            </CardDescription>
-          </CardHeader>
-
-          <div className="mt-6 space-y-3">
-            {[1, 2, 3].map((row) => (
-              <div key={row} className="flex items-center justify-between gap-4">
-                <div className="h-2.5 w-24 rounded-pill bg-surface" aria-hidden="true" />
-                <div className="h-2.5 w-12 rounded-pill bg-surface" aria-hidden="true" />
-              </div>
-            ))}
-          </div>
-
-          <p className="mt-8 text-micro text-ink-muted">{t('common.previewNotice')}</p>
+          <p className="mt-6 text-micro leading-relaxed text-ink-muted">{t('auth.demoNotice')}</p>
         </Card>
       </div>
     </div>

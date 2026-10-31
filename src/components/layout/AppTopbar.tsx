@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Bell, LogOut, Menu, Plus, Settings } from 'lucide-react';
+import { Bell, LogOut, Menu, PenLine, Plus, Settings } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { useI18n } from '@/i18n';
 import { routes } from '@/config/site';
 import { Button, Dropdown, IconButton } from '@/components/ui';
+import { UserAvatar } from '@/components/profile';
+import { EditProfileDialog } from '@/components/profile/EditProfileDialog';
 import { useToast } from '@/providers/ToastProvider';
 import { useAuth } from '@/services/auth.context';
 
@@ -26,6 +29,7 @@ export function AppTopbar({
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [profileOpen, setProfileOpen] = useState(false);
 
   return (
     <header
@@ -84,6 +88,10 @@ export function AppTopbar({
           align="end"
           panelClassName="w-56"
           onSelect={(value) => {
+            if (value === 'profile') {
+              setProfileOpen(true);
+              return;
+            }
             if (value === 'settings') {
               navigate(routes.settings);
               return;
@@ -102,27 +110,26 @@ export function AppTopbar({
           }}
           items={[
             {
+              value: 'profile',
+              label: t('profile.edit'),
+              description: user?.email,
+              icon: PenLine,
+              separated: true,
+            },
+            {
               value: 'settings',
               label: t('dashboard.nav.settings'),
               icon: Settings,
-              separated: true,
             },
             { value: 'signout', label: t('dashboard.signOut'), icon: LogOut },
           ]}
         >
           <button
             type="button"
-            aria-label={t('common.you')}
+            aria-label={t('profile.menuLabel')}
             className="flex items-center gap-2 rounded-pill border border-line bg-surface py-1 pl-1 pr-2.5 transition-colors hover:border-line-strong"
           >
-            <img
-              src="/images/avatar-tile.png"
-              alt=""
-              width={192}
-              height={192}
-              className="clay-surface size-8 rounded-full bg-surface-muted object-contain p-0.5"
-              style={{ imageRendering: 'pixelated' }}
-            />
+            <UserAvatar size="sm" />
             <span className="hidden max-w-32 truncate text-[0.75rem] font-medium text-ink-soft sm:block">
               {user?.name || user?.email || t('common.you')}
             </span>
@@ -132,6 +139,8 @@ export function AppTopbar({
 
       {/* Route key is intentionally unused visually; it keeps the bar in sync
           with navigation so focus/scroll behaviour resets per section. */}
+      <EditProfileDialog open={profileOpen} onClose={() => setProfileOpen(false)} />
+
       <span key={location.pathname} className="sr-only" aria-live="polite">
         {sectionLabel}
       </span>

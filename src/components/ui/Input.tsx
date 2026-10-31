@@ -25,6 +25,10 @@ export interface FieldProps {
   className?: string;
   children: ReactNode;
   htmlFor?: string;
+  /** Id of the error paragraph, so the control can reference it. */
+  errorId?: string;
+  /** Id of the hint paragraph, so the control can reference it. */
+  hintId?: string;
 }
 
 /** Shared label / hint / error scaffold for any form control. */
@@ -37,6 +41,8 @@ export function Field({
   className,
   children,
   htmlFor,
+  errorId,
+  hintId,
 }: FieldProps) {
   return (
     <div className={cn('flex flex-col gap-2', className)}>
@@ -56,11 +62,13 @@ export function Field({
       )}
       {children}
       {error ? (
-        <p className="text-micro text-clay-ink" role="alert">
+        <p id={errorId} className="text-micro text-clay-ink" role="alert">
           {error}
         </p>
       ) : hint ? (
-        <p className="text-micro text-ink-muted">{hint}</p>
+        <p id={hintId} className="text-micro text-ink-muted">
+          {hint}
+        </p>
       ) : null}
     </div>
   );
@@ -96,6 +104,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 ) {
   const generatedId = useId();
   const inputId = id ?? generatedId;
+  const errorId = `${inputId}-error`;
+  const hintId = `${inputId}-hint`;
+  const describedBy =
+    [ariaDescribedBy, error ? errorId : hint ? hintId : undefined]
+      .filter(Boolean)
+      .join(' ') || undefined;
 
   return (
     <Field
@@ -105,6 +119,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       required={required}
       optionalLabel={optionalLabel}
       htmlFor={inputId}
+      errorId={errorId}
+      hintId={hintId}
       className={containerClassName}
     >
       <div className="relative">
@@ -118,7 +134,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           id={inputId}
           required={required}
           aria-invalid={error ? true : undefined}
-          aria-describedby={ariaDescribedBy}
+          aria-describedby={describedBy}
           className={cn(
             fieldShell,
             fieldFocus,

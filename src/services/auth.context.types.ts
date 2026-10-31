@@ -1,4 +1,10 @@
-import type { AuthOutcome, AuthUser, LoginPayload, RegisterPayload } from './auth.types';
+import type {
+  AuthOutcome,
+  AuthUser,
+  LoginPayload,
+  ProfileUpdatePayload,
+  RegisterPayload,
+} from './auth.types';
 
 /**
  * Auth context contract, kept in a plain `.ts` module so the provider file
@@ -14,4 +20,6 @@ export interface AuthContextValue {
   register: (payload: RegisterPayload) => Promise<AuthOutcome>;
   logout: () => Promise<void>;
   resetPassword: (email: string, password: string) => Promise<AuthOutcome>;
+  /** Updates name, email, and avatar for the signed-in account. */
+  updateProfile: (changes: ProfileUpdatePayload) => Promise<AuthOutcome>;
 }

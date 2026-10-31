@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ChevronsUpDown, X } from 'lucide-react';
+import { ArrowLeft, PenLine, X } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { routes } from '@/config/site';
 import { useI18n } from '@/i18n';
@@ -7,6 +8,9 @@ import type { NavItem } from '@/types/navigation';
 import { Logo } from '@/components/brand/Logo';
 import { LanguageSwitcher } from '@/components/brand/LanguageSwitcher';
 import { IconButton } from '@/components/ui';
+import { UserAvatar } from '@/components/profile';
+import { EditProfileDialog } from '@/components/profile/EditProfileDialog';
+import { useAuth } from '@/services/auth.context';
 import { SidebarNavLink } from './NavLink';
 
 export interface AppSidebarProps {
@@ -30,6 +34,8 @@ export function AppSidebar({
   className,
 }: AppSidebarProps) {
   const { t } = useI18n();
+  const { user } = useAuth();
+  const [profileOpen, setProfileOpen] = useState(false);
 
   return (
     <aside
@@ -52,30 +58,41 @@ export function AppSidebar({
       </div>
 
       <div className="px-3">
+        {/* Profile entry point: the whole row is the control, with the pencil
+            affordance appearing on hover/focus only. */}
         <button
           type="button"
-          className="group flex w-full items-center gap-2.5 rounded-md border border-line bg-surface px-3 py-2.5 text-left transition-colors hover:border-line-strong"
-          aria-label={workspaceName}
+          onClick={() => setProfileOpen(true)}
+          className="group flex w-full items-center gap-2.5 rounded-md border border-line bg-surface px-2.5 py-2 text-left transition-colors hover:border-line-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-deep/45"
+          aria-label={t('profile.openMenu')}
         >
-          <span
-            className={cn(
-              'flex size-6 items-center justify-center rounded-sm text-[0.625rem] font-semibold uppercase',
-              accent === 'sage' ? 'bg-sage-wash text-sage-ink' : 'bg-taupe-soft text-ink-soft',
-            )}
-          >
-            {workspaceName.slice(0, 2)}
-          </span>
+          <UserAvatar size="sm" />
           <span className="min-w-0 flex-1">
             <span className="block truncate text-[0.8125rem] font-medium text-ink">
               {workspaceName}
             </span>
+            <span className="block truncate text-[0.6875rem] text-ink-muted">
+              {user?.email ?? t('profile.edit')}
+            </span>
           </span>
-          <ChevronsUpDown className="size-3.5 text-ink-faint" aria-hidden="true" />
+          <PenLine
+            className="size-3.5 shrink-0 text-ink-faint transition-colors group-hover:text-ink-soft"
+            aria-hidden="true"
+          />
         </button>
       </div>
 
       <nav aria-label={sectionLabel} className="mt-6 flex flex-1 flex-col gap-1 overflow-y-auto px-3">
-        <p className="eyebrow px-3 pb-2">{sectionLabel}</p>
+        <p className="eyebrow flex items-center gap-2 px-3 pb-2">
+          <span
+            className={cn(
+              'size-1.5 rounded-full',
+              accent === 'sage' ? 'bg-sage-deep' : 'bg-taupe',
+            )}
+            aria-hidden="true"
+          />
+          {sectionLabel}
+        </p>
         {items.map((item) => (
           <SidebarNavLink key={item.to} item={item} onNavigate={onClose} />
         ))}
@@ -98,6 +115,8 @@ export function AppSidebar({
           {t('dashboard.disclaimer')}
         </p>
       </div>
+
+      <EditProfileDialog open={profileOpen} onClose={() => setProfileOpen(false)} />
     </aside>
   );
 }

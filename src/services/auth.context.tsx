@@ -12,8 +12,15 @@ import {
   register as registerRequest,
   resetPassword as resetPasswordRequest,
   restoreSession,
+  updateProfile as updateProfileRequest,
 } from './auth.service';
-import type { AuthOutcome, AuthUser, LoginPayload, RegisterPayload } from './auth.types';
+import type {
+  AuthOutcome,
+  AuthUser,
+  LoginPayload,
+  ProfileUpdatePayload,
+  RegisterPayload,
+} from './auth.types';
 import type { AuthContextValue } from './auth.context.types';
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -66,6 +73,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [],
   );
 
+  /**
+   * Profile edits keep the same account id and the same session, so the
+   * visitor is never signed out by saving their own name.
+   */
+  const updateProfile = useCallback(
+    async (changes: ProfileUpdatePayload): Promise<AuthOutcome> => {
+      if (!user) return { ok: false, code: 'accountNotFound' };
+      const result = await updateProfileRequest(user.id, changes);
+      if (result.ok) setUser(result.data);
+      return result;
+    },
+    [user],
+  );
+
   const value = useMemo<AuthContextValue>(
     () => ({
       user,
@@ -75,8 +96,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       register,
       logout,
       resetPassword,
+      updateProfile,
     }),
-    [user, status, login, register, logout, resetPassword],
+    [user, status, login, register, logout, resetPassword, updateProfile],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

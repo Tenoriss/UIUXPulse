@@ -6,12 +6,24 @@
  * ripple through the UI.
  */
 export interface AuthUser {
-  /** Stable id derived from the email address. */
+  /** Stable id, assigned once at registration and never derived from email. */
   id: string;
   name: string;
   email: string;
   /** ISO timestamp — when the demo account was registered. */
   createdAt: string;
+  /**
+   * Custom avatar as a compressed data URL. `null` means "use the default
+   * pixel mascot". Never a remote URL — images stay in this browser.
+   */
+  avatarUrl: string | null;
+}
+
+/** Fields the profile form may change. */
+export interface ProfileUpdatePayload {
+  name: string;
+  email: string;
+  avatarUrl: string | null;
 }
 
 export interface RegisterPayload {
@@ -52,6 +64,8 @@ export interface StoredAccount {
   email: string;
   passwordHash: string;
   createdAt: string;
+  /** Optional so accounts created before Phase 4 keep loading. */
+  avatarUrl?: string | null;
 }
 
 /** The persisted session — a user id and when it started. No secrets. */
