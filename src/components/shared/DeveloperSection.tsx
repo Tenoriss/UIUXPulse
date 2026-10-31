@@ -33,25 +33,15 @@ export function DeveloperSection({ className }: { className?: string }) {
 
             <p className="mt-6 max-w-md text-body text-ink-soft">{t('developer.lead')}</p>
 
-            <dl className="mt-10 divide-y divide-white/[0.06] border-y border-white/[0.06]">
-              <div className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                <dt className="font-display text-[0.625rem] font-semibold uppercase tracking-[0.16em] text-ink-muted">
-                  {t('developer.stackLabel')}
-                </dt>
-                <dd className="text-[0.8125rem] text-ink-soft sm:text-right">
-                  {t('developer.stack')}
-                </dd>
-              </div>
-
-              <div className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                <dt className="font-display text-[0.625rem] font-semibold uppercase tracking-[0.16em] text-ink-muted">
-                  {t('developer.principleLabel')}
-                </dt>
-                <dd className="max-w-sm text-[0.8125rem] text-ink-soft sm:text-right">
-                  {t('developer.principle')}
-                </dd>
-              </div>
-            </dl>
+            {/* Purpose: why this product exists, stated plainly */}
+            <div className="mt-10 border-t border-white/[0.06] pt-6">
+              <p className="font-display text-[0.625rem] font-semibold uppercase tracking-[0.16em] text-ink-muted">
+                {t('developer.purposeLabel')}
+              </p>
+              <p className="mt-3 max-w-md text-body text-ink-soft">
+                {t('developer.purpose')}
+              </p>
+            </div>
           </div>
 
           {/* ------------------------------------------------------- Profiles */}

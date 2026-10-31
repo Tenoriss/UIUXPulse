@@ -137,9 +137,11 @@ Rules:
 - The guide mounts through the pathless `GuideLayout`, never outside `RouterProvider` —
   it calls `useLocation()`.
 
-**Developer credits.** The last section before the footer on public pages lists who built
-the product. Handles and URLs live in `src/config/developers.ts` (content), while the
-labels are translation keys. Brand marks are inline SVG in
+**Developer credits.** The last section before the footer on public pages states who built
+the product and why it exists (the "Purpose" block). Handles and URLs live in
+`src/config/developers.ts` (content), while the labels are translation keys. There is
+deliberately no tech-stack list or process manifesto here — the section is a credit and a
+statement of intent, not marketing collateral. Brand marks are inline SVG in
 `components/brand/SocialIcons.tsx` because lucide-react v1 no longer ships brand icons —
 do **not** add a dependency for two glyphs. External profile links **must** carry
 `target="_blank"` with `rel="noreferrer noopener"`, and every link **must** have a visible
