@@ -44,7 +44,7 @@ export function PublicHeader() {
       )}
     >
       <Container className="flex h-16 items-center justify-between gap-6 sm:h-18">
-        <Logo />
+        <Logo withMascot />
 
         <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">
           {publicNav.map((item) => (

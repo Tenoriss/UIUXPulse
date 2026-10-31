@@ -18,7 +18,7 @@ export function AuthLayout() {
     <div className="flex min-h-dvh bg-canvas">
       <div className="flex w-full flex-col lg:w-[54%]">
         <header className="flex items-center justify-between px-6 py-6 sm:px-10">
-          <Logo />
+          <Logo withMascot />
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
             <Link
