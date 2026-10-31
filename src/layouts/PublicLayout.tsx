@@ -2,6 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { useI18n } from '@/i18n';
 import { PublicHeader } from '@/components/layout/PublicHeader';
 import { PublicFooter } from '@/components/layout/PublicFooter';
+import { DeveloperSection } from '@/components/shared/DeveloperSection';
 
 /**
  * Public marketing layout: sticky editorial header, breakout content area,
@@ -25,6 +26,8 @@ export function PublicLayout() {
       <main id="main-content" key={location.pathname} className="flex-1 animate-fade-in">
         <Outlet />
       </main>
+
+      <DeveloperSection />
 
       <PublicFooter />
     </div>

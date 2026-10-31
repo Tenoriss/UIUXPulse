@@ -52,6 +52,24 @@ export const id: Dictionary = {
     dashboard: 'Dasbor',
   },
 
+  developer: {
+    eyebrow: 'Dibangun oleh',
+    title: 'Satu developer, tanpa panitia.',
+    lead: 'UIUXPulse dirancang dan dibangun oleh satu front-end developer. Setiap layar, komponen, dan kalimat di halaman ini lahir dari tangan yang sama — itu sebabnya detailnya tetap konsisten.',
+    github: 'GitHub',
+    instagram: 'Instagram',
+    githubNote: 'Kode sumber, riwayat commit, dan issue',
+    instagramNote: 'Catatan proses dan suasana di balik layar',
+    stackLabel: 'Teknologi',
+    stack: 'React 19 · TypeScript · Vite · Tailwind CSS v4 · React Router',
+    principleLabel: 'Prinsip kerja',
+    principle:
+      'Bangun fondasinya dulu. Komponen sebelum halaman, token sebelum gaya, dan tidak ada fitur yang tidak bisa dijelaskan dalam satu kalimat.',
+    visit: 'Buka profil',
+    backToTop: 'Kembali ke atas',
+    madeWith: 'Dirancang dan dibangun di Jakarta',
+  },
+
   footer: {
     description:
       'Praktik evaluasi independen untuk tim yang peduli pada rasa sebuah situs, bukan hanya tampilannya.',

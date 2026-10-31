@@ -53,6 +53,24 @@ export const en = {
     dashboard: 'Dashboard',
   },
 
+  developer: {
+    eyebrow: 'Built by',
+    title: 'One developer, no committee.',
+    lead: 'UIUXPulse is designed and built by a single front-end developer. Every screen, component, and word on this page comes from the same pair of hands — which is why the details stay consistent.',
+    github: 'GitHub',
+    instagram: 'Instagram',
+    githubNote: 'Source, commits, and issues',
+    instagramNote: 'Process notes and behind the scenes',
+    stackLabel: 'Stack',
+    stack: 'React 19 · TypeScript · Vite · Tailwind CSS v4 · React Router',
+    principleLabel: 'Working principle',
+    principle:
+      'Ship the foundation first. Components before pages, tokens before styles, and no feature that cannot be explained in one sentence.',
+    visit: 'Open profile',
+    backToTop: 'Back to top',
+    madeWith: 'Designed and built in Jakarta',
+  },
+
   footer: {
     description:
       'An independent evaluation practice for teams who care how their websites feel, not only how they look.',
