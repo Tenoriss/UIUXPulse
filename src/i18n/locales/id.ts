@@ -300,6 +300,12 @@ export const id: Dictionary = {
     errorTitle: 'Terjadi kesalahan',
   },
 
+  guide: {
+    open: 'Pip menjelaskan: {page}',
+    hide: 'Sembunyikan Pip',
+    show: 'Tampilkan Pip',
+  },
+
   modal: {
     close: 'Tutup dialog',
   },

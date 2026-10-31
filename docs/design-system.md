@@ -119,6 +119,24 @@ menus), `clay-inset` (inputs, tab tracks, wells). Raised objects **must** use
 `border-white/[0.06..0.08]` rather than `border-line`, because a warm grey hairline reads
 as dirt against a lifted surface.
 
+**Page guide (Pip).** Two characters share the pixel style: the site mascot in the header,
+and **Pip**, the guide that explains each page. Pip lives bottom-right as a 56px clay
+button; opening it reveals one short explanation, an optional action, and a "hide" control
+that persists in `localStorage` (`uiuxpulse.guide.hidden`).
+
+Rules:
+
+- Copy lives in `src/content/guide.ts`, not in the i18n dictionaries, because it needs
+  named props; **every** route must have an entry in **both** `en` and `id` (a smoke check
+  enforces parity, currently 17 entries).
+- Pip is a helper, never a gate: it must not cover the primary action on mobile, must be
+  dismissible, closes on navigation and on Escape, and exposes its text through
+  `role="status"`.
+- The container is `position: fixed` with `pointer-events-none` on the wrapper, so it never
+  intercepts clicks on the page beneath.
+- The guide mounts through the pathless `GuideLayout`, never outside `RouterProvider` —
+  it calls `useLocation()`.
+
 **Pixel mascot.** The product mascot is a pixel sprite cropped from its source artwork to
 a transparent PNG (`avatar-hero.png` 512², `avatar-tile.png` 192²). It **must** be rendered
 with `image-rendering: pixelated`, **must** sit on a `clay-surface-lg` disc (`ClayAvatar`),

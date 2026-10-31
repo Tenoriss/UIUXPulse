@@ -301,6 +301,12 @@ export const en = {
     errorTitle: 'Something went wrong',
   },
 
+  guide: {
+    open: 'Pip explains: {page}',
+    hide: 'Hide Pip',
+    show: 'Show Pip',
+  },
+
   modal: {
     close: 'Close dialog',
   },

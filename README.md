@@ -40,7 +40,9 @@ src/
 │   ├── shared/        PageIntro, CtaBand
 │   └── ui/            Button, Input, Card, Badge, Modal, Dropdown, Tabs,
 │                      Toast, Loading, EmptyState, ErrorState
+├── components/mascot/ Pip — the per-page guide (floating, bilingual)
 ├── config/            site routes + navigation trees
+├── content/           guide copy per route (en + id)
 ├── hooks/             useMediaQuery, useDismissable, useLockBodyScroll, useScrolled, useMounted
 ├── i18n/              provider, typed dictionaries (en/id), translate helpers
 ├── layouts/           PublicLayout, AuthLayout, DashboardLayout, AdminLayout
