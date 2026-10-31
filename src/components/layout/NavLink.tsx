@@ -80,7 +80,7 @@ export function SidebarNavLink({ item, onNavigate }: SidebarNavLinkProps) {
         cn(
           'group flex items-center gap-2.5 rounded-sm px-3 py-2 text-[0.8125rem] transition-all duration-300',
           isActive
-            ? 'bg-surface text-ink shadow-[0_1px_0_rgba(255,255,255,0.9)_inset,0_6px_16px_-14px_rgba(41,42,37,0.5)]'
+            ? 'bg-surface text-ink shadow-[0_1px_0_rgba(255,255,255,0.06)_inset,0_6px_16px_-14px_rgba(0,0,0,0.8)]'
             : 'text-ink-soft hover:bg-surface/70 hover:text-ink',
         )
       }

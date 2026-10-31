@@ -46,7 +46,7 @@ export function AppShell({ topbar, children, contentClassName, ...sidebarProps }
             type="button"
             aria-label="Close"
             onClick={() => setDrawerOpen(false)}
-            className="absolute inset-0 bg-ink/25 backdrop-blur-[2px] animate-fade-in"
+            className="absolute inset-0 bg-black/60 backdrop-blur-[2px] animate-fade-in"
           />
           <div className="relative h-full w-64 animate-fade-up shadow-clay-lg">
             <AppSidebar {...sidebarProps} onClose={() => setDrawerOpen(false)} />

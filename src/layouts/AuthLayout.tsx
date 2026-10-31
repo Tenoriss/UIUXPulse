@@ -44,10 +44,10 @@ export function AuthLayout() {
         </footer>
       </div>
 
-      <aside className="relative hidden overflow-hidden border-l border-line bg-surface-muted lg:block lg:w-[46%]">
+      <aside className="relative hidden overflow-hidden border-l border-line bg-surface lg:block lg:w-[46%]">
         <div className="absolute inset-0 dot-grid opacity-50" aria-hidden="true" />
         <div
-          className="absolute -right-24 top-1/4 size-96 rounded-full bg-sage-wash/70 blur-3xl"
+          className="absolute -right-24 top-1/4 size-96 rounded-full bg-sage/10 blur-3xl"
           aria-hidden="true"
         />
         <div className="relative flex h-full flex-col justify-between p-12">

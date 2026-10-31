@@ -72,7 +72,7 @@ export function Tabs<T extends string = string>({
           'flex items-center gap-1 overflow-x-auto',
           variant === 'underline'
             ? 'border-b border-line [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
-            : 'w-fit rounded-pill border border-line bg-surface-muted/60 p-1',
+            : 'clay-inset w-fit rounded-pill border border-line bg-surface-muted/60 p-1',
           listClassName,
         )}
       >

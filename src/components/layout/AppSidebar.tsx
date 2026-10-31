@@ -34,7 +34,7 @@ export function AppSidebar({
   return (
     <aside
       className={cn(
-        'flex h-full w-64 shrink-0 flex-col border-r border-line bg-surface-muted/50',
+        'flex h-full w-64 shrink-0 flex-col border-r border-line bg-surface/60',
         className,
       )}
     >

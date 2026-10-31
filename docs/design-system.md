@@ -37,23 +37,30 @@ semantic layer and **must not** reference raw brand values.
 
 | Semantic token | Value | Use | Contrast |
 | --- | --- | --- | --- |
-| `canvas` | `#F7F6F2` | Page background | — |
-| `surface` | `#FCFBF8` | Cards, panels, inputs | — |
-| `surface-muted` | `#EEECE5` | Secondary bands, skeletons | — |
-| `ink` | `#292A25` | Primary text, dark buttons | 13.37:1 on canvas |
-| `ink-soft` | `#55564E` | Body copy | 6.87:1 |
-| `ink-muted` | `#6B6B63` | Tertiary text, captions, meta | 4.97:1 (AA) |
-| `ink-faint` | `#A9A89F` | Placeholder, decorative icon, numerals ≥24px **only** | 2.21:1 — never body text |
-| `sage-deep` | `#5B6A53` | Links, focus ring, primary accent text | 5.35:1 |
-| `sage-ink` | `#47523F` | Text on sage wash | 7.00:1 |
-| `sage` | `#A5B29A` | Decorative fills and borders only | 2.06:1 — never text |
-| `line` / `line-strong` | `#E4E1D9` / `#D6D2C7` | Hairline borders | — |
-| `clay-ink` | `#8A4A38` | Error copy and error icons | 6.23:1 |
-| `clay` | `#A9715F` | Error fills / large text only | 3.72:1 |
-| `taupe` | `#C8C0B3` | Decoration, admin accent | 1.67:1 — never text |
+| `canvas` | `#111110` | Page background | — |
+| `surface` | `#191917` | Cards, panels | — |
+| `surface-muted` | `#21211E` | Secondary bands, skeletons | — |
+| `surface-sunken` | `#0C0C0B` | Input wells, recessed clay | — |
+| `ink` | `#F3F1EA` | Primary text, light buttons | 16.72:1 on canvas |
+| `ink-soft` | `#C6C4BA` | Body copy | 10.80:1 |
+| `ink-muted` | `#9C9A90` | Tertiary text, captions, meta | 6.69:1 (AA) |
+| `ink-faint` | `#6E6C64` | Placeholder, decorative icon, numerals ≥24px **only** | 3.59:1 — never body text |
+| `sage-deep` | `#8FA084` | Links, focus ring, accent text | 6.77:1 |
+| `sage-ink` | `#D3DEC7` | Text on sage wash | 13.53:1 |
+| `sage` | `#A5B29A` | Decorative fills, logo halo only | 9.09:1 — decoration |
+| `sage-wash` | `#1C221A` | Tinted surface | — |
+| `line` / `line-strong` | `#2A2A26` / `#3A3A34` | Hairline borders | — |
+| `clay-ink` | `#E5A492` | Error copy and error icons | 9.05:1 |
+| `clay` | `#C98A76` | Error fills | — |
+| `taupe` | `#C8C0B3` | Decoration, admin accent | — |
 
-`color-scheme: light` is set explicitly; there is no dark theme yet, and adding one must
-be done by overriding layer 2 only.
+`color-scheme: dark` is set explicitly. There is one theme; a light variant would be added
+by overriding the `--brand-*` layer only.
+
+> **Implementation pitfall (already hit once).** Tailwind v4 generates utilities for
+> colour names registered in `@theme`. Declaring `--color-*` in `:root` instead produces
+> **no utilities at all** — `bg-surface` silently disappears and the UI renders unstyled.
+> The semantic layer must stay inside the `@theme` block, aliasing `--brand-*`.
 
 ### 2.2 Typography
 
@@ -85,11 +92,21 @@ be done by overriding layer 2 only.
 | --- | --- |
 | Spacing | 4px base scale; section rhythm via `--spacing-section` (7rem) / `--spacing-section-lg` (10rem) |
 | Radius | `xs` 6 · `sm` 8 · `md` 12 · `lg` 16 · `xl` 22 · `2xl` 28 · `pill` 999 (pill **only** for buttons, badges, chips) |
-| Elevation | `shadow-hairline`, `shadow-soft`, `shadow-clay` (default card), `shadow-clay-lg` (modal/menu), `shadow-clay-pressed` (inputs) |
+| Elevation | `clay-surface` (raised panel), `clay-inset` (recessed well/input), `shadow-hairline`, `shadow-soft`, `shadow-clay`, `shadow-clay-lg`, `shadow-clay-pressed` |
 | Motion | `--duration-instant` 150ms · `--duration-quick` 250ms · `--duration-calm` 400ms · `--ease-editorial` |
 | Focus | `:focus-visible` → 2px `sage-deep` outline, 3px offset, never removed |
 
 All animation **must** collapse under `prefers-reduced-motion: reduce` (already global).
+
+**Claymorphism rule.** On a dark canvas a classic drop shadow reads as mud. Every raised
+surface **must** combine a 1px top rim highlight with a wide, low-opacity ambient shadow
+(`clay-surface`); every recessed control **must** use `clay-inset`. Inputs, tab tracks,
+and wells are recessed; cards, modals, menus, toasts, and buttons are raised.
+
+**Floating icon field.** Hero decoration uses `FloatingIcon`, a slow buoyant translate
+with a 2° rotation change (`animate-float*`), each tile staggered by `delay` and given its
+own `--icon-rotate`. Tiles **must** be `aria-hidden` (decorative) unless they carry a
+`label`. The field **must** hide below `md` and animate at most ±14px.
 
 ---
 
@@ -174,13 +191,13 @@ keys, never literals.
 
 | # | Requirement | How to verify |
 | --- | --- | --- |
-| A1 | Body text ≥4.5:1, large text ≥3:1 | Recompute pair table in §2.1; any `text-micro` using `ink-faint` is a failure |
+| A1 | Body text ≥4.5:1, large text ≥3:1 | Recompute pair table in §2.1; any `text-micro` using `ink-faint` is a failure. On the dark palette: ink 16.72, ink-soft 10.80, ink-muted 6.69, sage-deep 6.77, clay-ink 9.05, ochre-ink 9.46 — all on `#111110` |
 | A2 | Focus is always visible | Tab through every page: every interactive element shows the 2px sage-deep outline with offset |
 | A3 | No keyboard traps | Open modal/menu, Tab cycles inside; Escape exits and returns focus to trigger |
 | A4 | Targets ≥24×24px | Inspect `IconButton` (36px), toast close (32px), password reveal (36px) |
 | A5 | Forms are labelled and announced | Submit empty form: `aria-invalid` set, message read by screen reader, focus moved to first error |
 | A6 | Language is declared and switchable | `<html lang>` matches `locale`; toggling EN↔ID updates it without reload |
-| A7 | Motion respects preference | Emulate `prefers-reduced-motion`: all transitions ≤0.01ms |
+| A7 | Motion respects preference | Emulate `prefers-reduced-motion`: all transitions ≤0.01ms, floating icons stop |
 | A8 | One `h1` per page, logical heading order | DOM inspection per route |
 | A9 | Skip link present and functional | First Tab on public pages reveals "Skip to content" |
 
@@ -207,6 +224,9 @@ keys, never literals.
 - ❌ Pill radius on cards, panels, or inputs (pill is for buttons/badges only).
 - ❌ Heavy drop shadows or gradients used as decoration.
 - ❌ Numeric scores or evaluation results invented as placeholder content.
+- ❌ Declaring `--color-*` tokens outside `@theme` (silently removes every colour utility).
+- ❌ Flat surfaces on a dark canvas: raised or recessed is always chosen deliberately.
+- ❌ Extra illustration/icons added purely to fill space in hero or dashboard areas.
 - ❌ Copy that suggests UIUXPulse modifies the evaluated site.
 - ❌ Card grids where the reference rhythm calls for numbered hairline rows.
 
@@ -223,6 +243,9 @@ keys, never literals.
 - [ ] No console errors on any route, including `/nope` and `/app/nope`.
 - [ ] Reduced-motion emulation shows no animation (A7).
 - [ ] No raw hex in `src/components/**`.
+- [ ] Every colour utility present in the built CSS (`bg-surface`, `text-ink-muted`, …) —
+      check after any token edit.
+- [ ] Raised vs recessed clay chosen per §2.3 in every new surface.
 - [ ] Empty/loading/error states reachable and readable, with no fake data.
 
 ---

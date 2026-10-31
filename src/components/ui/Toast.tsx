@@ -30,7 +30,7 @@ function ToastItem({ record }: { record: ToastRecord }) {
     <div
       role="status"
       aria-live="polite"
-      className="pointer-events-auto flex w-full items-start gap-3 rounded-lg border border-line bg-surface p-3.5 shadow-clay-lg animate-slide-in-right"
+      className="clay-surface pointer-events-auto flex w-full items-start gap-3 rounded-lg border border-line bg-surface p-3.5 shadow-clay-lg animate-slide-in-right"
     >
       <span
         className={cn(

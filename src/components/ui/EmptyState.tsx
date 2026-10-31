@@ -22,7 +22,7 @@ export function EmptyState({
         className,
       )}
     >
-      <span className="mb-6 flex size-12 items-center justify-center rounded-full border border-line bg-surface-muted/70 text-ink-muted shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
+      <span className="mb-6 flex size-12 items-center justify-center rounded-full border border-line bg-surface-muted/70 text-ink-muted shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
         <Icon className="size-5" strokeWidth={1.4} aria-hidden="true" />
       </span>
 

@@ -8,7 +8,7 @@ import {
 import { cn } from '@/lib/cn';
 
 export const fieldShell =
-  'w-full rounded-md border border-line bg-surface text-ink transition-[border-color,box-shadow,background-color] duration-300 ease-[var(--ease-editorial)] placeholder:text-ink-faint hover:border-line-strong focus:border-sage disabled:cursor-not-allowed disabled:bg-surface-muted/50 disabled:text-ink-muted';
+  'clay-inset w-full rounded-md border border-line bg-surface-sunken text-ink transition-[border-color,box-shadow,background-color] duration-300 ease-[var(--ease-editorial)] placeholder:text-ink-faint hover:border-line-strong focus:border-sage-deep disabled:cursor-not-allowed disabled:bg-surface-muted/50 disabled:text-ink-muted';
 
 export const fieldFocus =
   'focus:outline-none focus-visible:border-sage focus-visible:ring-2 focus-visible:ring-sage/35 focus-visible:ring-offset-0';
@@ -199,7 +199,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
           ref={ref}
           id={checkboxId}
           type="checkbox"
-          className="peer size-4 shrink-0 cursor-pointer appearance-none rounded-xs border border-line-strong bg-surface transition-colors duration-200 checked:border-sage-deep checked:bg-sage-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-deep/40 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas disabled:cursor-not-allowed disabled:opacity-50"
+          className="peer size-4 shrink-0 cursor-pointer appearance-none rounded-xs border border-line-strong bg-surface transition-colors duration-200 checked:border-sage-deep checked:bg-sage-deep checked:shadow-[0_0_0_3px_rgb(143_160_132_/_0.15)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-deep/40 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas disabled:cursor-not-allowed disabled:opacity-50"
           {...props}
         />
         <svg

@@ -17,10 +17,10 @@ export const buttonBase =
   'group relative inline-flex select-none items-center justify-center gap-2 whitespace-nowrap font-medium tracking-[-0.005em] transition-[background-color,color,border-color,box-shadow,transform] duration-[var(--duration-quick)] ease-[var(--ease-editorial)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-deep/45 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas disabled:pointer-events-none disabled:opacity-45 active:translate-y-px';
 
 const toneStyles: Record<Tone, string> = {
-  dark: 'bg-ink text-canvas border border-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] hover:bg-ink-soft hover:border-ink-soft',
+  dark: 'bg-ink text-canvas border border-ink shadow-clay hover:bg-ink-soft hover:border-ink-soft',
   sage: 'bg-sage-deep text-canvas border border-sage-deep shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] hover:bg-sage-ink hover:border-sage-ink',
   neutral:
-    'bg-surface text-ink border border-line shadow-clay hover:border-line-strong hover:bg-surface-muted/60',
+    'bg-surface text-ink border border-line shadow-clay hover:border-line-strong hover:bg-surface-muted',
   outline:
     'bg-transparent text-ink border border-line-strong hover:bg-surface hover:border-ink/25',
   ghost: 'bg-transparent text-ink-soft border border-transparent hover:bg-surface-muted/70 hover:text-ink',

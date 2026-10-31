@@ -1,48 +1,94 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Accessibility,
+  Eye,
+  Gauge,
+  Layers,
+  LayoutGrid,
+  MousePointerClick,
+  Ruler,
+  ScanEye,
+  Type,
+} from 'lucide-react';
 import { Container } from '@/components/layout/Container';
 import { NumberedRow, SectionLabel, StatBand } from '@/components/shared/Editorial';
-import { Badge } from '@/components/ui';
+import { AvailabilityPill } from '@/components/brand/AvailabilityPill';
+import { FloatingIcon } from '@/components/brand/FloatingIcon';
 import { routes } from '@/config/site';
 import { useI18n } from '@/i18n';
 
 const principleKeys = ['observe', 'explain', 'prioritise'] as const;
 const flowKeys = ['submit', 'select', 'receive'] as const;
 const scopeKeys = ['scores', 'findings', 'evidence', 'recommendations'] as const;
+const scopeIcons = [Gauge, Eye, Layers, ScanEye] as const;
 
 export function HomePage() {
   const { t } = useI18n();
 
   return (
     <>
-      {/* ---------------------------------------------------------------- Hero */}
-      <Container className="pt-8 pb-14 sm:pt-12">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <Badge tone="sage" dot>
-            {t('home.available')}
-          </Badge>
-          <p className="text-micro uppercase tracking-[0.14em] text-ink-muted">
-            {t('home.heroMeta')}
-          </p>
-        </div>
+      {/* ================================================================ Hero
+          Poster composition: floating app tiles around an oversized uppercase
+          display line, with the serif italic accent sitting under it. */}
+      <section className="relative overflow-hidden">
+        <div
+          className="pointer-events-none absolute inset-0 dot-grid opacity-[0.35]"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-sage/10 blur-[120px]"
+          aria-hidden="true"
+        />
 
-        {/* Display line broken over three lines, accent word italicised */}
-        <h1 className="mt-10 font-serif text-hero text-ink">
-          {t('home.heroTitle')}
-          <br />
-          <em className="italic text-sage-deep">{t('home.heroTitleAccent')}</em>{' '}
-          {t('home.heroTitleRest')}
-        </h1>
+        <Container className="relative pt-6 pb-20 sm:pt-10">
+          {/* Floating constellation — decorative, hidden from AT, reduced below md */}
+          <div className="pointer-events-none absolute inset-0 hidden md:block" aria-hidden="true">
+            <FloatingIcon icon={LayoutGrid} className="left-[2%] top-[16%]" tone="sage" size="md" speed="slow" delay={0} rotate={-8} />
+            <FloatingIcon icon={Ruler} className="left-[16%] top-[6%]" tone="taupe" size="sm" speed="fast" delay={1.4} rotate={10} />
+            <FloatingIcon icon={MousePointerClick} className="right-[3%] top-[10%]" tone="clay" size="lg" speed="normal" delay={0.6} rotate={8} />
+            <FloatingIcon icon={Type} className="right-[17%] top-[3%]" tone="ink" size="sm" speed="slow" delay={2.1} rotate={-6} />
+            <FloatingIcon icon={Accessibility} className="right-[8%] top-[58%]" tone="sage" size="md" speed="fast" delay={1.1} rotate={6} />
+            <FloatingIcon icon={Layers} className="left-[5%] top-[62%]" tone="ink" size="md" speed="normal" delay={1.8} rotate={-10} />
+            <FloatingIcon icon={Gauge} className="left-[24%] top-[74%]" tone="sage" size="sm" speed="slow" delay={0.3} rotate={12} />
+            <FloatingIcon icon={ScanEye} className="right-[24%] top-[78%]" tone="taupe" size="md" speed="normal" delay={2.6} rotate={-4} />
+          </div>
 
-        {/* Asymmetric under-hero grid: text + actions left, image right */}
-        <div className="mt-14 grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-          <div className="flex flex-col justify-between gap-10">
-            <p className="max-w-md text-lead text-ink-soft">{t('home.heroLead')}</p>
+          <div className="relative flex flex-col items-center text-center">
+            {/* Portrait + availability, overlapping the display line */}
+            <div className="relative mb-[-2.5rem] flex flex-col items-center sm:mb-[-3.5rem]">
+              <div className="relative">
+                <div
+                  className="absolute -inset-2 rounded-full bg-sage/20 blur-xl"
+                  aria-hidden="true"
+                />
+                <img
+                  src="/images/hero-portrait.jpg"
+                  alt={t('home.heroPortraitAlt')}
+                  width={240}
+                  height={240}
+                  className="relative size-20 rounded-full border border-line object-cover shadow-clay sm:size-24"
+                />
+              </div>
+              <AvailabilityPill label={t('home.available')} className="mt-3" />
+            </div>
 
-            <div className="flex flex-wrap items-center gap-6">
+            <h1 className="mt-10 font-sans text-[clamp(2.75rem,12vw,10rem)] font-semibold uppercase leading-[0.82] tracking-[-0.045em] text-ink">
+              <span className="block">{t('home.heroLineOne')}</span>
+              <span className="block">{t('home.heroLineTwo')}</span>
+            </h1>
+
+            <p className="mt-4 font-serif text-[clamp(1.75rem,4vw,3rem)] italic leading-none text-sage-deep">
+              {t('home.heroAccent')}
+            </p>
+
+            <p className="mt-8 max-w-lg text-body text-ink-soft">{t('home.heroLead')}</p>
+
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
               <Link
                 to={routes.signUp}
-                className="group inline-flex items-center gap-2 rounded-pill border border-ink bg-ink px-6 py-3 text-[0.875rem] font-medium text-canvas transition-colors duration-300 hover:bg-ink-soft"
+                className="group inline-flex items-center gap-2 rounded-pill border border-ink bg-ink px-6 py-3 text-[0.875rem] font-medium text-canvas shadow-clay transition-colors duration-300 hover:bg-ink-soft"
               >
                 {t('home.heroPrimary')}
                 <ArrowRight
@@ -52,35 +98,20 @@ export function HomePage() {
               </Link>
               <Link
                 to={routes.howItWorks}
-                className="group inline-flex items-center gap-1.5 text-[0.8125rem] text-ink-soft underline decoration-line-strong underline-offset-4 transition-colors hover:text-ink hover:decoration-ink"
+                className="group inline-flex items-center gap-2 rounded-pill border border-line bg-surface/60 px-6 py-3 text-[0.875rem] font-medium text-ink-soft shadow-clay backdrop-blur-sm transition-colors duration-300 hover:border-line-strong hover:text-ink"
               >
                 {t('home.heroSecondary')}
                 <ArrowUpRight
-                  className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                   aria-hidden="true"
                 />
               </Link>
             </div>
-          </div>
 
-          <figure>
-            <div className="overflow-hidden rounded-lg border border-line bg-surface-muted shadow-clay">
-              <img
-                src="/images/hero-still-life.jpg"
-                alt={t('home.heroImageAlt')}
-                width={1408}
-                height={768}
-                loading="eager"
-                className="aspect-[4/3] w-full object-cover"
-              />
-            </div>
-            <figcaption className="mt-3 flex items-start justify-between gap-6 text-micro text-ink-muted">
-              <span className="max-w-xs leading-relaxed">{t('home.heroNote')}</span>
-              <span className="shrink-0 tabular-nums">01 / 04</span>
-            </figcaption>
-          </figure>
-        </div>
-      </Container>
+            <p className="mt-8 text-micro text-ink-muted">{t('home.heroSupport')}</p>
+          </div>
+        </Container>
+      </section>
 
       {/* ----------------------------------------------------------- Stat band */}
       <Container>
@@ -101,7 +132,7 @@ export function HomePage() {
             <span
               key={copy}
               aria-hidden={copy === 1}
-              className="flex items-center gap-10 font-serif text-xl text-ink-muted"
+              className="flex items-center gap-10 font-serif text-xl text-ink-faint"
             >
               {t('home.marquee')}
             </span>
@@ -173,33 +204,39 @@ export function HomePage() {
           </div>
 
           <ol className="flex flex-col">
-            {scopeKeys.map((key, index) => (
-              <li
-                key={key}
-                className="grid grid-cols-[40px_1fr] gap-5 border-t border-line py-6 last:border-b sm:grid-cols-[56px_1fr]"
-              >
-                <span className="text-micro tabular-nums tracking-[0.08em] text-ink-muted">
-                  0{index + 1}
-                </span>
-                <div>
-                  <h3 className="font-serif text-h4 text-ink">
-                    {t(`home.scope.${key}.title`)}
-                  </h3>
-                  <p className="mt-2 max-w-md text-body text-ink-soft">
-                    {t(`home.scope.${key}.body`)}
-                  </p>
-                </div>
-              </li>
-            ))}
+            {scopeKeys.map((key, index) => {
+              const Icon = scopeIcons[index];
+              return (
+                <li
+                  key={key}
+                  className="grid grid-cols-[32px_1fr] gap-5 border-t border-line py-6 last:border-b sm:grid-cols-[40px_1fr]"
+                >
+                  <span className="text-micro tabular-nums tracking-[0.08em] text-ink-muted">
+                    0{index + 1}
+                  </span>
+                  <div>
+                    <div className="flex items-center gap-2.5">
+                      <Icon className="size-4 text-sage-deep" strokeWidth={1.4} aria-hidden="true" />
+                      <h3 className="font-serif text-h4 text-ink">
+                        {t(`home.scope.${key}.title`)}
+                      </h3>
+                    </div>
+                    <p className="mt-2 max-w-md text-body text-ink-soft">
+                      {t(`home.scope.${key}.body`)}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
           </ol>
         </div>
       </Container>
 
       {/* ------------------------------------------------------------------ CTA */}
       <Container className="mt-24">
-        <div className="relative overflow-hidden rounded-xl border border-line bg-sage-wash/60 px-6 py-16 sm:px-14 sm:py-20">
+        <div className="relative overflow-hidden rounded-2xl border border-line bg-surface px-6 py-16 shadow-clay sm:px-14 sm:py-20">
           <div
-            className="absolute -bottom-24 -left-16 size-80 rounded-full bg-surface/70 blur-3xl"
+            className="pointer-events-none absolute -bottom-24 -left-16 size-80 rounded-full bg-sage/10 blur-3xl"
             aria-hidden="true"
           />
           <div className="relative max-w-2xl">
@@ -216,7 +253,7 @@ export function HomePage() {
               </Link>
               <Link
                 to={routes.methodology}
-                className="text-[0.8125rem] text-ink-soft underline decoration-ink/20 underline-offset-4 transition-colors hover:text-ink hover:decoration-ink"
+                className="text-[0.8125rem] text-ink-soft underline decoration-line-strong underline-offset-4 transition-colors hover:text-ink hover:decoration-ink"
               >
                 {t('home.ctaSecondary')}
               </Link>

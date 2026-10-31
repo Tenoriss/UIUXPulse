@@ -105,7 +105,7 @@ export function Modal({
         aria-label={t('modal.close')}
         tabIndex={-1}
         onClick={dismissible ? onClose : undefined}
-        className="absolute inset-0 cursor-default bg-ink/25 backdrop-blur-[3px] animate-fade-in"
+        className="absolute inset-0 cursor-default bg-black/65 backdrop-blur-[3px] animate-fade-in"
       />
 
       <div
@@ -116,7 +116,7 @@ export function Modal({
         aria-describedby={description ? descriptionId : undefined}
         tabIndex={-1}
         className={cn(
-          'relative z-10 w-full rounded-t-2xl border border-line bg-surface shadow-clay-lg animate-slide-up sm:rounded-2xl sm:animate-scale-in',
+          'clay-surface relative z-10 w-full rounded-t-2xl border border-line bg-surface shadow-clay-lg animate-slide-up sm:rounded-2xl sm:animate-scale-in',
           sizeStyles[size],
           className,
         )}

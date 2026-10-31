@@ -12,7 +12,7 @@ export function PublicFooter({ className }: { className?: string }) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className={cn('mt-24 border-t border-line bg-canvas', className)}>
+    <footer className={cn('mt-24 border-t border-line bg-surface/40', className)}>
       <Container className="py-14 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_2fr] lg:gap-20">
           <div className="max-w-sm">

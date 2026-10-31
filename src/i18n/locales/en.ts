@@ -73,6 +73,9 @@ export const en = {
 
   home: {
     available: 'Accepting new evaluations',
+    heroLineOne: 'Website',
+    heroLineTwo: 'Evaluation',
+    heroAccent: 'with intention',
     heroTitle: 'Clarity for the',
     heroTitleAccent: 'websites',
     heroTitleRest: 'you already own.',
@@ -80,8 +83,9 @@ export const en = {
       'Submit a URL, choose the pages that matter, and receive a calm, structured read on usability, hierarchy, and craft — with visual evidence and recommendations you can act on yourself.',
     heroPrimary: 'Start an evaluation',
     heroSecondary: 'See how it works',
-    heroImageAlt: 'Cream still-life composition with soft clay objects',
     heroMeta: 'Evaluation practice · Jakarta / remote',
+    heroPortraitAlt: 'Portrait of the UIUXPulse lead evaluator',
+    heroSupport: 'Scores, evidence, and recommendations — never changes to your site.',
     heroScroll: 'Selected sections',
     indexLabel: 'Report index',
     heroNote: 'No crawling of private spaces. No changes to your site. Ever.',

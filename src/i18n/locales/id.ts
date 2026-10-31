@@ -72,6 +72,9 @@ export const id: Dictionary = {
 
   home: {
     available: 'Menerima evaluasi baru',
+    heroLineOne: 'Evaluasi',
+    heroLineTwo: 'Situs Web',
+    heroAccent: 'dengan niat',
     heroTitle: 'Kejelasan untuk',
     heroTitleAccent: 'situs',
     heroTitleRest: 'yang sudah Anda miliki.',
@@ -79,8 +82,9 @@ export const id: Dictionary = {
       'Kirim satu URL, pilih halaman yang penting, lalu terima pembacaan yang tenang dan terstruktur atas kegunaan, hierarki, dan kualitas detail — lengkap dengan bukti visual dan rekomendasi yang bisa Anda kerjakan sendiri.',
     heroPrimary: 'Mulai evaluasi',
     heroSecondary: 'Lihat cara kerjanya',
-    heroImageAlt: 'Komposisi benda tanah liat lembut di atas latar krem',
     heroMeta: 'Praktik evaluasi · Jakarta / jarak jauh',
+    heroPortraitAlt: 'Potret evaluator utama UIUXPulse',
+    heroSupport: 'Skor, bukti, dan rekomendasi — tanpa pernah mengubah situs Anda.',
     heroScroll: 'Bagian pilihan',
     indexLabel: 'Indeks laporan',
     heroNote: 'Tanpa memindai ruang privat. Tanpa mengubah situs Anda. Selamanya.',

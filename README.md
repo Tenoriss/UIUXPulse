@@ -62,14 +62,21 @@ That document is the contract; this README only covers setup.
 All tokens live in `src/styles/index.css` under `@theme`, so every value is both a CSS
 variable and a Tailwind utility.
 
-- **Palette** — `canvas #F7F6F2`, `surface #FCFBF8`, `surface-muted #EEECE5`,
-  `ink #292A25`, `ink-muted #85857D`, `sage #A5B29A`, `sage-deep #65735C`,
-  `taupe #C8C0B3`, `line #E4E1D9`, plus muted clay/ochre feedback tones.
+- **Palette (dark)** — `canvas #111110`, `surface #191917`, `surface-muted #21211E`,
+  `ink #F3F1EA`, `ink-soft #C6C4BA`, `ink-muted #9C9A90`, `sage-wash #1C221A`,
+  `sage-deep #8FA084`, `line #2A2A26`, plus muted clay/ochre feedback tones.
+  Raw values live in `--brand-*`; utilities are generated from the `--color-*`
+  aliases registered in `@theme`.
 - **Type** — `font-serif` (Instrument Serif) for editorial headings, `font-sans` (Inter) for UI.
   Fluid display scale: `text-display`, `text-h1…h4`, `text-lead`, `text-body`, `text-micro`, `eyebrow`.
 - **Radius** — `xs … 2xl` plus `pill` (used only for buttons, badges, and chips).
-- **Depth** — `shadow-soft`, `shadow-clay`, `shadow-clay-lg`, `shadow-clay-pressed`: soft inner
-  highlight + long, low-opacity ambient shadow (claymorphism, never heavy drop shadows).
+- **Depth (claymorphism)** — on a dark canvas a drop shadow reads as mud, so clay depth
+  is a 1px rim highlight on the top edge plus a wide, very low-opacity ambient shadow:
+  `clay-surface` (raised), `clay-inset` (recessed inputs/wells), `shadow-clay`,
+  `shadow-clay-lg`, `shadow-clay-pressed`.
+- **Motion** — `animate-float` / `animate-float-slow` / `animate-float-fast` drive the
+  floating app-tile field, with per-icon `delay` and `--icon-rotate`; `animate-pulse-dot`
+  marks live availability. Everything collapses under `prefers-reduced-motion`.
 - **Motion** — one easing (`--ease-editorial`) and a small set of entrance animations;
   all disabled under `prefers-reduced-motion`.
 

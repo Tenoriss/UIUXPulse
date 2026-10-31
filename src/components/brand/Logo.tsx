@@ -10,7 +10,7 @@ export function LogoMark({ className }: { className?: string }) {
       className={cn('size-8 text-ink', className)}
     >
       {/* Pulse line inside a soft clay circle */}
-      <circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" strokeOpacity="0.14" />
+      <circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" strokeOpacity="0.16" />
       <circle cx="16" cy="16" r="10.5" fill="var(--color-sage-wash)" />
       <path
         d="M7.5 16.4h4.1l2.2-4.6 3.4 9.1 2.6-6.2 1.5 3.1h3.2"
