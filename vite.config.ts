@@ -14,12 +14,14 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 5173,
     strictPort: false,
-    // The preview host is a dynamic e2b domain; allowing it keeps the
-    // live preview working inside the sandbox iframe.
+    // The preview host is a dynamic sandbox domain; allowing it keeps the
+    // live preview working inside the preview iframe.
     allowedHosts: true,
-    hmr: {
-      clientPort: 443,
-      protocol: 'wss',
+    // HMR is intentionally left at its default: the client derives host,
+    // protocol (ws/wss) and port from `location`, so it works both on
+    // localhost and behind the https preview proxy.
+    watch: {
+      ignored: ['**/*.tsbuildinfo', '**/dist/**'],
     },
   },
   preview: {
