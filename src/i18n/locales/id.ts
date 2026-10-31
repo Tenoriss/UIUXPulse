@@ -65,7 +65,7 @@ export const id: Dictionary = {
     instagramNote: 'Catatan proses dan suasana di balik layar',
     visit: 'Buka profil',
     backToTop: 'Kembali ke atas',
-    madeWith: 'Dirancang dan dibangun di Jakarta',
+    madeWith: 'Dirancang dan dibangun di kamar kost',
   },
 
   footer: {

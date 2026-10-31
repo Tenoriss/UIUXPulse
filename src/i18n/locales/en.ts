@@ -66,7 +66,7 @@ export const en = {
     instagramNote: 'Process notes and behind the scenes',
     visit: 'Open profile',
     backToTop: 'Back to top',
-    madeWith: 'Designed and built in Jakarta',
+    madeWith: 'Designed and built in a boarding room',
   },
 
   footer: {
