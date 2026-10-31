@@ -134,7 +134,7 @@ export function Dropdown<T extends string = string>({
           role="menu"
           aria-label={label}
           className={cn(
-            'clay-surface absolute top-[calc(100%+0.5rem)] z-40 min-w-52 origin-top overflow-hidden rounded-md border border-line bg-surface p-1.5 shadow-clay-lg animate-scale-in',
+            'clay-surface-lg absolute top-[calc(100%+0.5rem)] z-40 min-w-52 origin-top overflow-hidden rounded-lg border border-white/[0.08] bg-surface p-1.5 animate-scale-in',
             align === 'end' ? 'right-0' : 'left-0',
             panelClassName,
           )}

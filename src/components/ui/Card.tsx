@@ -8,8 +8,8 @@ import { cn } from '@/lib/cn';
 export type CardVariant = 'surface' | 'muted' | 'flush';
 
 const variantStyles: Record<CardVariant, string> = {
-  surface: 'clay-surface bg-surface border border-line',
-  muted: 'clay-inset bg-surface-muted border border-line',
+  surface: 'clay-surface bg-surface border border-white/[0.06]',
+  muted: 'clay-inset bg-surface-muted border border-black/20',
   flush: 'bg-transparent border border-line',
 };
 

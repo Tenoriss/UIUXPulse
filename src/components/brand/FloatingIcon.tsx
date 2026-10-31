@@ -20,16 +20,16 @@ export interface FloatingIconProps {
 }
 
 const sizeStyles = {
-  sm: { tile: 'size-9 rounded-md', glyph: 'size-4' },
-  md: { tile: 'size-12 rounded-lg', glyph: 'size-5' },
-  lg: { tile: 'size-16 rounded-xl', glyph: 'size-7' },
+  sm: { tile: 'size-10 rounded-lg', glyph: 'size-4' },
+  md: { tile: 'size-13 rounded-xl', glyph: 'size-5' },
+  lg: { tile: 'size-17 rounded-2xl', glyph: 'size-7' },
 } as const;
 
 const toneStyles = {
-  sage: 'bg-sage-wash text-sage-ink border-sage/25',
-  clay: 'bg-clay-soft text-clay-ink border-clay/25',
-  taupe: 'bg-taupe-soft text-taupe border-taupe/25',
-  ink: 'bg-surface text-ink border-line',
+  sage: 'bg-sage-wash text-sage-ink',
+  clay: 'bg-clay-soft text-clay-ink',
+  taupe: 'bg-taupe-soft text-taupe',
+  ink: 'bg-surface text-ink-soft',
 } as const;
 
 const speedStyles = {
@@ -39,12 +39,12 @@ const speedStyles = {
 } as const;
 
 /**
- * A single floating app tile.
+ * A single floating clay tile.
  *
- * The motion is intentionally buoyant rather than spinning: a slow vertical
- * translation with a 2° rotation change, each icon offset by `delay` so the
- * group reads as a loose constellation. All motion is suppressed under
- * `prefers-reduced-motion` by the global rule.
+ * The motion is buoyant rather than spinning: a slow vertical translation with
+ * a 2° rotation change, each icon offset by `delay` so the group reads as a
+ * loose constellation. Motion is suppressed under `prefers-reduced-motion` by
+ * the global rule, and the whole field is decorative (hidden from AT).
  */
 export function FloatingIcon({
   icon: Icon,
@@ -73,19 +73,16 @@ export function FloatingIcon({
       {variant === 'solid' ? (
         <div
           className={cn(
-            'flex items-center justify-center border shadow-clay backdrop-blur-sm',
+            'clay-surface flex items-center justify-center border border-white/[0.06]',
             dims.tile,
             toneStyles[tone],
           )}
           style={{ transform: `rotate(${rotate}deg)` }}
         >
-          <Icon className={dims.glyph} strokeWidth={1.4} />
+          <Icon className={dims.glyph} strokeWidth={1.6} />
         </div>
       ) : (
-        <Icon
-          className={cn('text-ink-faint', dims.glyph, 'size-6')}
-          strokeWidth={1.2}
-        />
+        <Icon className="size-6 text-ink-faint" strokeWidth={1.2} />
       )}
     </div>
   );

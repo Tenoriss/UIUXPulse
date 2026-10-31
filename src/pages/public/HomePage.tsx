@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import {
+  Accessibility,
   ArrowRight,
   ArrowUpRight,
-  Accessibility,
   Eye,
   Gauge,
   Layers,
@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { Container } from '@/components/layout/Container';
 import { NumberedRow, SectionLabel, StatBand } from '@/components/shared/Editorial';
-import { AvailabilityPill } from '@/components/brand/AvailabilityPill';
+import { AvailabilityPill, ClayAvatar } from '@/components/brand/AvailabilityPill';
 import { FloatingIcon } from '@/components/brand/FloatingIcon';
 import { routes } from '@/config/site';
 import { useI18n } from '@/i18n';
@@ -30,85 +30,100 @@ export function HomePage() {
   return (
     <>
       {/* ================================================================ Hero
-          Poster composition: floating app tiles around an oversized uppercase
-          display line, with the serif italic accent sitting under it. */}
+          Split editorial hero: type locked to the left column, the clay avatar
+          floating to the right over a warm glow. Asymmetry keeps the display
+          line from fighting the mascot for the same optical centre. */}
       <section className="relative overflow-hidden">
         <div
-          className="pointer-events-none absolute inset-0 dot-grid opacity-[0.35]"
+          className="pointer-events-none absolute inset-0 dot-grid opacity-40"
           aria-hidden="true"
         />
         <div
-          className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-sage/10 blur-[120px]"
+          className="pointer-events-none absolute -right-20 top-[-10%] size-[520px] rounded-full bg-sage/10 blur-[130px]"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute -left-32 bottom-0 size-[380px] rounded-full bg-clay/10 blur-[120px]"
           aria-hidden="true"
         />
 
-        <Container className="relative pt-6 pb-20 sm:pt-10">
-          {/* Floating constellation — decorative, hidden from AT, reduced below md */}
-          <div className="pointer-events-none absolute inset-0 hidden md:block" aria-hidden="true">
-            <FloatingIcon icon={LayoutGrid} className="left-[2%] top-[16%]" tone="sage" size="md" speed="slow" delay={0} rotate={-8} />
-            <FloatingIcon icon={Ruler} className="left-[16%] top-[6%]" tone="taupe" size="sm" speed="fast" delay={1.4} rotate={10} />
-            <FloatingIcon icon={MousePointerClick} className="right-[3%] top-[10%]" tone="clay" size="lg" speed="normal" delay={0.6} rotate={8} />
-            <FloatingIcon icon={Type} className="right-[17%] top-[3%]" tone="ink" size="sm" speed="slow" delay={2.1} rotate={-6} />
-            <FloatingIcon icon={Accessibility} className="right-[8%] top-[58%]" tone="sage" size="md" speed="fast" delay={1.1} rotate={6} />
-            <FloatingIcon icon={Layers} className="left-[5%] top-[62%]" tone="ink" size="md" speed="normal" delay={1.8} rotate={-10} />
-            <FloatingIcon icon={Gauge} className="left-[24%] top-[74%]" tone="sage" size="sm" speed="slow" delay={0.3} rotate={12} />
-            <FloatingIcon icon={ScanEye} className="right-[24%] top-[78%]" tone="taupe" size="md" speed="normal" delay={2.6} rotate={-4} />
-          </div>
-
-          <div className="relative flex flex-col items-center text-center">
-            {/* Portrait + availability, overlapping the display line */}
-            <div className="relative mb-[-2.5rem] flex flex-col items-center sm:mb-[-3.5rem]">
-              <div className="relative">
-                <div
-                  className="absolute -inset-2 rounded-full bg-sage/20 blur-xl"
-                  aria-hidden="true"
-                />
-                <img
-                  src="/images/hero-portrait.jpg"
-                  alt={t('home.heroPortraitAlt')}
-                  width={240}
-                  height={240}
-                  className="relative size-20 rounded-full border border-line object-cover shadow-clay sm:size-24"
-                />
+        <Container className="relative pt-10 pb-16 sm:pt-16 sm:pb-24">
+          <div className="grid items-center gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
+            {/* ---------------------------------------------------- Left column */}
+            <div className="relative z-10">
+              <div className="flex flex-wrap items-center gap-4">
+                <AvailabilityPill label={t('home.available')} />
+                <p className="font-display text-micro uppercase tracking-[0.14em] text-ink-muted">
+                  {t('home.heroMeta')}
+                </p>
               </div>
-              <AvailabilityPill label={t('home.available')} className="mt-3" />
+
+              <h1 className="mt-8 font-display text-[clamp(2.75rem,9.5vw,7.5rem)] font-extrabold uppercase leading-[0.84] tracking-[-0.045em] text-ink">
+                <span className="block">{t('home.heroLineOne')}</span>
+                <span className="block text-ink-soft">{t('home.heroLineTwo')}</span>
+              </h1>
+
+              <p className="mt-3 font-serif text-[clamp(1.5rem,3.2vw,2.5rem)] font-medium italic leading-none text-sage-deep">
+                {t('home.heroAccent')}
+              </p>
+
+              <p className="mt-7 max-w-md text-body text-ink-soft">{t('home.heroLead')}</p>
+
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <Link
+                  to={routes.signUp}
+                  className="group inline-flex items-center gap-2 rounded-pill border border-ink bg-ink px-6 py-3 text-[0.875rem] font-semibold text-canvas shadow-clay transition-colors duration-300 hover:bg-ink-soft"
+                >
+                  {t('home.heroPrimary')}
+                  <ArrowRight
+                    className="size-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                    aria-hidden="true"
+                  />
+                </Link>
+                <Link
+                  to={routes.howItWorks}
+                  className="clay-surface group inline-flex items-center gap-2 rounded-pill border border-white/[0.07] bg-surface/70 px-6 py-3 text-[0.875rem] font-medium text-ink-soft backdrop-blur-sm transition-colors duration-300 hover:text-ink"
+                >
+                  {t('home.heroSecondary')}
+                  <ArrowUpRight
+                    className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    aria-hidden="true"
+                  />
+                </Link>
+              </div>
+
+              <p className="mt-7 max-w-sm text-micro leading-relaxed text-ink-muted">
+                {t('home.heroSupport')}
+              </p>
             </div>
 
-            <h1 className="mt-10 font-sans text-[clamp(2.75rem,12vw,10rem)] font-semibold uppercase leading-[0.82] tracking-[-0.045em] text-ink">
-              <span className="block">{t('home.heroLineOne')}</span>
-              <span className="block">{t('home.heroLineTwo')}</span>
-            </h1>
+            {/* --------------------------------------------------- Right column */}
+            <div className="relative flex justify-center lg:justify-end">
+              {/* Floating clay tiles orbit the avatar */}
+              <div className="pointer-events-none absolute inset-0 hidden sm:block" aria-hidden="true">
+                <FloatingIcon icon={LayoutGrid} className="left-0 top-2" tone="sage" size="md" speed="slow" delay={0} rotate={-9} />
+                <FloatingIcon icon={Ruler} className="left-[18%] -top-4" tone="taupe" size="sm" speed="fast" delay={1.3} rotate={11} />
+                <FloatingIcon icon={MousePointerClick} className="right-2 top-0" tone="clay" size="lg" speed="normal" delay={0.5} rotate={8} />
+                <FloatingIcon icon={Type} className="right-[22%] bottom-6" tone="ink" size="sm" speed="slow" delay={2} rotate={-7} />
+                <FloatingIcon icon={Accessibility} className="left-2 bottom-0" tone="sage" size="md" speed="fast" delay={1.1} rotate={6} />
+                <FloatingIcon icon={ScanEye} className="left-[30%] -bottom-6" tone="taupe" size="sm" speed="normal" delay={2.4} rotate={-12} />
+              </div>
 
-            <p className="mt-4 font-serif text-[clamp(1.75rem,4vw,3rem)] italic leading-none text-sage-deep">
-              {t('home.heroAccent')}
-            </p>
-
-            <p className="mt-8 max-w-lg text-body text-ink-soft">{t('home.heroLead')}</p>
-
-            <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-              <Link
-                to={routes.signUp}
-                className="group inline-flex items-center gap-2 rounded-pill border border-ink bg-ink px-6 py-3 text-[0.875rem] font-medium text-canvas shadow-clay transition-colors duration-300 hover:bg-ink-soft"
-              >
-                {t('home.heroPrimary')}
-                <ArrowRight
-                  className="size-4 transition-transform duration-300 group-hover:translate-x-0.5"
-                  aria-hidden="true"
+              <div className="relative animate-fade-up">
+                <ClayAvatar
+                  src="/images/avatar-hero.png"
+                  alt={t('home.heroPortraitAlt')}
+                  size="lg"
                 />
-              </Link>
-              <Link
-                to={routes.howItWorks}
-                className="group inline-flex items-center gap-2 rounded-pill border border-line bg-surface/60 px-6 py-3 text-[0.875rem] font-medium text-ink-soft shadow-clay backdrop-blur-sm transition-colors duration-300 hover:border-line-strong hover:text-ink"
-              >
-                {t('home.heroSecondary')}
-                <ArrowUpRight
-                  className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                  aria-hidden="true"
-                />
-              </Link>
+
+                {/* Clay nameplate, like a caption under an exhibit */}
+                <div className="clay-surface absolute -bottom-5 left-1/2 -translate-x-1/2 rounded-pill border border-white/[0.07] bg-surface px-4 py-1.5">
+                  <span className="font-display text-[0.625rem] font-semibold uppercase tracking-[0.16em] text-ink-muted">
+                    Pulse · 001
+                  </span>
+                </div>
+              </div>
             </div>
-
-            <p className="mt-8 text-micro text-ink-muted">{t('home.heroSupport')}</p>
           </div>
         </Container>
       </section>
@@ -234,7 +249,7 @@ export function HomePage() {
 
       {/* ------------------------------------------------------------------ CTA */}
       <Container className="mt-24">
-        <div className="relative overflow-hidden rounded-2xl border border-line bg-surface px-6 py-16 shadow-clay sm:px-14 sm:py-20">
+        <div className="clay-surface-lg relative overflow-hidden rounded-2xl border border-white/[0.07] bg-surface px-6 py-16 sm:px-14 sm:py-20">
           <div
             className="pointer-events-none absolute -bottom-24 -left-16 size-80 rounded-full bg-sage/10 blur-3xl"
             aria-hidden="true"

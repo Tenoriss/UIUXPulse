@@ -106,9 +106,14 @@ export function AppTopbar({
             aria-label={t('common.you')}
             className="flex items-center gap-2 rounded-pill border border-line bg-surface py-1 pl-1 pr-2.5 transition-colors hover:border-line-strong"
           >
-            <span className="flex size-7 items-center justify-center rounded-full bg-sage-wash text-[0.625rem] font-semibold uppercase text-sage-ink">
-              NP
-            </span>
+            <img
+              src="/images/avatar-tile.png"
+              alt=""
+              width={192}
+              height={192}
+              className="clay-surface size-8 rounded-full bg-surface-muted object-contain p-0.5"
+              style={{ imageRendering: 'pixelated' }}
+            />
             <span className="hidden text-[0.75rem] font-medium text-ink-soft sm:block">
               Studio Aria
             </span>

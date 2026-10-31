@@ -116,7 +116,7 @@ export function Modal({
         aria-describedby={description ? descriptionId : undefined}
         tabIndex={-1}
         className={cn(
-          'clay-surface relative z-10 w-full rounded-t-2xl border border-line bg-surface shadow-clay-lg animate-slide-up sm:rounded-2xl sm:animate-scale-in',
+          'clay-surface-lg relative z-10 w-full rounded-t-2xl border border-white/[0.08] bg-surface animate-slide-up sm:rounded-2xl sm:animate-scale-in',
           sizeStyles[size],
           className,
         )}

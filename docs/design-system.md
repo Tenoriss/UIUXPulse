@@ -64,9 +64,16 @@ by overriding the `--brand-*` layer only.
 
 ### 2.2 Typography
 
-- `font.sans` = Inter Variable (body + UI) — weights 400/500/600.
-- `font.serif` = Instrument Serif 400 (+ italic) — headings, numerals, editorial voice.
+- `font.sans` = **Plus Jakarta Sans Variable** (body + UI) — weights 400/500/600/700.
+- `font.serif` = **Fraunces Variable** with `SOFT 60 / opsz 48` — headings, numerals,
+  editorial voice; always `font-medium` (500) or heavier so the soft axis reads.
+- `font.display` = **Bricolage Grotesque Variable** — poster display, eyebrows, labels,
+  and the uppercase hero line.
 - Base: 16px / 400 / 1.7 line height on `body`.
+
+Fonts **must** be self-hosted through Fontsource (no runtime Google Fonts request):
+`@fontsource-variable/fraunces/soft.css`, `.../soft-italic.css`,
+`@fontsource-variable/bricolage-grotesque`, `@fontsource-variable/plus-jakarta-sans`.
 
 | Utility | Size (fluid) | Leading | Use |
 | --- | --- | --- | --- |
@@ -98,10 +105,24 @@ by overriding the `--brand-*` layer only.
 
 All animation **must** collapse under `prefers-reduced-motion: reduce` (already global).
 
-**Claymorphism rule.** On a dark canvas a classic drop shadow reads as mud. Every raised
-surface **must** combine a 1px top rim highlight with a wide, low-opacity ambient shadow
-(`clay-surface`); every recessed control **must** use `clay-inset`. Inputs, tab tracks,
-and wells are recessed; cards, modals, menus, toasts, and buttons are raised.
+**Claymorphism rule (pronounced).** Clay depth is built from three cues together, never a
+single shadow:
+
+1. **Lip** — `inset 0 1px 0 rgba(255,255,255,0.11)` on the top edge plus
+   `inset 0 -2px 3px rgba(0,0,0,0.55)` underneath, so the slab looks pressed from putty.
+2. **Putty gradient** — a vertical `linear-gradient` from ~7% white at the top to ~8% black
+   at the bottom (`clay-surface`), which simulates a curved, light-catching surface.
+3. **Ambient separation** — two stacked, very low-opacity, wide shadows.
+
+Utilities: `clay-surface` (cards, buttons, tiles), `clay-surface-lg` (modals, hero panels,
+menus), `clay-inset` (inputs, tab tracks, wells). Raised objects **must** use
+`border-white/[0.06..0.08]` rather than `border-line`, because a warm grey hairline reads
+as dirt against a lifted surface.
+
+**Pixel mascot.** The product mascot is a pixel sprite cropped from its source artwork to
+a transparent PNG (`avatar-hero.png` 512², `avatar-tile.png` 192²). It **must** be rendered
+with `image-rendering: pixelated`, **must** sit on a `clay-surface-lg` disc (`ClayAvatar`),
+and **must not** be recoloured or blurred.
 
 **Floating icon field.** Hero decoration uses `FloatingIcon`, a slow buoyant translate
 with a 2° rotation change (`animate-float*`), each tile staggered by `delay` and given its

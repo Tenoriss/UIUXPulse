@@ -16,7 +16,7 @@ design system, reusable components, layouts, routing, and bilingual (EN/ID) arch
 | Styling    | Tailwind CSS v4 (CSS-first `@theme` tokens)   |
 | Routing    | React Router 7 (`createBrowserRouter`)        |
 | Icons      | Lucide React                                  |
-| Fonts      | Instrument Serif + Inter Variable (self-hosted via Fontsource) |
+| Fonts      | Fraunces (SOFT) + Bricolage Grotesque + Plus Jakarta Sans (Fontsource) |
 
 ## Commands
 
