@@ -105,7 +105,7 @@ export function MobileNavDrawer({ open, onClose, items }: MobileNavDrawerProps) 
           </nav>
 
           <div className="mt-8 flex flex-col gap-3">
-            <LinkButton to={routes.signUp} size="lg" fullWidth onClick={onClose}>
+            <LinkButton to={routes.register} size="lg" fullWidth onClick={onClose}>
               {t('nav.signUp')}
               <ArrowRight className="size-4" aria-hidden="true" />
             </LinkButton>

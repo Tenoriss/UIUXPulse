@@ -71,10 +71,28 @@ That document is the contract; this README only covers setup.
 | `/principles`   | Editorial principles                                              |
 | `/methodology`  | What a report contains                                            |
 | `/start`        | Start-an-evaluation gate (redirects to sign-in when signed out)   |
+| `/sign-in`      | Sign in (mock credentials, `?next=` destination preserved)        |
+| `/register`     | Create a demo account (canonical; `/sign-up` forwards here)       |
+| `/forgot-password` | Mock reset request — no email is sent                          |
+| `/reset-password`  | Mock reset form — updates the demo account's password          |
 
-Authentication is a **frontend mock**: signing in or up writes a single `localStorage` flag
-and returns the visitor to the `?next=` destination, defaulting to the workspace. There is
-no backend, no real session, and no password handling beyond form validation.
+## Authentication (frontend mock)
+
+Everything lives in `src/services/`: `auth.storage.ts` is the only module that touches
+`localStorage`, `auth.service.ts` holds the register/login/logout/reset logic, and
+`auth.context.tsx` exposes it through `useAuth()`.
+
+- **Register** a demo account, then sign in with it. Accounts are per-browser; the demo
+  starts empty, so there is no seeded password to guess.
+- Passwords are **never stored** — only a salted SHA-256 digest, so a wrong password really
+  fails. That is a demo substitute, not a password hash.
+- The session persists across refreshes; logout clears it and returns to the homepage.
+- `/app/**` and `/admin/**` are guarded by `RequireAuth`; the intended destination survives
+  the sign-in round trip.
+- Forgot/reset password never send email and never verify a token — they change the local
+  demo account only.
+
+Clearing site data resets everything. There is no backend, no OAuth, and no email delivery.
 
 ## Design tokens
 

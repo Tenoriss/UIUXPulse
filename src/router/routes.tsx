@@ -11,9 +11,13 @@ import { HowItWorksPage } from '@/pages/public/HowItWorksPage';
 import { StartEvaluationPage } from '@/pages/public/StartEvaluationPage';
 import { PrinciplesPage } from '@/pages/public/PrinciplesPage';
 import { MethodologyPage } from '@/pages/public/MethodologyPage';
+import { RequireAuth } from '@/components/auth/RequireAuth';
+import { RedirectIfAuthenticated } from '@/components/auth/RedirectIfAuthenticated';
 import { SignInPage } from '@/pages/auth/SignInPage';
-import { SignUpPage } from '@/pages/auth/SignUpPage';
+import { RegisterPage } from '@/pages/auth/RegisterPage';
+import { LegacySignUpRedirect } from '@/pages/auth/LegacySignUpRedirect';
 import { ForgotPasswordPage } from '@/pages/auth/ForgotPasswordPage';
+import { ResetPasswordPage } from '@/pages/auth/ResetPasswordPage';
 import { OverviewPage } from '@/pages/dashboard/OverviewPage';
 import { EvaluationsPage } from '@/pages/dashboard/EvaluationsPage';
 import { ReportsPage } from '@/pages/dashboard/ReportsPage';
@@ -56,34 +60,59 @@ export const appRoutes: RouteObject[] = [
         element: <AuthLayout />,
         errorElement: <RouteErrorBoundary />,
         children: [
-          { path: 'sign-in', element: <SignInPage /> },
-          { path: 'sign-up', element: <SignUpPage /> },
-          { path: 'forgot-password', element: <ForgotPasswordPage /> },
+          // Signed-in visitors are bounced out of these three; the reset screen
+          // stays reachable on purpose.
+          {
+            element: <RedirectIfAuthenticated />,
+            children: [
+              { path: 'sign-in', element: <SignInPage /> },
+              { path: 'register', element: <RegisterPage /> },
+              { path: 'forgot-password', element: <ForgotPasswordPage /> },
+            ],
+          },
+          { path: 'reset-password', element: <ResetPasswordPage /> },
+          { path: 'sign-up', element: <LegacySignUpRedirect /> },
         ],
       },
       {
-        path: routes.dashboard,
-        element: <DashboardLayout />,
+        // Guard wraps the shell, not the other way round: `<RequireAuth />`
+        // replaces `element`, so the layout must live below it or it would
+        // never mount.
+        element: <RequireAuth />,
         errorElement: <RouteErrorBoundary />,
         children: [
-          { index: true, element: <OverviewPage /> },
-          { path: 'evaluations', element: <EvaluationsPage /> },
-          { path: 'reports', element: <ReportsPage /> },
-          { path: 'settings', element: <SettingsPage /> },
-          { path: '*', element: <NotFoundPage inApp /> },
+          {
+            path: routes.dashboard,
+            element: <DashboardLayout />,
+            errorElement: <RouteErrorBoundary />,
+            children: [
+              { index: true, element: <OverviewPage /> },
+              { path: 'evaluations', element: <EvaluationsPage /> },
+              { path: 'evaluations/new', element: <EvaluationsPage /> },
+              { path: 'reports', element: <ReportsPage /> },
+              { path: 'settings', element: <SettingsPage /> },
+              { path: '*', element: <NotFoundPage inApp /> },
+            ],
+          },
         ],
       },
       {
-        path: routes.admin,
-        element: <AdminLayout />,
+        element: <RequireAuth />,
         errorElement: <RouteErrorBoundary />,
         children: [
-          { index: true, element: <AdminOverviewPage /> },
-          { path: 'queue', element: <AdminQueuePage /> },
-          { path: 'users', element: <AdminUsersPage /> },
-          { path: 'criteria', element: <AdminCriteriaPage /> },
-          { path: 'settings', element: <SettingsPage admin /> },
-          { path: '*', element: <NotFoundPage inApp /> },
+          {
+            path: routes.admin,
+            element: <AdminLayout />,
+            errorElement: <RouteErrorBoundary />,
+            children: [
+              { index: true, element: <AdminOverviewPage /> },
+              { path: 'queue', element: <AdminQueuePage /> },
+              { path: 'users', element: <AdminUsersPage /> },
+              { path: 'criteria', element: <AdminCriteriaPage /> },
+              { path: 'settings', element: <SettingsPage admin /> },
+              { path: '*', element: <NotFoundPage inApp /> },
+            ],
+          },
         ],
       },
     ],

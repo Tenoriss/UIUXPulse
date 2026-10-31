@@ -171,13 +171,48 @@ carrying the same `next`, while authenticated visitors go straight to the worksp
 link a new CTA directly to `/sign-up` or `/app` — route it through the gate so the auth
 requirement can never be bypassed by a copy-pasted link.
 
-**Mock session.** `lib/mockAuth.ts` + `providers/SessionProvider.tsx` store one
-`localStorage` flag (`uiuxpulse.session.user`). The provider reads storage only after mount
-(via `hooks/useHydrateSession.ts`) so SSR and the first client paint agree. This is a
-frontend demonstration, not authentication: no request leaves the browser, and the toast on
-sign-in/sign-up still says so. `lib/redirect.ts` is the only place that validates a `?next=`
-destination — same-origin relative paths only, rejecting absolute, protocol-relative, and
-backslash forms.
+**Mock authentication.** `src/services/` holds the whole auth layer and is the only thing
+the UI talks to:
+
+| File | Role |
+| --- | --- |
+| `auth.types.ts` | `AuthUser`, payloads, `AuthResult<T>`, stored record shapes |
+| `auth.storage.ts` | the **only** module that touches `localStorage` |
+| `auth.service.ts` | register / login / logout / restoreSession / requestPasswordReset / resetPassword |
+| `auth.context.tsx` | `AuthProvider` + `useAuth()`; owns `user`, `status`, `isAuthenticated` |
+| `auth.context.types.ts` | the context contract, kept out of the provider file (Fast Refresh) |
+
+Rules:
+
+- **Passwords are never stored.** Accounts persist a salted SHA-256 digest
+  (`email::password`) so a wrong password really fails, but SHA-256 is *not* a password
+  hash — a real backend replaces `auth.service.ts`, it does not extend it.
+- **Never claim this is authentication.** Every auth screen says the account lives in this
+  browser; the sign-in/sign-up toasts say it again.
+- Login failures return `invalidCredentials` for both an unknown email and a wrong
+  password, and `requestPasswordReset` answers identically for unknown addresses, so no
+  form can be used to enumerate accounts. The reset screen is the one exception: it must
+  tell the visitor the address is unknown, because the next step is to sign in with it.
+- The session is read **lazily in `useState`**, not in an effect, so a refresh lands on the
+  right state on the first render and never flashes the wrong shell. `status` is `loading`
+  only where there is no browser (SSR).
+- The auth API is async and returns a discriminated `AuthResult`, so loading states already
+  exist and a real `fetch` can drop in without touching components.
+
+**Route guards.** `components/auth/RequireAuth.tsx` and `RedirectIfAuthenticated.tsx`.
+
+- `RequireAuth` wraps the workspace and admin branches. It must sit **above** the layout
+  route (`element: <RequireAuth />` → child `element: <DashboardLayout />`); putting it on
+  the same node as the layout replaces the layout and its `Outlet`, which silently drops
+  the whole shell.
+- Unauthenticated access to `/app/**` or `/admin/**` redirects to `/sign-in?next=…` with
+  the full destination (path, query, hash). After login the visitor is sent there.
+- Signed-in visitors are bounced from `/sign-in`, `/register`, and `/forgot-password` to
+  their `?next=` target or the dashboard. `/reset-password` stays reachable on purpose.
+- `lib/redirect.ts` is the only place that validates a `?next=` destination — same-origin
+  relative paths only, rejecting absolute, protocol-relative, and backslash forms.
+- Logout navigates away **before** clearing the session, otherwise the guard redirects at
+  the same moment and the two navigations race.
 
 **Pixel mascot.** The product mascot is a pixel sprite cropped from its source artwork to
 a transparent PNG (`avatar-hero.png` 512², `avatar-tile.png` 192²). It **must** be rendered

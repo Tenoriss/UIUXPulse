@@ -76,19 +76,25 @@ export const guideContent: Record<Locale, Record<string, GuidePage>> = {
       name: 'Pip',
       page: 'Sign in',
       title: 'Welcome back',
-      body: 'Sign in to reach your evaluations and reports. Authentication is not connected in this preview, so the form only validates input.',
+      body: 'Sign in to reach your evaluations and reports. This build keeps demo accounts in your browser only — register one first if you have not yet.',
     },
-    signUp: {
+    register: {
       name: 'Pip',
       page: 'Create account',
       title: 'Set up in a minute',
-      body: 'An email and a password are all we ask for. Your workspace is where evaluations and reports collect.',
+      body: 'A name, an email, and a password are all we ask for. The account lives in this browser only — a demo session, not a real sign-up.',
     },
     forgotPassword: {
       name: 'Pip',
       page: 'Forgot password',
       title: 'Password reset',
-      body: 'Enter the email you signed up with. No reset email is actually sent while authentication is still a preview.',
+      body: 'Enter the account email and we describe what a reset would do. No email is ever sent in this demo.',
+    },
+    resetPassword: {
+      name: 'Pip',
+      page: 'Reset password',
+      title: 'Choose a new password',
+      body: 'Set a new password for a demo account. Nothing is emailed and nothing is verified, but the new password really does replace the old one here.',
     },
     dashboard: {
       name: 'Pip',
@@ -199,19 +205,25 @@ export const guideContent: Record<Locale, Record<string, GuidePage>> = {
       name: 'Pip',
       page: 'Masuk',
       title: 'Selamat datang kembali',
-      body: 'Masuk untuk membuka evaluasi dan laporan Anda. Autentikasi belum terhubung pada pratinjau ini, jadi formulir hanya memvalidasi masukan.',
+      body: 'Masuk untuk membuka evaluasi dan laporan Anda. Build ini menyimpan akun demo di browser Anda saja — daftar dulu kalau belum punya.',
     },
-    signUp: {
+    register: {
       name: 'Pip',
       page: 'Buat akun',
       title: 'Siap dalam satu menit',
-      body: 'Cukup email dan kata sandi. Ruang kerja Anda adalah tempat evaluasi dan laporan dikumpulkan.',
+      body: 'Nama, email, dan kata sandi sudah cukup. Akun ini hanya hidup di browser Anda — sesi demo, bukan pendaftaran sungguhan.',
     },
     forgotPassword: {
       name: 'Pip',
       page: 'Lupa kata sandi',
       title: 'Setel ulang kata sandi',
-      body: 'Masukkan email yang Anda pakai mendaftar. Tidak ada email setel ulang yang benar-benar dikirim selama autentikasi masih pratinjau.',
+      body: 'Masukkan email akun dan kami jelaskan apa yang dilakukan proses reset. Tidak ada email yang dikirim di demo ini.',
+    },
+    resetPassword: {
+      name: 'Pip',
+      page: 'Setel ulang kata sandi',
+      title: 'Pilih kata sandi baru',
+      body: 'Tetapkan kata sandi baru untuk akun demo. Tidak ada email dan tidak ada verifikasi, tapi kata sandi barunya benar-benar menggantikan yang lama di sini.',
     },
     dashboard: {
       name: 'Pip',

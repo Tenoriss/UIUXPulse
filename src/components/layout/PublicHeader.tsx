@@ -49,7 +49,7 @@ export function PublicHeader() {
           >
             {t('nav.signIn')}
           </Link>
-          <LinkButton to={routes.signUp} size="sm" tone="dark">
+          <LinkButton to={routes.register} size="sm" tone="dark">
             {t('nav.signUp')}
             <ArrowRight className="size-3.5" aria-hidden="true" />
           </LinkButton>

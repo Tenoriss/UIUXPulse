@@ -1,12 +1,17 @@
 import { useState, type FormEvent } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Building2, Mail, User } from 'lucide-react';
-import { Button, Input } from '@/components/ui';
-import { AuthFooterLinks, AuthHeading } from '@/components/auth';
+import { Button, Checkbox, Input } from '@/components/ui';
+import {
+  AuthAlert,
+  AuthFooterLinks,
+  AuthHeading,
+  PasswordToggle,
+} from '@/components/auth';
 import { routes } from '@/config/site';
 import { useI18n } from '@/i18n';
 import { useToast } from '@/providers/ToastProvider';
-import { useSession } from '@/providers/SessionProvider';
+import { useAuth } from '@/services/auth.context';
 import { readReturnTo } from '@/lib/redirect';
 import {
   hasErrors,
@@ -17,16 +22,24 @@ import {
   type FieldError,
 } from '@/lib/validation';
 
-type Errors = Record<'name' | 'email' | 'password' | 'confirm', FieldError>;
+type Field = 'name' | 'email' | 'password' | 'confirm' | 'terms';
+type Errors = Record<Field, FieldError>;
 
-const emptyErrors: Errors = { name: null, email: null, password: null, confirm: null };
+const emptyErrors: Errors = {
+  name: null,
+  email: null,
+  password: null,
+  confirm: null,
+  terms: null,
+};
 
-export function SignUpPage() {
+export function RegisterPage() {
   const { t } = useI18n();
   const { toast } = useToast();
-  const { signIn } = useSession();
+  const { register } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+
   const [values, setValues] = useState({
     name: '',
     email: '',
@@ -34,48 +47,65 @@ export function SignUpPage() {
     password: '',
     confirm: '',
   });
+  const [accepted, setAccepted] = useState(false);
+  const [reveal, setReveal] = useState(false);
   const [errors, setErrors] = useState<Errors>(emptyErrors);
+  const [formError, setFormError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
   const set = (key: keyof typeof values) => (event: React.ChangeEvent<HTMLInputElement>) =>
     setValues((current) => ({ ...current, [key]: event.target.value }));
 
-  const onSubmit = (event: FormEvent) => {
+  const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    setFormError(null);
+
     const nextErrors: Errors = {
       name: validateRequired(values.name),
       email: validateEmail(values.email),
       password: validatePassword(values.password),
       confirm: validatePasswordMatch(values.password, values.confirm),
+      terms: accepted ? null : 'validation.terms',
     };
     setErrors(nextErrors);
-
     if (hasErrors(nextErrors)) return;
 
     setSubmitting(true);
-    window.setTimeout(() => {
-      setSubmitting(false);
-      // Mock only: the account is created in memory and a local session flag
-      // is written. Nothing is sent anywhere.
-      signIn(values.email);
-      toast({
-        title: t('session.signedIn'),
-        description: t('auth.previewNotice'),
-        variant: 'info',
-      });
-      navigate(readReturnTo(location.search), { replace: true });
-    }, 600);
+    const result = await register({
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    });
+    setSubmitting(false);
+
+    if (!result.ok) {
+      if (result.code === 'emailTaken') {
+        setErrors((current) => ({ ...current, email: 'validation.emailTaken' }));
+      } else {
+        setFormError(t('auth.errors.generic'));
+      }
+      return;
+    }
+
+    toast({
+      title: t('auth.welcomeTitle', { name: result.data.name }),
+      description: t('auth.demoNotice'),
+      variant: 'success',
+    });
+    navigate(readReturnTo(location.search), { replace: true });
   };
 
   return (
     <>
       <AuthHeading
         eyebrow={t('auth.eyebrow')}
-        title={t('auth.signUpTitle')}
-        description={t('auth.signUpLead')}
+        title={t('auth.registerTitle')}
+        description={t('auth.registerLead')}
       />
 
       <form onSubmit={onSubmit} noValidate className="flex flex-col gap-4">
+        {formError && <AuthAlert tone="error">{formError}</AuthAlert>}
+
         <Input
           label={t('auth.fullName')}
           placeholder={t('auth.fullNamePlaceholder')}
@@ -90,6 +120,7 @@ export function SignUpPage() {
         <Input
           label={t('auth.email')}
           type="email"
+          inputMode="email"
           placeholder={t('auth.emailPlaceholder')}
           autoComplete="email"
           leadingIcon={<Mail className="size-4" aria-hidden="true" />}
@@ -111,18 +142,26 @@ export function SignUpPage() {
 
         <Input
           label={t('auth.password')}
-          type="password"
+          type={reveal ? 'text' : 'password'}
           placeholder={t('auth.passwordPlaceholder')}
           autoComplete="new-password"
+          hint={t('auth.passwordHint')}
           value={values.password}
           onChange={set('password')}
           error={errors.password ? t(errors.password) : undefined}
           required
+          trailingSlot={
+            <PasswordToggle
+              revealed={reveal}
+              onToggle={() => setReveal((value) => !value)}
+            />
+          }
         />
 
         <Input
           label={t('auth.confirmPassword')}
-          type="password"
+          type={reveal ? 'text' : 'password'}
+          placeholder={t('auth.confirmPlaceholder')}
           autoComplete="new-password"
           value={values.confirm}
           onChange={set('confirm')}
@@ -130,8 +169,22 @@ export function SignUpPage() {
           required
         />
 
-        <Button type="submit" size="lg" fullWidth loading={submitting} className="mt-3">
-          {t('auth.signUp')}
+        <div className="mt-1">
+          <Checkbox
+            label={t('auth.acceptTerms')}
+            checked={accepted}
+            onChange={(event) => setAccepted(event.target.checked)}
+            aria-invalid={errors.terms ? true : undefined}
+          />
+          {errors.terms && (
+            <p className="mt-2 text-micro text-clay-ink" role="alert">
+              {t(errors.terms)}
+            </p>
+          )}
+        </div>
+
+        <Button type="submit" size="lg" fullWidth loading={submitting} className="mt-2">
+          {t('auth.createAccount')}
         </Button>
       </form>
 
@@ -145,7 +198,7 @@ export function SignUpPage() {
             {t('auth.signInInstead')}
           </Link>
         </p>
-        <p className="text-micro text-ink-muted">{t('auth.terms')}</p>
+        <p className="text-micro text-ink-muted">{t('auth.demoNotice')}</p>
       </AuthFooterLinks>
     </>
   );

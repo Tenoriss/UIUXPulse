@@ -17,8 +17,13 @@ export const routes = {
   principles: '/principles',
   methodology: '/methodology',
   signIn: '/sign-in',
+  /** Canonical registration page. */
+  register: '/register',
+  /** Legacy alias kept so existing links keep working; forwards to /register. */
   signUp: '/sign-up',
   forgotPassword: '/forgot-password',
+  resetPassword: '/reset-password',
+  profile: '/app/settings',
   dashboard: '/app',
   dashboardOverview: '/app',
   evaluations: '/app/evaluations',

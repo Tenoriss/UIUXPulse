@@ -6,8 +6,7 @@ import { Button } from '@/components/ui';
 import { PageIntro } from '@/components/shared/PageIntro';
 import { routes } from '@/config/site';
 import { useI18n } from '@/i18n';
-import { useSession } from '@/providers/SessionProvider';
-import { useHydrateSession } from '@/hooks/useHydrateSession';
+import { useAuth } from '@/services/auth.context';
 
 /**
  * Start-an-evaluation gate.
@@ -21,9 +20,7 @@ export function StartEvaluationPage() {
   const { t } = useI18n();
   const navigate = useNavigate();
   const location = useLocation();
-  const { isAuthenticated } = useSession();
-
-  useHydrateSession();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     if (isAuthenticated) return;

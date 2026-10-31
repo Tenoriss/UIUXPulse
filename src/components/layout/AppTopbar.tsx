@@ -1,10 +1,11 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Bell, LogOut, Menu, Plus, Settings } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { useI18n } from '@/i18n';
 import { routes } from '@/config/site';
 import { Button, Dropdown, IconButton } from '@/components/ui';
 import { useToast } from '@/providers/ToastProvider';
+import { useAuth } from '@/services/auth.context';
 
 export interface AppTopbarProps {
   onMenuClick: () => void;
@@ -22,6 +23,8 @@ export function AppTopbar({
 }: AppTopbarProps) {
   const { t } = useI18n();
   const { toast } = useToast();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const location = useLocation();
 
   return (
@@ -82,13 +85,19 @@ export function AppTopbar({
           panelClassName="w-56"
           onSelect={(value) => {
             if (value === 'settings') {
-              window.location.assign(routes.settings);
+              navigate(routes.settings);
               return;
             }
-            toast({
-              title: t('common.readOnly'),
-              description: t('auth.previewNotice'),
-              variant: 'info',
+            // Leave the guarded area *before* clearing the session. Doing it
+            // the other way round lets `<RequireAuth />` redirect to sign-in at
+            // the same moment, and the two navigations race.
+            navigate(routes.home, { replace: true });
+            void logout().then(() => {
+              toast({
+                title: t('auth.signedOutTitle'),
+                description: t('auth.signedOutLead'),
+                variant: 'info',
+              });
             });
           }}
           items={[
@@ -114,8 +123,8 @@ export function AppTopbar({
               className="clay-surface size-8 rounded-full bg-surface-muted object-contain p-0.5"
               style={{ imageRendering: 'pixelated' }}
             />
-            <span className="hidden text-[0.75rem] font-medium text-ink-soft sm:block">
-              Studio Aria
+            <span className="hidden max-w-32 truncate text-[0.75rem] font-medium text-ink-soft sm:block">
+              {user?.name || user?.email || t('common.you')}
             </span>
           </button>
         </Dropdown>

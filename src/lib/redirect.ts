@@ -16,6 +16,22 @@ export function isSafeReturnTo(value: string | null | undefined): value is strin
   return true;
 }
 
+/**
+ * Build the `next` query value from a router location.
+ *
+ * Only the path is sent when there is no query or hash, so the common case
+ * stays a readable `?next=/app/reports`.
+ */
+export function buildNextPath(location: {
+  pathname: string;
+  search?: string;
+  hash?: string;
+}): string {
+  const { pathname, search = '', hash = '' } = location;
+  const target = `${pathname}${search}${hash}`;
+  return `next=${encodeURIComponent(target)}`;
+}
+
 export function readReturnTo(search: string, fallback: string = FALLBACK): string {
   const value = new URLSearchParams(search).get('next');
   return isSafeReturnTo(value) ? value : fallback;

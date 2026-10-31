@@ -4,7 +4,7 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from './router';
 import { I18nProvider } from '@/i18n';
 import { ToastProvider } from '@/providers/ToastProvider';
-import { SessionProvider } from '@/providers/SessionProvider';
+import { AuthProvider } from '@/services/auth.context';
 import './styles/index.css';
 
 const rootElement = document.getElementById('root');
@@ -17,9 +17,9 @@ createRoot(rootElement).render(
   <StrictMode>
     <I18nProvider>
       <ToastProvider>
-        <SessionProvider>
+        <AuthProvider>
           <RouterProvider router={router} />
-        </SessionProvider>
+        </AuthProvider>
       </ToastProvider>
     </I18nProvider>
   </StrictMode>,
